@@ -1,4 +1,4 @@
-package com.example.pseaiproject
+package it.unipd.dei.pseaiproject
 
 import org.junit.Test
 
