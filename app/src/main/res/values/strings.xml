@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">PSE AI Project</string>
+
+    <!-- Stringhe utilizzate per la schermata di Login/SignUp -->
     <string name="login">Effettua il login!!</string>
     <string name="logout">logout</string>
     <string name="registrati">Registrati per poter utilizzare l\'applicazione</string>
