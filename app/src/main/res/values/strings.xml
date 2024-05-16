@@ -2,10 +2,14 @@
     <string name="app_name">PSE AI Project</string>
 
     <!-- Stringhe utilizzate per la schermata di Login/SignUp -->
-    <string name="login">Effettua il login!!</string>
     <string name="logout">logout</string>
     <string name="registrati">Registrati per poter utilizzare l\'applicazione</string>
-    <string name="hint_password">Inserisci la password</string>
+    <string name="password_text">Password</string>
+    <string name="confirm_password_text">Conferma Password</string>
     <string name="login_button">Login</string>
-    <string name="email_hint">Inserisci l\'email</string>
+    <string name="signup_button">Registrati</string>
+    <string name="email_text">Email</string>
+    <string name="account_circle">Account Circle</string>
+    <string name="no_account">Non hai un account? Registrati!</string>
+    <string name="yes_account">Hai già un account? Accedi!</string>
 </resources>
