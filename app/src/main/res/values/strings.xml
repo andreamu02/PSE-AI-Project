@@ -12,4 +12,10 @@
     <string name="account_circle">Account Circle</string>
     <string name="no_account">Non hai un account? Registrati!</string>
     <string name="yes_account">Hai già un account? Accedi!</string>
+    <string name="password_dimenticata">Password dimenticata?</string>
+    <string name="lock_icon">Lock icon</string>
+    <string name="password_dimenticata_title">PASSWORD DIMENTICATA</string>
+    <string name="password_dimenticata_subtitle">Inserisci la tua mail per il recupero della password</string>
+    <string name="back_button">Indietro</string>
+    <string name="reset_password">Reset Password</string>
 </resources>

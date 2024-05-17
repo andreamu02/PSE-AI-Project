@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".SignInActivity">
+    tools:context=".SignUpActivity">
 
     <ImageView
         android:layout_width="160dp"
@@ -17,12 +17,13 @@
         android:contentDescription="@string/account_circle"
         />
 
-    <!--EditText per l'inserimento dell'username -->
+    <!-- EditText per l'inserimento dell'email -->
     <EditText
         android:id="@+id/email_input_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:autofillHints=""
         android:hint="@string/email_text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -31,12 +32,13 @@
         android:padding="18dp"
         android:inputType="textEmailAddress" />
 
-    <!--EditText per l'inserimento della password -->
+    <!-- EditText per l'inserimento della password -->
     <EditText
         android:id="@+id/password_input_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:autofillHints=""
         android:hint="@string/password_text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -45,11 +47,13 @@
         android:padding="18dp"
         android:inputType="textPassword" />
 
+    <!-- EditText per l'inserimento della password di conferma -->
     <EditText
         android:id="@+id/confirm_password_input_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:autofillHints=""
         android:hint="@string/confirm_password_text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -58,18 +62,22 @@
         android:padding="18dp"
         android:inputType="textPassword" />
 
-    <!-- Login Button -->
-    <Button
+    <!-- MaterialButton per la registrazione -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/signup_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:background="@drawable/rounded_corner"
+        android:padding="12dp"
         android:backgroundTint="@color/white"
-        android:padding="18dp"
         android:text="@string/signup_button"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        app:iconGravity="textStart"
+        android:textSize="20sp"
+        app:iconTint="@color/black" />
 
+    <!-- Link alla pagina di SignIn -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
