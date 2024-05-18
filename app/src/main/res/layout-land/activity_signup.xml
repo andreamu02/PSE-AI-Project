@@ -32,8 +32,19 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:src="@drawable/baseline_account_circle_24"
-            android:contentDescription="@string/account_circle"
-            />
+            android:contentDescription="@string/account_circle"/>
+
+        <!-- TextView per mostrare delle info -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signup"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:paddingTop="10dp"
+            android:text="@string/signup"
+            android:textAllCaps="true"/>
     </LinearLayout>
 
     <!-- Container destro (occupa metà dello schermo a destra della guideline) -->
