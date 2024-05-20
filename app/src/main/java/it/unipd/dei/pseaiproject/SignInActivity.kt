@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthEmailException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import java.lang.Exception
@@ -79,13 +80,13 @@ class SignInActivity : AppCompatActivity() {
     // Metodo per gestire gli errori di accesso
     private fun handleSignInError(exception: Exception?){
         when (exception) {
-            is FirebaseAuthInvalidCredentialsException -> {
-                // Gestisce l'errore di password errata
-                Toast.makeText(this, "Password errata. Riprova.", Toast.LENGTH_SHORT).show()
-            }
             is FirebaseAuthInvalidUserException -> {
                 // Gestisce l'errore di utente non trovato
                 Toast.makeText(this, "L'email inserita non esiste. Riprova.", Toast.LENGTH_SHORT).show()
+            }
+            is FirebaseAuthInvalidCredentialsException -> {
+                // Gestisce l'errore di password errata
+                Toast.makeText(this, "Password errata. Riprova.", Toast.LENGTH_SHORT).show()
             }
             else -> {
                 // Gestisce gli altri tipi di errori
