@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PSEAIProject">
+        android:theme="@style/Theme.Material3.Dark.NoActionBar">
         <activity android:name=".SignInActivity"
             android:exported="true">
         <intent-filter>
