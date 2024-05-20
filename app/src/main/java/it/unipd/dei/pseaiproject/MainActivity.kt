@@ -1,4 +1,4 @@
-package com.example.progetto
+package it.unipd.dei.pseaiproject
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sharedPreferences = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE)
@@ -74,6 +75,21 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // Do nothing
             }
+        }
+
+        val textView = findViewById<TextView>(R.id.prova)
+        val button = findViewById<Button>(R.id.button)
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        if(firebaseAuth.currentUser != null){
+            textView.text = firebaseAuth.currentUser!!.email.toString()
+        }
+
+        button.setOnClickListener{
+            firebaseAuth.signOut()
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

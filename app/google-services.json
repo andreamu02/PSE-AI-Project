@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "260177840662",
+    "project_id": "pse-ai-project",
+    "storage_bucket": "pse-ai-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260177840662:android:1043fecfb11f74cdaf0337",
+        "android_client_info": {
+          "package_name": "it.unipd.dei.pseaiproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp28ovAIK0xdCyFHECujRi_u2CyTE1ry4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

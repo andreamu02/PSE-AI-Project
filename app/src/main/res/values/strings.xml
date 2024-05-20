@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Progetto</string>
     <string name="start">Get started!</string>
     <string name="apple">Apple image</string>
     <string name="changeTheme">Change theme</string>
@@ -9,4 +8,25 @@
         <item>Item 3</item>
         <item>Item 4</item>
     </string-array>
+    <string name="app_name">PSE AI Project</string>
+
+    <!-- Stringhe utilizzate per la schermata di Login/SignUp -->
+    <string name="logout">logout</string>
+    <string name="registrati">Registrati per poter utilizzare l\'applicazione</string>
+    <string name="password_text">Password</string>
+    <string name="confirm_password_text">Conferma Password</string>
+    <string name="login_button">Login</string>
+    <string name="login">Autenticati</string>
+    <string name="signup_button">SignUp</string>
+    <string name="signup">Registrati</string>
+    <string name="email_text">Email</string>
+    <string name="account_circle">Account Circle</string>
+    <string name="no_account">Non hai un account? Registrati!</string>
+    <string name="yes_account">Hai già un account? Accedi!</string>
+    <string name="password_dimenticata">Password dimenticata?</string>
+    <string name="lock_icon">Lock icon</string>
+    <string name="password_dimenticata_title">Password dimenticata</string>
+    <string name="password_dimenticata_subtitle">Inserisci la tua mail per il recupero della password</string>
+    <string name="back_button">Indietro</string>
+    <string name="reset_password">Reset Password</string>
 </resources>
