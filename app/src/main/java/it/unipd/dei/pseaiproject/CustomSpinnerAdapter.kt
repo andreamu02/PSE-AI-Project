@@ -1,4 +1,4 @@
-package com.example.progetto
+package it.unipd.dei.pseaiproject
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import it.unipd.dei.pseaiproject.R
 
 class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>, private val textColor: Int) :
     ArrayAdapter<SpinnerItem>(context, 0, data) {
