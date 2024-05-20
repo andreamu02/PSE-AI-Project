@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">PSE AI Project</string>
+    <string name="app_name">Progetto</string>
+    <string name="start">Get started!</string>
+    <string name="apple">Apple image</string>
+    <string name="changeTheme">Change theme</string>
+    <string-array name="spinner_items">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+    </string-array>
 </resources>
