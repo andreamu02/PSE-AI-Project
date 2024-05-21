@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".SignInActivity">
+    tools:context=".ui.auth.SignInActivity">
 
     <!-- Guideline per dividere lo schermo a metà -->
     <androidx.constraintlayout.widget.Guideline
@@ -47,81 +47,100 @@
     </LinearLayout>
 
     <!-- Container destro (occupa metà dello schermo a destra della guideline) -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="30dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent">
-        <!-- EditText per l'inserimento dell'email -->
-        <EditText
-            android:id="@+id/email_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:autofillHints=""
-            android:hint="@string/email_text"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner"
-            android:padding="18dp"
-            android:inputType="textEmailAddress" />
 
-        <!-- EditText per l'inserimento della password -->
-        <EditText
-            android:id="@+id/password_input"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:autofillHints=""
-            android:hint="@string/password_text"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner"
-            android:padding="18dp"
-            android:inputType="textPassword" />
+            android:orientation="vertical"
+            android:layout_marginEnd="10dp">
 
-        <!-- MaterialButton per il SignIn -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/login_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:padding="12dp"
-            android:backgroundTint="@color/white"
-            android:text="@string/login_button"
-            android:textColor="@color/black"
-            app:cornerRadius="10dp"
-            app:iconGravity="textStart"
-            android:textSize="20sp"
-            app:iconTint="@color/black" />
+            <!-- EditText per l'inserimento dell'email -->
+            <EditText
+                android:id="@+id/email_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:autofillHints=""
+                android:hint="@string/email_text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp"
+                android:background="@drawable/rounded_corner"
+                android:padding="18dp"
+                android:inputType="textEmailAddress" />
 
-        <!-- Link alla pagina di SingUp -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/not_signup"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:paddingTop="10dp"
-            android:text="@string/no_account"/>
+            <!-- EditText per l'inserimento della password -->
+            <EditText
+                android:id="@+id/password_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:autofillHints=""
+                android:hint="@string/password_text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp"
+                android:background="@drawable/rounded_corner"
+                android:padding="18dp"
+                android:inputType="textPassword" />
 
-        <!-- Link alla pagina di ResetPassword -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/forgot_password"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:paddingTop="10dp"
-            android:text="@string/password_dimenticata"/>
-    </LinearLayout>
+            <!-- FrameLayout per avere una progressbar nascosta sotto il bottone da attivare in seguito -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
+
+                <ProgressBar
+                    android:id="@+id/signInProgressbar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="invisible" />
+                <!-- MaterialButton per il SignIn -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/login_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:backgroundTint="@color/white"
+                    android:text="@string/login_button"
+                    android:textColor="@color/black"
+                    app:cornerRadius="10dp"
+                    app:iconGravity="textStart"
+                    android:textSize="20sp"
+                    app:iconTint="@color/black" />
+            </FrameLayout>
+
+            <!-- Link alla pagina di SingUp -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/not_signup"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:text="@string/no_account"/>
+
+            <!-- Link alla pagina di ResetPassword -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/forgot_password"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:paddingTop="10dp"
+                android:text="@string/password_dimenticata"/>
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
