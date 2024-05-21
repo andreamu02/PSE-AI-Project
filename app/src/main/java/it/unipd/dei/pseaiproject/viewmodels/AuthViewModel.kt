@@ -1,4 +1,4 @@
-package it.unipd.dei.pseaiproject.viewmodel
+package it.unipd.dei.pseaiproject.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

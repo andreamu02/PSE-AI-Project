@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import it.unipd.dei.pseaiproject.MainActivity
 import it.unipd.dei.pseaiproject.databinding.ActivitySigninBinding
-import it.unipd.dei.pseaiproject.viewmodel.AuthViewModel
+import it.unipd.dei.pseaiproject.viewmodels.AuthViewModel
 import kotlinx.coroutines.launch
 
 class SignInActivity : AppCompatActivity() {
