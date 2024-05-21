@@ -1,6 +1,5 @@
 package it.unipd.dei.pseaiproject.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,81 +34,71 @@ class AuthViewModel : ViewModel() {
     private val _signUpState = MutableLiveData<Boolean>()
     val signUpState: LiveData<Boolean> = _signUpState
 
+    // Suspend fun per signIn, così si aspetta che venga eseguita la funzione in Firebase
     suspend fun signIn(email: String, password: String): Boolean {
-        var signinSucces = false
-
         // Segnala l'inizio del processo di signIn
         _signInState.value = true
 
         // Avvia una coroutine nel contesto principale
-        withContext(Dispatchers.Main) {
-            try {
+        return try {
+            withContext(Dispatchers.IO) {
                 // Effettua il tentativo di accesso con Firebase Authentication
                 firebaseAuth.signInWithEmailAndPassword(email, password).await()
-
-                // Se l'accesso è riuscito, imposta il flag a true
-                signinSucces = true
-            } catch (e: Exception) {
-                // Se l'accesso fallisce, gestisci l'errore
-                handleAuthException(e)
             }
-
-            // Segnala la fine del processo di signIn
+            true
+        } catch (e: Exception) {
+            // Se l'accesso fallisce, gestisci l'errore
+            handleAuthException(e)
+            false
+        } finally {
+            // Fine del processo di signIn
             _signInState.value = false
         }
-        return signinSucces
     }
 
+    // Suspend fun per signUp, così si aspetta che venga eseguita la funzione in Firebase
     suspend fun signUp(email: String, password: String): Boolean {
-        var signupSuccess = false
-
         // Segnala l'inizio del processo di signUp
         _signUpState.value = true
-
-        // Avvia una coroutine nel contesto principale
-        withContext(Dispatchers.Main) {
-            try {
+        return try {
+            // Avvia una coroutine nel contesto principale
+            withContext(Dispatchers.IO) {
                 // Effettua il tentativo di registrazione con Firebase Authentication
                 firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-
-                // Se la registrazione è riuscita, ritorna true
-                signupSuccess = true
-            } catch (e: Exception) {
-                // Se la registrazione fallisce, gestisci l'errore
-                handleAuthException(e)
             }
-
+            true
+        } catch (e: Exception) {
+            // Se la registrazione fallisce, gestisci l'errore
+            handleAuthException(e)
+            false
+        } finally {
             // Segnala la fine del processo di signUp
             _signUpState.value = false
         }
-        return signupSuccess
     }
 
+    // Suspend fun per il reset della password, così si aspetta che venga eseguita la funzione in Firebase
     suspend fun resetPassword(email: String): Boolean {
-        var resetPasswordSuccess = false
-
         // Segnala l'inizio del processo di reset della password
         _resetPasswordState.value = true
 
-        // Avvia una coroutine nel contesto principale
-        withContext(Dispatchers.Main) {
-            try {
+        return try {
+            // Avvia una coroutine nel contesto principale
+            withContext(Dispatchers.IO) {
                 // Invia l'email per il reset della password tramite Firebase Authentication
                 firebaseAuth.sendPasswordResetEmail(email).await()
-
-                resetPasswordSuccess = true
-                // Se l'operazione è completata con successo, mostra un messaggio all'utente
-                _authException.value =
-                    "Il link per il reset della password è stato inviato alla tua email"
-            } catch (e: Exception) {
-                // Se si verifica un errore, gestiscilo
-                handleAuthException(e)
             }
-
+            // Se l'operazione è completata con successo, mostra un messaggio all'utente
+            _authException.value = "Il link per il reset della password è stato inviato alla tua email"
+            true
+        } catch (e: Exception) {
+            // Se il reset della password fallisce, gestisci l'errore
+            handleAuthException(e)
+            false
+        }finally {
             // Segnala la fine del processo di reset della password
             _resetPasswordState.value = false
         }
-        return resetPasswordSuccess
     }
 
     // Funzione per ottenere l'utente attuale
@@ -119,27 +108,12 @@ class AuthViewModel : ViewModel() {
 
     // Metodo per gestire gli errori di accesso
     private fun handleAuthException(exception: Exception?) {
-        when (exception) {
-            is FirebaseAuthWeakPasswordException -> {
-                _authException.value =
-                    "La password è troppo debole. Inserisci una password più sicura."
-            }
-            is FirebaseAuthUserCollisionException -> {
-                // Gestisce l'errore di conflitto di account
-                _authException.value = "Esiste già un account con questa mail."
-            }
-            is FirebaseAuthInvalidUserException -> {
-                // Gestisce l'errore di utente non trovato
-                _authException.value = "L'email inserita non è valida. Riprova."
-            }
-            is FirebaseAuthInvalidCredentialsException -> {
-                // Gestisce l'errore di password errata
-                _authException.value = "Password errata. Riprova."
-            }
-            else -> {
-                // Gestisce gli altri tipi di errori
-                _authException.value = "Errore di Firebase: ${exception?.message}"
-            }
+        _authException.value = when (exception) {
+            is FirebaseAuthWeakPasswordException -> "La password è troppo debole. Inserisci una password più sicura."
+            is FirebaseAuthUserCollisionException -> "Esiste già un account con questa mail."
+            is FirebaseAuthInvalidUserException -> "L'email inserita non è valida. Riprova."
+            is FirebaseAuthInvalidCredentialsException -> "Password errata. Riprova."
+            else -> "Errore di Firebase: ${exception?.message}"
         }
     }
 }
