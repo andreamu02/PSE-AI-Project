@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".SignUpActivity">
+    tools:context=".ui.auth.SignUpActivity">
 
     <ImageView
         android:layout_width="160dp"
@@ -73,20 +73,32 @@
         android:padding="18dp"
         android:inputType="textPassword" />
 
-    <!-- MaterialButton per la registrazione -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/signup_button"
+    <!-- FrameLayout per avere una progressbar nascosta sotto il bottone da attivare in seguito -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:padding="12dp"
-        android:backgroundTint="@color/white"
-        android:text="@string/signup_button"
-        android:textColor="@color/black"
-        app:cornerRadius="10dp"
-        app:iconGravity="textStart"
-        android:textSize="20sp"
-        app:iconTint="@color/black" />
+        android:layout_marginTop="32dp">
+
+        <ProgressBar
+            android:id="@+id/signUpProgressbar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible" />
+        <!-- MaterialButton per la registrazione -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signup_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/signup_button"
+            android:textColor="@color/black"
+            app:cornerRadius="10dp"
+            app:iconGravity="textStart"
+            android:textSize="20sp"
+            app:iconTint="@color/black" />
+    </FrameLayout>
 
     <!-- Link alla pagina di SignIn -->
     <TextView

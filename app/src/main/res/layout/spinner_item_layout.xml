@@ -10,7 +10,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:src="@drawable/menu"
-        android:contentDescription="Spinner item icon" />
+        android:contentDescription="@string/spinner_item_icon" />
 
     <TextView
         android:id="@+id/text"

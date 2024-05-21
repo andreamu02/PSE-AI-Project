@@ -1,5 +1,7 @@
 [versions]
-agp = "8.4.0"
+activityKtx = "1.9.0"
+agp = "8.4.1"
+appcompatVersion = "1.4.1"
 firebaseBom = "33.0.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -7,18 +9,28 @@ junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
+lifecycleViewmodelKtx = "2.8.0"
 material = "1.12.0"
 googleGmsGoogleServices = "4.4.1"
 firebaseAuth = "23.0.0"
+tensorflowLiteSupport = "0.1.0"
+tensorflowLiteMetadata = "0.1.0"
+tensorflowLiteGpu = "2.3.0"
 
 [libraries]
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
+androidx-appcompat-v141 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+tensorflow-lite-support = { group = "org.tensorflow", name = "tensorflow-lite-support", version.ref = "tensorflowLiteSupport" }
+tensorflow-lite-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata", version.ref = "tensorflowLiteMetadata" }
+tensorflow-lite-gpu = { group = "org.tensorflow", name = "tensorflow-lite-gpu", version.ref = "tensorflowLiteGpu" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
