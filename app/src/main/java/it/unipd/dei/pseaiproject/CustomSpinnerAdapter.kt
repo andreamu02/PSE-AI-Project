@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import it.unipd.dei.pseaiproject.R
 
-class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>, private val textColor: Int) :
+class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>, private val textColor: Int, private val backgroundColor: Int) :
     ArrayAdapter<SpinnerItem>(context, 0, data) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -20,7 +20,9 @@ class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.spinner_item_layout, parent, false)
             val textView = view.findViewById<TextView>(R.id.text)
+            val imageView = view.findViewById<ImageView>(R.id.icon)
             textView.setTextColor(ContextCompat.getColor(context, textColor))
+            view.setBackgroundColor(ContextCompat.getColor(context, backgroundColor))
             holder = ViewHolder()
             holder.icon = view.findViewById(R.id.icon)
             holder.text = view.findViewById(R.id.text)

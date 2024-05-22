@@ -21,10 +21,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val sharedPreferences = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE)
         val isDarkTheme = sharedPreferences.getBoolean("isDarkTheme", false)
+        var backgroundAB = R.color.black
+        var titleColor = R.color.ametista
+        var spinnerTextColor = R.color.white
         if (isDarkTheme) {
             setTheme(R.style.DarkStyle)
         } else {
             setTheme(R.style.LightStyle)
+            backgroundAB = R.color.white
+            titleColor = R.color.green
+            spinnerTextColor = R.color.black
         }
 
         firebaseAuth = FirebaseAuth.getInstance()
@@ -38,33 +44,15 @@ class MainActivity : AppCompatActivity() {
         val spinnerItems = listOf(
             SpinnerItem(R.drawable.home, "Home"),
             SpinnerItem(R.drawable.information_slab_box, "Info"),
-            SpinnerItem(R.drawable.theme_light_dark, "Change Theme"),
-            SpinnerItem(R.drawable.home, "Logout")
+            SpinnerItem(R.drawable.theme_light_dark, "Change theme"),
+            SpinnerItem(R.drawable.logout, "Logout")
         )
-
-        var backgroundAB = R.color.black
-        var titleColor = R.color.ametista
-        var spinnerTextColor = R.color.white
-        if (!isDarkTheme) {
-            backgroundAB = R.color.white
-            titleColor = R.color.green
-            spinnerTextColor = R.color.black
-        }
 
         supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(backgroundAB)))
         toolbar.setTitleTextColor(resources.getColor(titleColor))
 
-        val adapter = CustomSpinnerAdapter(this, spinnerItems, spinnerTextColor)
+        val adapter = CustomSpinnerAdapter(this, spinnerItems, spinnerTextColor, backgroundAB)
         spinner.adapter = adapter
-        val buttonChangeTheme = findViewById<Button>(R.id.changeTheme) // Bottone per cambiare tema
-        buttonChangeTheme.setOnClickListener {
-            // Cambia tema e riavvia l'attività
-            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.putBoolean("isDarkTheme", !isDarkTheme)
-            editor.apply()
-
-            recreate()
-        }
 
         // Gestire gli eventi di selezione
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -76,7 +64,14 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-                Toast.makeText(this@MainActivity, "Selected: $item", Toast.LENGTH_SHORT).show()
+                if(item.text == "Change theme"){
+                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                    editor.putBoolean("isDarkTheme", !isDarkTheme)
+                    editor.apply()
+                    spinner.setSelection(0)
+                    recreate()
+                }
+                //Toast.makeText(this@MainActivity, "Selected: $item", Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
