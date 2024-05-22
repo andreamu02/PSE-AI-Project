@@ -9,6 +9,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
+        android:background="@android:color/transparent"
         android:src="@drawable/menu"
         android:contentDescription="@string/spinner_item_icon" />
 
@@ -16,6 +17,7 @@
         android:id="@+id/text"
         android:layout_width="70dp"
         android:layout_height="80dp"
+        android:background="@android:color/transparent"
         android:gravity="center"
         android:textColor="@color/black"
         android:layout_marginStart="16dp"

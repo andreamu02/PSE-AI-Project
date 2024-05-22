@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
@@ -26,8 +25,10 @@ class MainActivity : AppCompatActivity() {
         var spinnerTextColor = R.color.white
         if (isDarkTheme) {
             setTheme(R.style.DarkStyle)
+            window.setBackgroundDrawableResource(R.drawable.home_background_dark)
         } else {
             setTheme(R.style.LightStyle)
+            window.setBackgroundDrawableResource(R.drawable.home_background_light)
             backgroundAB = R.color.white
             titleColor = R.color.green
             spinnerTextColor = R.color.black
