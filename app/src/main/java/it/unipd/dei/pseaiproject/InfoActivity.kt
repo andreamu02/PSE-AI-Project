@@ -13,8 +13,9 @@ import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import it.unipd.dei.pseaiproject.ui.auth.SignInActivity
 
-class MainActivity : AppCompatActivity() {
+class InfoActivity: AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sharedPreferences = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE)
@@ -32,10 +33,9 @@ class MainActivity : AppCompatActivity() {
             titleColor = R.color.green
             spinnerTextColor = R.color.black
         }
-
         firebaseAuth = FirebaseAuth.getInstance()
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_info)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -53,29 +53,34 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = CustomSpinnerAdapter(this, spinnerItems, spinnerTextColor, backgroundAB)
         spinner.adapter = adapter
+        spinner.setSelection(1)
 
         // Gestire gli eventi di selezione
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val item = parent.getItemAtPosition(position) as SpinnerItem
-                if(item.text == "Logout"){
+                if (item.text == "Logout") {
                     firebaseAuth.signOut()
-                    val intent = Intent(this@MainActivity, SignInActivity::class.java)
+                    val intent = Intent(this@InfoActivity, SignInActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
-                if(item.text == "Change theme"){
+                if (item.text == "Change theme") {
                     val editor: SharedPreferences.Editor = sharedPreferences.edit()
                     editor.putBoolean("isDarkTheme", !isDarkTheme)
                     editor.apply()
-                    spinner.setSelection(0)
+                    spinner.setSelection(1)
                     recreate()
                 }
-                if(item.text == "Info") {
+                if (item.text == "Home") {
                     // Apri la nuova Activity
-                    val intent = Intent(this@MainActivity, InfoActivity::class.java)
+                    val intent = Intent(this@InfoActivity, MainActivity::class.java)
                     startActivity(intent)
-                    intent.putExtra("theme", isDarkTheme)
                 }
                 //Toast.makeText(this@MainActivity, "Selected: $item", Toast.LENGTH_SHORT).show()
             }

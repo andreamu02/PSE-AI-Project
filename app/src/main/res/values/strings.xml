@@ -5,6 +5,7 @@
     <string name="start">Get started!</string>
     <string name="apple">Apple image</string>
     <string name="changeTheme">Change theme</string>
+    <string name="AppTitle">ImageClassifier</string>
     <string-array name="spinner_items">
         <item>Item 1</item>
         <item>Item 2</item>
