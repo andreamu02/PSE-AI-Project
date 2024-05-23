@@ -1,4 +1,4 @@
-package it.unipd.dei.pseaiproject
+package it.unipd.dei.pseaiproject.ui.main
 
 import android.content.Context
 import android.content.Intent
@@ -11,6 +11,9 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
+import it.unipd.dei.pseaiproject.CustomSpinnerAdapter
+import it.unipd.dei.pseaiproject.R
+import it.unipd.dei.pseaiproject.SpinnerItem
 import it.unipd.dei.pseaiproject.ui.auth.SignInActivity
 
 class InfoActivity: AppCompatActivity() {
