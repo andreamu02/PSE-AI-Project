@@ -81,6 +81,7 @@ class InfoActivity: AppCompatActivity() {
                     // Apri la nuova Activity
                     val intent = Intent(this@InfoActivity, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 //Toast.makeText(this@MainActivity, "Selected: $item", Toast.LENGTH_SHORT).show()
             }

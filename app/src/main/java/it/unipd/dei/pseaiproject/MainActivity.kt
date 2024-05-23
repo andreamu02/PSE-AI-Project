@@ -75,7 +75,8 @@ class MainActivity : AppCompatActivity() {
                     // Apri la nuova Activity
                     val intent = Intent(this@MainActivity, InfoActivity::class.java)
                     startActivity(intent)
-                    intent.putExtra("theme", isDarkTheme)
+                    spinner.setSelection(0)
+                    finish()
                 }
                 //Toast.makeText(this@MainActivity, "Selected: $item", Toast.LENGTH_SHORT).show()
             }
