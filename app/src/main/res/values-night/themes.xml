@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="DarkStyle" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:background">@color/black</item>
+    <style name="DarkStyle" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:background">@drawable/home_background_dark</item>
         <item name="colorPrimary">@color/ametista</item>
         <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/colorAccent</item>
