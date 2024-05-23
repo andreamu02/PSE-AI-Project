@@ -19,14 +19,8 @@
         </intent-filter>
         </activity>
         <activity android:name=".ui.auth.SignUpActivity"/>
-        <activity android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".InfoActivity" />
+        <activity android:name=".ui.main.MainActivity"/>
+        <activity android:name=".ui.main.InfoActivity" />
         <activity android:name=".ui.auth.ForgotPasswordActivity"/>
     </application>
 

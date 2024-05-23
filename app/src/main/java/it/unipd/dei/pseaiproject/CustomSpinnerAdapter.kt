@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import it.unipd.dei.pseaiproject.R
 
 class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>, private val textColor: Int, private val backgroundColor: Int) :
     ArrayAdapter<SpinnerItem>(context, 0, data) {
@@ -24,8 +23,8 @@ class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>
             textView.setTextColor(ContextCompat.getColor(context, textColor))
             view.setBackgroundColor(ContextCompat.getColor(context, backgroundColor))
             holder = ViewHolder()
-            holder.icon = view.findViewById(R.id.icon)
-            holder.text = view.findViewById(R.id.text)
+            holder.icon = imageView
+            holder.text = textView
             view.tag = holder
         } else {
             holder = view.tag as ViewHolder
