@@ -171,13 +171,12 @@ class CameraActivity : AppCompatActivity() {
         val numberOfObjects = numberOfDetections.intArray[0]
         for (i in 0 until numberOfObjects) {
             val score = scores.floatArray[i]
-            if (score > 0) {
+            if (score > 0.5) {
                 val location = locations.floatArray.sliceArray(i * 4 until (i + 1) * 4)
                 val left = location[0] * bitmap.width
                 val top = location[1] * bitmap.height
                 val right = location[2] * bitmap.width
                 val bottom = location[3] * bitmap.height
-
                 val detectedClass = classes.intArray[i]
                 val label = "Class: $detectedClass, Score: ${"%.2f".format(score)}"
                 detections.add(DetectionOverlayView.Detection(left, top, right, bottom, label))

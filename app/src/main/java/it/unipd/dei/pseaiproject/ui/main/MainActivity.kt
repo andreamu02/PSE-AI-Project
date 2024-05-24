@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import it.unipd.dei.pseaiproject.CameraActivity
 import it.unipd.dei.pseaiproject.CustomSpinnerAdapter
@@ -59,8 +60,8 @@ class MainActivity : AppCompatActivity() {
             SpinnerItem(R.drawable.logout, "Logout")
         )
 
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(backgroundAB)))
-        toolbar.setTitleTextColor(resources.getColor(titleColor))
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, backgroundAB)))
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, titleColor))
 
         val adapter = CustomSpinnerAdapter(this, spinnerItems, spinnerTextColor, backgroundAB)
         spinner.adapter = adapter
