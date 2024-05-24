@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.ImageFormat
 import android.graphics.Rect
 import android.graphics.YuvImage
@@ -127,10 +128,10 @@ class CameraActivity : AppCompatActivity() {
         val originalBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
         // Ridimensiona il bitmap a 300x300 pixel
-        return Bitmap.createScaledBitmap(originalBitmap, 300, 300, true)
+        //return Bitmap.createScaledBitmap(originalBitmap, 300, 300, true)
 
         //TODO SE vengono modificate le proporzioni prova questo
-        /*// Mantieni le proporzioni durante il ridimensionamento a 300x300
+        // Mantieni le proporzioni durante il ridimensionamento a 300x300
     val aspectRatio = originalBitmap.width.toFloat() / originalBitmap.height.toFloat()
     val scaledBitmap = if (aspectRatio > 1) {
         // L'immagine è larga
@@ -147,7 +148,7 @@ class CameraActivity : AppCompatActivity() {
     val top = (300 - scaledBitmap.height) / 2f
     canvas.drawBitmap(scaledBitmap, left, top, null)
 
-    return paddedBitmap*/
+    return paddedBitmap
     }
 
     // Rileva oggetti in un Bitmap e aggiorna l'overlay
