@@ -124,7 +124,30 @@ class CameraActivity : AppCompatActivity() {
         val out = ByteArrayOutputStream()
         yuvImage.compressToJpeg(Rect(0, 0, image.width, image.height), 100, out)
         val imageBytes = out.toByteArray()
-        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        val originalBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+        // Ridimensiona il bitmap a 300x300 pixel
+        return Bitmap.createScaledBitmap(originalBitmap, 300, 300, true)
+
+        //TODO SE vengono modificate le proporzioni prova questo
+        /*// Mantieni le proporzioni durante il ridimensionamento a 300x300
+    val aspectRatio = originalBitmap.width.toFloat() / originalBitmap.height.toFloat()
+    val scaledBitmap = if (aspectRatio > 1) {
+        // L'immagine è larga
+        Bitmap.createScaledBitmap(originalBitmap, 300, (300 / aspectRatio).toInt(), true)
+    } else {
+        // L'immagine è alta
+        Bitmap.createScaledBitmap(originalBitmap, (300 * aspectRatio).toInt(), 300, true)
+    }
+
+    // Crea un bitmap 300x300 con padding nero se necessario
+    val paddedBitmap = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(paddedBitmap)
+    val left = (300 - scaledBitmap.width) / 2f
+    val top = (300 - scaledBitmap.height) / 2f
+    canvas.drawBitmap(scaledBitmap, left, top, null)
+
+    return paddedBitmap*/
     }
 
     // Rileva oggetti in un Bitmap e aggiorna l'overlay
