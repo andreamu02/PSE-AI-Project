@@ -7,10 +7,12 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
+import it.unipd.dei.pseaiproject.CameraActivity
 import it.unipd.dei.pseaiproject.CustomSpinnerAdapter
 import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.SpinnerItem
@@ -43,6 +45,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val spinner: Spinner = findViewById(R.id.spinner)
+        val start : Button = findViewById(R.id.getStarted)
+
+        start.setOnClickListener {
+            val myIntent = Intent(this, CameraActivity::class.java)
+            startActivity(myIntent)
+        }
 
         val spinnerItems = listOf(
             SpinnerItem(R.drawable.home, "Home"),
