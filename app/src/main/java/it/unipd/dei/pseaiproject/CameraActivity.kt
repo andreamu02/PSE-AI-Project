@@ -2,27 +2,27 @@ package it.unipd.dei.pseaiproject
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.ImageFormat
-import android.graphics.Rect
-import android.graphics.YuvImage
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
+import androidx.camera.core.Preview
+import androidx.camera.core.resolutionselector.AspectRatioStrategy
+import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
-import it.unipd.dei.pseaiproject.ml.ObjectDetectionModel
-import org.tensorflow.lite.support.image.TensorImage
-import java.io.ByteArrayOutputStream
+import org.tensorflow.lite.task.vision.detector.Detection
+import java.util.LinkedList
 import java.util.concurrent.Executors
 
-class CameraActivity : AppCompatActivity() {
+class CameraActivity : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
 
     // View per mostrare il feed della fotocamera
     private lateinit var previewView: PreviewView
@@ -32,6 +32,11 @@ class CameraActivity : AppCompatActivity() {
 
     // Executor per eseguire operazioni della fotocamera in un thread separato
     private val cameraExecutor = Executors.newSingleThreadExecutor()
+
+    // Variabili per il buffer di bitmap, l'analisi delle immagini e l'helper per il rilevamento degli oggetti
+    private lateinit var bitmapBuffer: Bitmap
+    private var imageAnalyzer: ImageAnalysis? = null
+    private lateinit var objectDetectorHelper: ObjectDetectorHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +51,13 @@ class CameraActivity : AppCompatActivity() {
         } else {
             requestPermissions.launch(arrayOf(Manifest.permission.CAMERA))
         }
+
+        objectDetectorHelper = ObjectDetectorHelper(
+            context = this,
+            objectDetectorListener = this)
     }
 
-    // Richiesta permessi fotocamera
+    // Metodo per gestire la richiesta dei permessi della fotocamera
     private val requestPermissions = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         if (permissions.all { it.value }) {
             startCamera()
@@ -58,46 +67,64 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-    // Controlla se tutti i permessi sono concessi
+    // Metodo per verificare se tutti i permessi necessari sono stati concessi
     private fun allPermissionsGranted() = arrayOf(Manifest.permission.CAMERA).all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
-    // Inizializza la fotocamera
+    // Metodo per avviare la fotocamera
     private fun startCamera() {
+        // Ottiene il provider della fotocamera
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
+
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+
+            // Seleziona la fotocamera posteriore come default
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+            // Imposta la strategia per la selezione della risoluzione
+            val resolutionSelector = ResolutionSelector.Builder()
+                .setAspectRatioStrategy(AspectRatioStrategy.RATIO_4_3_FALLBACK_AUTO_STRATEGY)
+                .build()
 
             // Configura la preview della fotocamera
             val preview = Preview.Builder()
+                .setResolutionSelector(resolutionSelector)
                 .build()
                 .also {
                     it.setSurfaceProvider(previewView.surfaceProvider)
                 }
 
-            // Configura la cattura delle immagini
-            val imageCapture = ImageCapture.Builder().build()
-
             // Configura l'analisi delle immagini
-            val imageAnalyzer = ImageAnalysis.Builder()
+            imageAnalyzer = ImageAnalysis.Builder()
+                .setResolutionSelector(resolutionSelector)
+                .setTargetRotation(previewView.display.rotation)
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
                 .build()
                 .also {
-                    it.setAnalyzer(cameraExecutor) { imageProxy ->
-                        val bitmap = imageProxyToBitmap(imageProxy)
-                        detectObjects(bitmap)
-                        imageProxy.close()
+                    it.setAnalyzer(cameraExecutor) { image ->
+                        // Inizializza il buffer di bitmap solo una volta che l'analizzatore è in esecuzione
+                        if (!::bitmapBuffer.isInitialized) {
+                            bitmapBuffer = Bitmap.createBitmap(
+                                image.width,
+                                image.height,
+                                Bitmap.Config.ARGB_8888
+                            )
+                        }
+                        detectObjects(image)
                     }
                 }
 
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            // Scollega tutti i casi d'uso precedenti e collega quelli nuovi
+            cameraProvider.unbindAll()
 
             try {
-                // Scollega tutti i casi d'uso e collega quelli nuovi
-                cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture, imageAnalyzer
-                )
+                    this, cameraSelector, preview, imageAnalyzer)
+
+                preview.setSurfaceProvider(previewView.surfaceProvider)
             } catch (exc: Exception) {
                 Log.e("CameraXApp", "Use case binding failed", exc)
             }
@@ -105,90 +132,44 @@ class CameraActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
-    // Converte un oggetto ImageProxy in un Bitmap
-    private fun imageProxyToBitmap(image: ImageProxy): Bitmap {
-        val yBuffer = image.planes[0].buffer
-        val uBuffer = image.planes[1].buffer
-        val vBuffer = image.planes[2].buffer
+    // Metodo per l'analisi delle immagini e il rilevamento degli oggetti
+    private fun detectObjects(image: ImageProxy) {
+        // Copia i bit RGB nel buffer bitmap condiviso
+        image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
 
-        val ySize = yBuffer.remaining()
-        val uSize = uBuffer.remaining()
-        val vSize = vBuffer.remaining()
-
-        val nv21 = ByteArray(ySize + uSize + vSize)
-
-        yBuffer.get(nv21, 0, ySize)
-        uBuffer.get(nv21, ySize, uSize)
-        vBuffer.get(nv21, ySize + uSize, vSize)
-
-        val yuvImage = YuvImage(nv21, ImageFormat.NV21, image.width, image.height, null)
-        val out = ByteArrayOutputStream()
-        yuvImage.compressToJpeg(Rect(0, 0, image.width, image.height), 100, out)
-        val imageBytes = out.toByteArray()
-        val originalBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-
-        // Ridimensiona il bitmap a 300x300 pixel
-        //return Bitmap.createScaledBitmap(originalBitmap, 300, 300, true)
-
-        //TODO SE vengono modificate le proporzioni prova questo
-        // Mantieni le proporzioni durante il ridimensionamento a 300x300
-    val aspectRatio = originalBitmap.width.toFloat() / originalBitmap.height.toFloat()
-    val scaledBitmap = if (aspectRatio > 1) {
-        // L'immagine è larga
-        Bitmap.createScaledBitmap(originalBitmap, 300, (300 / aspectRatio).toInt(), true)
-    } else {
-        // L'immagine è alta
-        Bitmap.createScaledBitmap(originalBitmap, (300 * aspectRatio).toInt(), 300, true)
+        val imageRotation = image.imageInfo.rotationDegrees
+        // Passa il Bitmap e la rotazione all'helper per il rilevamento e l'elaborazione degli oggetti
+        objectDetectorHelper.detect(bitmapBuffer, imageRotation)
     }
 
-    // Crea un bitmap 300x300 con padding nero se necessario
-    val paddedBitmap = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)
-    val canvas = Canvas(paddedBitmap)
-    val left = (300 - scaledBitmap.width) / 2f
-    val top = (300 - scaledBitmap.height) / 2f
-    canvas.drawBitmap(scaledBitmap, left, top, null)
-
-    return paddedBitmap
+    // Metodo chiamato quando la configurazione dell'attività cambia
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        imageAnalyzer?.targetRotation = previewView.display.rotation
     }
 
-    // Rileva oggetti in un Bitmap e aggiorna l'overlay
-    private fun detectObjects(bitmap: Bitmap) {
-        // Inizializza il modello
-        val model = ObjectDetectionModel.newInstance(this)
-
-        // Crea gli input per il modello
-        val image = TensorImage.fromBitmap(bitmap)
-
-        // Esegui l'inferenza del modello e ottieni i risultati
-        val outputs = model.process(image)
-        val locations = outputs.locationsAsTensorBuffer
-        val classes = outputs.classesAsTensorBuffer
-        val scores = outputs.scoresAsTensorBuffer
-        val numberOfDetections = outputs.numberOfDetectionsAsTensorBuffer
-
-        val detections = mutableListOf<DetectionOverlayView.Detection>()
-
-        // Elabora i risultati e aggiungi le bounding box
-        val numberOfObjects = numberOfDetections.intArray[0]
-        for (i in 0 until numberOfObjects) {
-            val score = scores.floatArray[i]
-            if (score > 0.5) {
-                val location = locations.floatArray.sliceArray(i * 4 until (i + 1) * 4)
-                val left = location[0] * bitmap.width
-                val top = location[1] * bitmap.height
-                val right = location[2] * bitmap.width
-                val bottom = location[3] * bitmap.height
-                val detectedClass = classes.intArray[i]
-                val label = "Class: $detectedClass, Score: ${"%.2f".format(score)}"
-                detections.add(DetectionOverlayView.Detection(left, top, right, bottom, label))
-            }
+    // Metodo chiamato in caso di errore durante il rilevamento degli oggetti
+    override fun onError(error: String) {
+        this.runOnUiThread {
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
         }
-
-        // Aggiorna l'overlay con le rilevazioni
-        runOnUiThread {
-            overlayView.setDetections(detections)
-        }
-
-        model.close()
     }
+
+    // Metodo chiamato quando ci sono risultati dal rilevamento degli oggetti
+    override fun onResults(
+        results: MutableList<Detection>?,
+        inferenceTime: Long,
+        imageHeight: Int,
+        imageWidth: Int
+    ) {
+        this.runOnUiThread { overlayView.setResults(
+            results ?: LinkedList<Detection>(),
+            imageHeight,
+            imageWidth)
+
+            overlayView.invalidate() // Invalida la view per forzarne il ridisegno
+        }
+    }
+
+
 }
