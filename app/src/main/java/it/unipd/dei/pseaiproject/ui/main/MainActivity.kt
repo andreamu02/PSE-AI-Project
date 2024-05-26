@@ -14,27 +14,17 @@ import com.google.firebase.auth.FirebaseAuth
 import it.unipd.dei.pseaiproject.CustomSpinnerAdapter
 import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.SpinnerItem
+import it.unipd.dei.pseaiproject.SpinnerItemSelectedListener
+import it.unipd.dei.pseaiproject.StyleManager
+import it.unipd.dei.pseaiproject.ThemeType
 import it.unipd.dei.pseaiproject.ui.auth.SignInActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPreferences = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE)
-        val isDarkTheme = sharedPreferences.getBoolean("isDarkTheme", false)
-        var backgroundAB = R.color.black
-        var titleColor = R.color.ametista
-        var spinnerTextColor = R.color.white
-        if (isDarkTheme) {
-            setTheme(R.style.DarkStyle)
-            window.setBackgroundDrawableResource(R.drawable.home_background_dark)
-        } else {
-            setTheme(R.style.LightStyle)
-            window.setBackgroundDrawableResource(R.drawable.home_background_light)
-            backgroundAB = R.color.white
-            titleColor = R.color.green
-            spinnerTextColor = R.color.black
-        }
+        val styleManager = StyleManager(this)
+        val theme = styleManager.loadThemePreference(this)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -51,42 +41,10 @@ class MainActivity : AppCompatActivity() {
             SpinnerItem(R.drawable.logout, "Logout")
         )
 
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(backgroundAB)))
-        toolbar.setTitleTextColor(resources.getColor(titleColor))
-
-        val adapter = CustomSpinnerAdapter(this, spinnerItems, spinnerTextColor, backgroundAB)
+        val adapter = CustomSpinnerAdapter(this, spinnerItems, theme)
         spinner.adapter = adapter
 
         // Gestire gli eventi di selezione
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val item = parent.getItemAtPosition(position) as SpinnerItem
-                if(item.text == "Logout"){
-                    firebaseAuth.signOut()
-                    val intent = Intent(this@MainActivity, SignInActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-                if(item.text == "Change theme"){
-                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                    editor.putBoolean("isDarkTheme", !isDarkTheme)
-                    editor.apply()
-                    spinner.setSelection(0)
-                    recreate()
-                }
-                if(item.text == "Info") {
-                    // Apri la nuova Activity
-                    val intent = Intent(this@MainActivity, InfoActivity::class.java)
-                    startActivity(intent)
-                    spinner.setSelection(0)
-                    finish()
-                }
-                //Toast.makeText(this@MainActivity, "Selected: $item", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Do nothing
-            }
-        }
+        spinner.onItemSelectedListener = SpinnerItemSelectedListener(this, firebaseAuth, theme, styleManager, spinner)
     }
 }
