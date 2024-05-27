@@ -11,22 +11,28 @@ import it.unipd.dei.pseaiproject.SpinnerItem
 import it.unipd.dei.pseaiproject.SpinnerItemSelectedListener
 import it.unipd.dei.pseaiproject.StyleManager
 
+
+//classe per gestire l'activity info
 class InfoActivity: AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Carica il tema stilistico usato prima di chiudere l'app
         val styleManager = StyleManager(this)
         val theme = styleManager.loadThemePreference(this)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
         setContentView(R.layout.activity_info)
+
+        // Setta la toolbar come actionbar per la window
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val spinner: Spinner = findViewById(R.id.spinner)
 
+        // Creazione degli elementi dello spinner
         val spinnerItems = listOf(
             SpinnerItem(R.drawable.home, "Home"),
             SpinnerItem(R.drawable.information_slab_box, "Info"),
@@ -34,6 +40,7 @@ class InfoActivity: AppCompatActivity() {
             SpinnerItem(R.drawable.logout, "Logout")
         )
 
+        // Creazione e inizializzazione dello spinner tramite gli elementi precedentemente definiti
         val adapter = CustomSpinnerAdapter(this, spinnerItems, theme)
         spinner.adapter = adapter
         spinner.setSelection(1)

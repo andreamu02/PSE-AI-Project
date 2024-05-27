@@ -9,9 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 
-class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>, private val theme: ThemeType) :
+//Classe che personalizza l'aspetto degli elementi di uno spinner
+//In ingresso riceve il contesto, la lista degli elementi dello spinner e il tema con cui decidere i colori dello spinner
+class CustomSpinnerAdapter(context: Context, data: List<SpinnerItem>, private val theme: ThemeType) :
     ArrayAdapter<SpinnerItem>(context, 0, data) {
 
+        //metodo che crea e ritorna una vista per l'elemento dello spinner selezionato
+        //usato per settare il colore del testo e dello sfondo di un generico elemento dello spinner
+        //e per bindare un'icona ad un certo testo
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var view = convertView
         val holder: ViewHolder
@@ -43,10 +48,14 @@ class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>
         return view!!
     }
 
+    //metodo che gestisce la visualizzazione degli elementi nel menu a tendina dello spinner
+    //crea e ritorna una vista per ogni elemento dello spinner
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         return getView(position, convertView, parent)
     }
 
+    //classe interna statica per ottimizzare le prestazioni dell'adattatore
+    //Tramite questa classe: posso evitare chiamate ripetute a findViewById (costose)
     private class ViewHolder {
         var icon: ImageView? = null
         var text: TextView? = null

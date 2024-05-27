@@ -18,23 +18,27 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Carica il tema stilistico usato prima di chiudere l'app
         val styleManager = StyleManager(this)
         val theme = styleManager.loadThemePreference(this)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
         setContentView(R.layout.activity_main)
+        // Setta la toolbar come actionbar per la window
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val spinner: Spinner = findViewById(R.id.spinner)
         val start : Button = findViewById(R.id.getStarted)
 
+        //bottone per iniziare ad usare il modello
         start.setOnClickListener {
             val myIntent = Intent(this, CameraActivity::class.java)
             startActivity(myIntent)
         }
 
+        // Creazione degli elementi dello spinner
         val spinnerItems = listOf(
             SpinnerItem(R.drawable.home, "Home"),
             SpinnerItem(R.drawable.information_slab_box, "Info"),
@@ -42,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             SpinnerItem(R.drawable.logout, "Logout")
         )
 
+        // Creazione e inizializzazione dello spinner tramite gli elementi precedentemente definiti
         val adapter = CustomSpinnerAdapter(this, spinnerItems, theme)
         spinner.adapter = adapter
 
