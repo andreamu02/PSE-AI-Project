@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
+import it.unipd.dei.pseaiproject.CameraActivity
 import it.unipd.dei.pseaiproject.CustomSpinnerAdapter
 import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.SpinnerItem
@@ -25,6 +27,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val spinner: Spinner = findViewById(R.id.spinner)
+        val start : Button = findViewById(R.id.getStarted)
+
+        start.setOnClickListener {
+            val myIntent = Intent(this, CameraActivity::class.java)
+            startActivity(myIntent)
+        }
 
         val spinnerItems = listOf(
             SpinnerItem(R.drawable.home, "Home"),
@@ -33,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             SpinnerItem(R.drawable.logout, "Logout")
         )
 
-        val adapter = CustomSpinnerAdapter(this, spinnerItems, theme)
         spinner.adapter = adapter
 
         // Gestire gli eventi di selezione

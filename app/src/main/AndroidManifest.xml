@@ -4,6 +4,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,7 +26,8 @@
         <activity android:name=".ui.auth.SignUpActivity"/>
         <activity android:name=".ui.main.MainActivity"/>
         <activity android:name=".ui.main.InfoActivity" />
-        <activity android:name=".ui.auth.ForgotPasswordActivity"/>
+        <activity android:name=".ui.auth.ForgotPasswordActivity" />
+        <activity android:name=".CameraActivity"/>
     </application>
 
 </manifest>
