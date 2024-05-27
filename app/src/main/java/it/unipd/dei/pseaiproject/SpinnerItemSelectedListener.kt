@@ -1,6 +1,5 @@
 package it.unipd.dei.pseaiproject
 
-import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.AdapterView

@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
+import it.unipd.dei.pseaiproject.StyleManager
 import it.unipd.dei.pseaiproject.ui.main.MainActivity
 import it.unipd.dei.pseaiproject.databinding.ActivitySigninBinding
 import it.unipd.dei.pseaiproject.viewmodels.AuthViewModel
@@ -21,6 +22,8 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val styleManager = StyleManager(this)
+        val theme = styleManager.loadThemePreference(this)
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

@@ -20,7 +20,7 @@ class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>
         if (theme.name == ThemeType.LIGHT.name)
         {
             textColor = R.color.black
-            backgroundColor = R.color.green
+            backgroundColor = R.color.lightBrown
         }
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.spinner_item_layout, parent, false)

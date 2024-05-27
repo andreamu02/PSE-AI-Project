@@ -1,12 +1,6 @@
 package it.unipd.dei.pseaiproject.ui.main
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -16,8 +10,6 @@ import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.SpinnerItem
 import it.unipd.dei.pseaiproject.SpinnerItemSelectedListener
 import it.unipd.dei.pseaiproject.StyleManager
-import it.unipd.dei.pseaiproject.ThemeType
-import it.unipd.dei.pseaiproject.ui.auth.SignInActivity
 
 class InfoActivity: AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
