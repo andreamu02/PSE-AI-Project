@@ -9,13 +9,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 
-class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>, private val textColor: Int, private val backgroundColor: Int) :
+class CustomSpinnerAdapter(context: Context, private val data: List<SpinnerItem>, private val theme: ThemeType) :
     ArrayAdapter<SpinnerItem>(context, 0, data) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var view = convertView
         val holder: ViewHolder
-
+        var textColor = R.color.white
+        var backgroundColor = R.color.ametista
+        if (theme.name == ThemeType.LIGHT.name)
+        {
+            textColor = R.color.black
+            backgroundColor = R.color.lightBrown
+        }
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.spinner_item_layout, parent, false)
             val textView = view.findViewById<TextView>(R.id.text)

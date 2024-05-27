@@ -10,4 +10,6 @@
     <color name="ametista">#8F00FF</color>
     <color name="lightGrey">#D2D2D2</color>
     <color name="green">#00FF00</color>
+    <color name="lightBrown">#CD853F</color>
+    <color name="brownWhite">#DABDAB</color>
 </resources>
