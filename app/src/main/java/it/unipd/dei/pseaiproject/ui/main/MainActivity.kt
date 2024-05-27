@@ -1,10 +1,11 @@
 package it.unipd.dei.pseaiproject.ui.main
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import it.unipd.dei.pseaiproject.CameraActivity
 import it.unipd.dei.pseaiproject.CustomSpinnerAdapter
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             SpinnerItem(R.drawable.logout, "Logout")
         )
 
-        spinner.adapter = adapter
+        spinner.adapter = CustomSpinnerAdapter(this, spinnerItems, theme)
 
         // Gestire gli eventi di selezione
         spinner.onItemSelectedListener = SpinnerItemSelectedListener(this, firebaseAuth, theme, styleManager, spinner)
