@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import it.unipd.dei.pseaiproject.ui.auth.SignInActivity
@@ -38,11 +37,10 @@ class SpinnerItemSelectedListener(private val activity: AppCompatActivity, priva
             {
                 val intent = Intent(activity, InfoActivity::class.java)
                 activity.startActivity(intent)
-                activity.finish()
+                spinner.setSelection(0)
             }
         }
         if (selectedItem.text == "Home") {
-            // Apri la nuova Activity
             if (activityName == "InfoActivity")
             {
                 val intent = Intent(activity, MainActivity::class.java)
