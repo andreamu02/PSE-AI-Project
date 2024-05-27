@@ -33,6 +33,9 @@ class CameraActivity : AppCompatActivity(), ObjectDetectorHelper.DetectorListene
     // Executor per eseguire operazioni della fotocamera in un thread separato
     private val cameraExecutor = Executors.newSingleThreadExecutor()
 
+    private var lastTimeUpdateScreen = 0L
+
+
     // Variabili per il buffer di bitmap, l'analisi delle immagini e l'helper per il rilevamento degli oggetti
     private lateinit var bitmapBuffer: Bitmap
     private var imageAnalyzer: ImageAnalysis? = null
@@ -166,8 +169,12 @@ class CameraActivity : AppCompatActivity(), ObjectDetectorHelper.DetectorListene
             results ?: LinkedList<Detection>(),
             imageHeight,
             imageWidth)
+            if (lastTimeUpdateScreen == 0L || (System.currentTimeMillis() - lastTimeUpdateScreen >= 250)){
+                overlayView.invalidate()                        // Invalida la view per forzarne il ridisegno ogni 0.5 s
+                lastTimeUpdateScreen = System.currentTimeMillis()
+            }
 
-            overlayView.invalidate() // Invalida la view per forzarne il ridisegno
+
         }
     }
 
