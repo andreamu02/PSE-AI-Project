@@ -22,7 +22,7 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import it.unipd.dei.pseaiproject.R
-import it.unipd.dei.pseaiproject.detection.DetectionOverlayView
+import it.unipd.dei.pseaiproject.DetectionOverlayView
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList

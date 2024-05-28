@@ -7,7 +7,6 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import it.unipd.dei.pseaiproject.CameraActivity
 import it.unipd.dei.pseaiproject.spinner.CustomSpinnerAdapter
 import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.spinner.SpinnerItem
