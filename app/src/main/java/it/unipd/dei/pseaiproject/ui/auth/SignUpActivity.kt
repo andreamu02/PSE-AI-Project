@@ -8,9 +8,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
+import it.unipd.dei.pseaiproject.databinding.ActivitySignupBinding
 import it.unipd.dei.pseaiproject.style.StyleManager
 import it.unipd.dei.pseaiproject.ui.main.MainActivity
-import it.unipd.dei.pseaiproject.databinding.ActivitySignupBinding
 import it.unipd.dei.pseaiproject.viewmodels.AuthViewModel
 import kotlinx.coroutines.launch
 
@@ -23,6 +23,7 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val styleManager = StyleManager(this)
+        //TODO CHIEDERE SE SERVE QUESTO
         val theme = styleManager.loadThemePreference(this)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)

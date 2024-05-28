@@ -69,4 +69,14 @@
         android:layout_weight="1"
         android:name="it.unipd.dei.pseaiproject.ui.CameraFragment"
         tools:layout="@layout/fragment_camera" />
+
+    <!-- Aggiunta del bottone -->
+    <ImageButton
+        android:id="@+id/modal_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/apri_modale"
+        android:src="@drawable/baseline_arrow_upward_24"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>
