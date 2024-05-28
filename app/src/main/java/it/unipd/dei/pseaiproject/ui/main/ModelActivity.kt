@@ -1,10 +1,11 @@
-package it.unipd.dei.pseaiproject
+package it.unipd.dei.pseaiproject.ui.main
 
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import it.unipd.dei.pseaiproject.R
 
 class ModelActivity : AppCompatActivity() {
 

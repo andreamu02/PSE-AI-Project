@@ -1,4 +1,4 @@
-package it.unipd.dei.pseaiproject
+package it.unipd.dei.pseaiproject.detection
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -20,7 +20,6 @@ class ObjectDetectorHelper(
     val context: Context,
     val objectDetectorListener: DetectorListener?) {
 
-    //TODO Lazy Val maybe
     private var objectDetector: ObjectDetector? = null
 
     init {

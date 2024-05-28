@@ -1,12 +1,14 @@
-package it.unipd.dei.pseaiproject
+package it.unipd.dei.pseaiproject.spinner
 
 import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import it.unipd.dei.pseaiproject.R
+import it.unipd.dei.pseaiproject.style.StyleManager
+import it.unipd.dei.pseaiproject.style.ThemeType
 import it.unipd.dei.pseaiproject.ui.auth.SignInActivity
 import it.unipd.dei.pseaiproject.ui.main.InfoActivity
 import it.unipd.dei.pseaiproject.ui.main.MainActivity

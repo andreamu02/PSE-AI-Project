@@ -5,11 +5,11 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import it.unipd.dei.pseaiproject.CustomSpinnerAdapter
+import it.unipd.dei.pseaiproject.spinner.CustomSpinnerAdapter
 import it.unipd.dei.pseaiproject.R
-import it.unipd.dei.pseaiproject.SpinnerItem
-import it.unipd.dei.pseaiproject.SpinnerItemSelectedListener
-import it.unipd.dei.pseaiproject.StyleManager
+import it.unipd.dei.pseaiproject.spinner.SpinnerItem
+import it.unipd.dei.pseaiproject.spinner.SpinnerItemSelectedListener
+import it.unipd.dei.pseaiproject.style.StyleManager
 
 class InfoActivity: AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
