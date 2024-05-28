@@ -1,4 +1,4 @@
-package it.unipd.dei.pseaiproject
+package it.unipd.dei.pseaiproject.detection
 
 import android.content.Context
 import android.graphics.Bitmap

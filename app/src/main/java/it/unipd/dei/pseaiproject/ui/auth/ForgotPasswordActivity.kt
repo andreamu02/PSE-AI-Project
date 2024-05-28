@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
-import it.unipd.dei.pseaiproject.StyleManager
+import it.unipd.dei.pseaiproject.style.StyleManager
 import it.unipd.dei.pseaiproject.databinding.ActivityForgotpasswordBinding
 import it.unipd.dei.pseaiproject.viewmodels.AuthViewModel
 import kotlinx.coroutines.launch
