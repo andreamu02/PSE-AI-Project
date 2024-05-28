@@ -7,8 +7,8 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import it.unipd.dei.pseaiproject.CameraActivity
 import it.unipd.dei.pseaiproject.CustomSpinnerAdapter
+import it.unipd.dei.pseaiproject.ModelActivity
 import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.SpinnerItem
 import it.unipd.dei.pseaiproject.SpinnerItemSelectedListener
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val start : Button = findViewById(R.id.getStarted)
 
         start.setOnClickListener {
-            val myIntent = Intent(this, CameraActivity::class.java)
+            val myIntent = Intent(this, ModelActivity::class.java)
             startActivity(myIntent)
         }
 

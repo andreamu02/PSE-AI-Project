@@ -27,6 +27,7 @@ tensorflowLiteTaskCore = "0.3.1"
 tensorflowLiteTaskVision = "0.4.0"
 tensorflowLiteTaskVisionVersion = "0.4.2"
 objectDetectionCommon = "18.0.0"
+fragment = "1.7.1"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
@@ -53,6 +54,7 @@ tensorflow-lite-task-core = { module = "org.tensorflow:tensorflow-lite-task-core
 tensorflow-lite-task-vision = { module = "org.tensorflow:tensorflow-lite-task-vision", version.ref = "tensorflowLiteTaskVision" }
 tensorflow-lite-task-vision-v042 = { module = "org.tensorflow:tensorflow-lite-task-vision", version.ref = "tensorflowLiteTaskVisionVersion" }
 object-detection-common = { group = "com.google.mlkit", name = "object-detection-common", version.ref = "objectDetectionCommon" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

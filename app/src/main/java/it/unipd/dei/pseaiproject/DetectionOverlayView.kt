@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList
 import kotlin.math.max
+import kotlin.math.min
 
 // Classe che estende View, serve per visualizzare le rilevazioni di oggetti su un'area di disegno
 class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
@@ -54,38 +55,50 @@ class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(contex
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
 
+        val viewWidth = width.toFloat()
+        val viewHeight = height.toFloat()
+
         for (result in results) {
             val boundingBox = result.boundingBox // Bounding box della rilevazione
 
             // Coordinate scalate
-            val top = boundingBox.top * scaleFactor
-            val bottom = boundingBox.bottom * scaleFactor
-            val left = boundingBox.left * scaleFactor
-            val right = boundingBox.right * scaleFactor
+            var top = boundingBox.top * scaleFactor
+            var bottom = boundingBox.bottom * scaleFactor
+            var left = boundingBox.left * scaleFactor
+            var right = boundingBox.right * scaleFactor
 
-            // Disegna la bounding box attorno agli oggetti rilevati
-            val drawableRect = RectF(left, top, right, bottom)
-            canvas.drawRect(drawableRect, boxPaint)
+            // Assicura che le coordinate scalate siano all'interno dei limiti della View
+            top = max(0f, min(top, viewHeight))
+            bottom = max(0f, min(bottom, viewHeight))
+            left = max(0f, min(left, viewWidth))
+            right = max(0f, min(right, viewWidth))
 
-            // Crea il testo da visualizzare accanto agli oggetti rilevati
-            val drawableText =
-                result.categories[0].label + " " +
-                        String.format("%.2f", result.categories[0].score)
+            // Disegna la bounding box solo se è all'interno dei limiti della View
+            if (top < viewHeight && left < viewWidth) {
+                // Disegna la bounding box attorno agli oggetti rilevati
+                val drawableRect = RectF(left, top, right, bottom)
+                canvas.drawRect(drawableRect, boxPaint)
 
-            // Disegna un rettangolo dietro il testo di visualizzazione
-            textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)
-            val textWidth = bounds.width()
-            val textHeight = bounds.height()
-            canvas.drawRect(
-                left,
-                top,
-                left + textWidth + 8,
-                top + textHeight + 8,
-                textBackgroundPaint
-            )
+                // Crea il testo da visualizzare accanto agli oggetti rilevati
+                val drawableText =
+                    result.categories[0].label + " " +
+                            String.format("%.2f", result.categories[0].score)
 
-            // Disegna il testo per l'oggetto rilevato
-            canvas.drawText(drawableText, left, top + bounds.height(), textPaint)
+                // Disegna un rettangolo dietro il testo di visualizzazione
+                textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)
+                val textWidth = bounds.width()
+                val textHeight = bounds.height()
+                canvas.drawRect(
+                    left,
+                    top,
+                    left + textWidth + 8,
+                    top + textHeight + 8,
+                    textBackgroundPaint
+                )
+
+                // Disegna il testo per l'oggetto rilevato
+                canvas.drawText(drawableText, left, top + bounds.height(), textPaint)
+            }
         }
     }
 

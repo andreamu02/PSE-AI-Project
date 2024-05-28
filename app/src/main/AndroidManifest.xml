@@ -27,7 +27,7 @@
         <activity android:name=".ui.main.MainActivity"/>
         <activity android:name=".ui.main.InfoActivity" />
         <activity android:name=".ui.auth.ForgotPasswordActivity" />
-        <activity android:name=".CameraActivity"/>
+        <activity android:name=".ModelActivity"/>
     </application>
 
 </manifest>
