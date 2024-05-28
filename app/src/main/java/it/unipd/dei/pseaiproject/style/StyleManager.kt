@@ -1,9 +1,10 @@
-package it.unipd.dei.pseaiproject
+package it.unipd.dei.pseaiproject.style
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import it.unipd.dei.pseaiproject.R
 
 //classe che, data un'attività, ne cambia lo stile grafico salvando la scelta in memoria
 class StyleManager(private val activity: AppCompatActivity) {
