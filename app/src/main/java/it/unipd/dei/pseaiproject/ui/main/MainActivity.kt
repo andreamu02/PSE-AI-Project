@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         //bottone per iniziare ad usare il modello
         start.setOnClickListener {
-            val myIntent = Intent(this, CameraActivity::class.java)
+            val myIntent = Intent(this, ModelActivity::class.java)
             startActivity(myIntent)
         }
 

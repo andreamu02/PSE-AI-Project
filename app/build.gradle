@@ -58,6 +58,8 @@ dependencies {
     implementation libs.camera.lifecycle
     implementation libs.camera.view
     implementation libs.camera.extensions
+    implementation libs.object.detection.common
+    implementation libs.androidx.fragment
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

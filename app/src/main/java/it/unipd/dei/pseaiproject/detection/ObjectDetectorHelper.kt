@@ -20,7 +20,6 @@ class ObjectDetectorHelper(
     val context: Context,
     val objectDetectorListener: DetectorListener?) {
 
-    //TODO Lazy Val maybe
     private var objectDetector: ObjectDetector? = null
 
     init {

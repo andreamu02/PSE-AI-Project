@@ -1,4 +1,4 @@
-package it.unipd.dei.pseaiproject
+package it.unipd.dei.pseaiproject.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -6,9 +6,11 @@ import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
@@ -18,13 +20,15 @@ import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.detection.DetectionOverlayView
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList
 import java.util.concurrent.Executors
 
-class CameraActivity : AppCompatActivity(), ObjectDetectorHelper.DetectorListener {
+class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
     // View per mostrare il feed della fotocamera
     private lateinit var previewView: PreviewView
@@ -35,17 +39,24 @@ class CameraActivity : AppCompatActivity(), ObjectDetectorHelper.DetectorListene
     // Executor per eseguire operazioni della fotocamera in un thread separato
     private val cameraExecutor = Executors.newSingleThreadExecutor()
 
+    private var lastTimeUpdateScreen = 0L
+
     // Variabili per il buffer di bitmap, l'analisi delle immagini e l'helper per il rilevamento degli oggetti
     private lateinit var bitmapBuffer: Bitmap
     private var imageAnalyzer: ImageAnalysis? = null
     private lateinit var objectDetectorHelper: ObjectDetectorHelper
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_camera)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_camera, container, false)
+    }
 
-        previewView = findViewById(R.id.previewView)
-        overlayView = findViewById(R.id.overlayView)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        previewView = view.findViewById(R.id.previewView)
+        overlayView = view.findViewById(R.id.overlayView)
 
         // Controlla se i permessi sono concessi, altrimenti richiedili
         if (allPermissionsGranted()) {
@@ -55,7 +66,7 @@ class CameraActivity : AppCompatActivity(), ObjectDetectorHelper.DetectorListene
         }
 
         objectDetectorHelper = ObjectDetectorHelper(
-            context = this,
+            context = requireContext(),
             objectDetectorListener = this)
     }
 
@@ -64,20 +75,20 @@ class CameraActivity : AppCompatActivity(), ObjectDetectorHelper.DetectorListene
         if (permissions.all { it.value }) {
             startCamera()
         } else {
-            Toast.makeText(this, "Permessi non concessi dall'utente.", Toast.LENGTH_SHORT).show()
-            finish()
+            Toast.makeText(requireContext(), "Permessi non concessi dall'utente.", Toast.LENGTH_SHORT).show()
+            requireActivity().finish()
         }
     }
 
     // Metodo per verificare se tutti i permessi necessari sono stati concessi
     private fun allPermissionsGranted() = arrayOf(Manifest.permission.CAMERA).all {
-        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
+        ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
     // Metodo per avviare la fotocamera
     private fun startCamera() {
         // Ottiene il provider della fotocamera
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener({
 
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -131,7 +142,7 @@ class CameraActivity : AppCompatActivity(), ObjectDetectorHelper.DetectorListene
                 Log.e("CameraXApp", "Use case binding failed", exc)
             }
 
-        }, ContextCompat.getMainExecutor(this))
+        }, ContextCompat.getMainExecutor(requireContext()))
     }
 
     // Metodo per l'analisi delle immagini e il rilevamento degli oggetti
@@ -152,8 +163,8 @@ class CameraActivity : AppCompatActivity(), ObjectDetectorHelper.DetectorListene
 
     // Metodo chiamato in caso di errore durante il rilevamento degli oggetti
     override fun onError(error: String) {
-        this.runOnUiThread {
-            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        requireActivity().runOnUiThread {
+            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -164,14 +175,18 @@ class CameraActivity : AppCompatActivity(), ObjectDetectorHelper.DetectorListene
         imageHeight: Int,
         imageWidth: Int
     ) {
-        this.runOnUiThread { overlayView.setResults(
-            results ?: LinkedList<Detection>(),
-            imageHeight,
-            imageWidth)
-
-            overlayView.invalidate() // Invalida la view per forzarne il ridisegno
+        activity?.runOnUiThread {
+            if (isAdded) {
+                overlayView.setResults(
+                    results ?: LinkedList(),
+                    imageHeight,
+                    imageWidth
+                )
+                if (lastTimeUpdateScreen == 0L || (System.currentTimeMillis() - lastTimeUpdateScreen >= 250)) {
+                    overlayView.invalidate()                    // Invalida la view per forzarne il ridisegno ogni 0.5 s
+                    lastTimeUpdateScreen = System.currentTimeMillis()
+                }
+            }
         }
     }
-
-
 }
