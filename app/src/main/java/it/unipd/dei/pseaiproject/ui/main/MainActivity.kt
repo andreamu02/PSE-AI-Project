@@ -3,6 +3,7 @@ package it.unipd.dei.pseaiproject.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -28,6 +29,13 @@ class MainActivity : AppCompatActivity() {
         // Setta la toolbar come actionbar per la window
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        toolbar.setTitleTextAppearance(this, R.style.ToolbarTitleText)
+
+        //cambia il colore delle immagini
+        val image1: ImageView = findViewById(R.id.androidStudio)
+        styleManager.setImageViewDrawableColor(image1, R.drawable.android_studio, this)
+        val image2: ImageView = findViewById(R.id.android)
+        styleManager.setImageViewDrawableColor(image2, R.drawable.android, this)
 
         val spinner: Spinner = findViewById(R.id.spinner)
         val start : Button = findViewById(R.id.getStarted)
@@ -50,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = CustomSpinnerAdapter(this, spinnerItems, theme)
         spinner.adapter = adapter
 
-        // Gestire gli eventi di selezione
+        // Gestione degli eventi di selezione
         spinner.onItemSelectedListener = SpinnerItemSelectedListener(this, firebaseAuth, theme, styleManager, spinner)
     }
 }
