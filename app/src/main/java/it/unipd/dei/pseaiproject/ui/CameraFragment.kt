@@ -41,6 +41,11 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
     private var lastTimeUpdateScreen = 0L
 
+    private var results : MutableList<Detection>? = null
+
+    private var previousResults: MutableList<Detection>? = null
+
+
     // Variabili per il buffer di bitmap, l'analisi delle immagini e l'helper per il rilevamento degli oggetti
     private lateinit var bitmapBuffer: Bitmap
     private var imageAnalyzer: ImageAnalysis? = null
@@ -177,16 +182,44 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
     ) {
         activity?.runOnUiThread {
             if (isAdded) {
+                this.results = results
                 overlayView.setResults(
                     results ?: LinkedList(),
                     imageHeight,
                     imageWidth
                 )
-                if (lastTimeUpdateScreen == 0L || (System.currentTimeMillis() - lastTimeUpdateScreen >= 250)) {
+                if (lastTimeUpdateScreen == 0L || (System.currentTimeMillis() - lastTimeUpdateScreen >= 1000 || resultsAreDifferent())) {
                     overlayView.invalidate()                    // Invalida la view per forzarne il ridisegno ogni 0.5 s
                     lastTimeUpdateScreen = System.currentTimeMillis()
                 }
+                previousResults = this.results
             }
         }
+    }
+
+    private fun resultsAreDifferent() : Boolean {
+        if (this.results == null && this.previousResults == null) {
+            return false
+        }else if((this.results == null && this.previousResults != null) || (this.results != null && this.previousResults == null) ) {
+            return true
+        }
+        if (this.results!!.size != this.previousResults!!.size){
+            return true
+        }
+        var foundResults: MutableList<Detection> = mutableListOf()
+        for (result in this.results!!) {
+            var found = false
+            for(previousResult in this.previousResults!!) {
+                if(result !in foundResults && result.categories[0].label == previousResult.categories[0].label) {
+                    found = true
+                    foundResults.add(result)
+                    break
+                }
+            }
+            if(!found) {
+                return true
+            }
+        }
+        return false
     }
 }
