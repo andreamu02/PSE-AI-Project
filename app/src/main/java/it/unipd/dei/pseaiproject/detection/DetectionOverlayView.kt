@@ -1,4 +1,4 @@
-package it.unipd.dei.pseaiproject.detection
+package it.unipd.dei.pseaiproject
 
 import android.content.Context
 import android.graphics.Canvas
@@ -9,7 +9,6 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
-import it.unipd.dei.pseaiproject.R
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList
 import kotlin.math.max

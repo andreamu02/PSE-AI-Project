@@ -1,10 +1,13 @@
-package it.unipd.dei.pseaiproject
+package it.unipd.dei.pseaiproject.style
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import it.unipd.dei.pseaiproject.R
 
 //classe che, data un'attività, ne cambia lo stile grafico salvando la scelta in memoria
 class StyleManager(private val activity: AppCompatActivity) {
@@ -58,5 +61,20 @@ class StyleManager(private val activity: AppCompatActivity) {
             drawable.setTint(context.resources.getColor(color))
             imageView.setImageDrawable(drawable)
         }
+    }
+
+    fun setWidgetAppearance(context: Context, toolbar: Toolbar, button: Button)
+    {
+        val prefs: SharedPreferences = activity.getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
+        val themeName = prefs.getString("key_theme", ThemeType.DARK.name)
+        var color = R.color.black
+        if (themeName == ThemeType.DARK.name)
+        {
+            color = R.color.white
+            button.setTextAppearance(R.style.CustomButtonDark)
+        }
+        else button.setTextAppearance(R.style.CustomButtonLight)
+        toolbar.setTitleTextAppearance(context, R.style.ToolbarTitleText)
+        toolbar.setTitleTextColor(context.resources.getColor(color))
     }
 }

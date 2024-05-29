@@ -7,9 +7,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorPrimaryLight">#E69500</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="ametista">#8F00FF</color>
     <color name="lightGrey">#D2D2D2</color>
     <color name="green">#00FF00</color>
     <color name="lightBrown">#CD853F</color>
+    <color name="darkGrey">#3C3C3C</color>
     <color name="brownWhite">#DABDAB</color>
+    <color name="lightBlue">#99D6EA</color>
 </resources>

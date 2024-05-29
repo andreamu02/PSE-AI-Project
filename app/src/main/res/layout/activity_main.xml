@@ -7,11 +7,11 @@
 
     <ImageView
         android:id="@+id/ImageView"
-        android:layout_width="283dp"
-        android:layout_height="591dp"
+        android:layout_width="318dp"
+        android:layout_height="632dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/apple"
-        android:src="@drawable/apple_image"
+        android:src="@drawable/object_recognition"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -98,7 +98,6 @@
         android:layout_height="56dp"
         android:padding="12dp"
         android:text="@string/start"
-        android:textColor="@color/black"
         android:textSize="20sp"
         app:cornerRadius="10dp"
         app:iconGravity="textStart"
@@ -107,7 +106,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.795" />
+        app:layout_constraintVertical_bias="0.777" />
 
     <Spinner
             android:id="@+id/spinner"

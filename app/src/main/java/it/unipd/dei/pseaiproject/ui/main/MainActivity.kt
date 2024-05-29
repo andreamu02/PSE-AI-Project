@@ -29,17 +29,19 @@ class MainActivity : AppCompatActivity() {
         // Setta la toolbar come actionbar per la window
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        toolbar.setTitleTextAppearance(this, R.style.ToolbarTitleText)
 
         //cambia il colore delle immagini
         val image1: ImageView = findViewById(R.id.androidStudio)
         styleManager.setImageViewDrawableColor(image1, R.drawable.android_studio, this)
         val image2: ImageView = findViewById(R.id.android)
         styleManager.setImageViewDrawableColor(image2, R.drawable.android, this)
+        val image3: ImageView = findViewById(R.id.ImageView)
+        styleManager.setImageViewDrawableColor(image3, R.drawable.object_recognition, this)
 
         val spinner: Spinner = findViewById(R.id.spinner)
         val start : Button = findViewById(R.id.getStarted)
 
+        styleManager.setWidgetAppearance(this, toolbar, start)
         //bottone per iniziare ad usare il modello
         start.setOnClickListener {
             val myIntent = Intent(this, CameraActivity::class.java)

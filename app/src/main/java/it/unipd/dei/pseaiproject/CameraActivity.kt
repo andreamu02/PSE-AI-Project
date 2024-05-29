@@ -18,7 +18,6 @@ import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
-import it.unipd.dei.pseaiproject.detection.DetectionOverlayView
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList
