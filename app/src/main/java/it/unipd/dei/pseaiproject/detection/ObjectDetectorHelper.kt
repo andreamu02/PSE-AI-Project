@@ -9,14 +9,14 @@ import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.Rot90Op
 import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
-
-//import org.tensorflow.lite.gpu.CompatibilityList
+import org.tensorflow.lite.gpu.CompatibilityList
+import org.tensorflow.lite.task.core.BaseOptions
 
 class ObjectDetectorHelper(
     private var threshold: Float = 0.5f,
     var numThreads: Int = 2,
     private var maxResults: Int = 3,
-    var currentDelegate: Int = 0,
+    var currentDelegate: Int = DELEGATE_CPU,
     val context: Context,
     val objectDetectorListener: DetectorListener?) {
 
@@ -33,19 +33,18 @@ class ObjectDetectorHelper(
                 .setMaxResults(maxResults)
 
         // Imposta le opzioni generali di rilevamento, incluso il numero di thread utilizzati
-        /*
         val baseOptionsBuilder = BaseOptions.builder().setNumThreads(numThreads)
 
-        // Use the specified hardware for running the model. Default to CPU
+        // Usa l'hardware specificato per eseguire il modello. Predefinito su CPU
         when (currentDelegate) {
             DELEGATE_CPU -> {
-                // Default
+                // Predefinito, non è necessario fare nulla
             }
             DELEGATE_GPU -> {
                 if (CompatibilityList().isDelegateSupportedOnThisDevice) {
                     baseOptionsBuilder.useGpu()
                 } else {
-                    objectDetectorListener?.onError("GPU is not supported on this device")
+                    objectDetectorListener?.onError("GPU non è supportata su questo dispositivo")
                 }
             }
             DELEGATE_NNAPI -> {
@@ -54,15 +53,15 @@ class ObjectDetectorHelper(
         }
 
         optionsBuilder.setBaseOptions(baseOptionsBuilder.build())
-        */
+
         try {
             objectDetector =
                 ObjectDetector.createFromFileAndOptions(context, "mobilenetv1.tflite", optionsBuilder.build())
         } catch (e: IllegalStateException) {
             objectDetectorListener?.onError(
-                "Object detector failed to initialize. See error logs for details"
+                "Il rilevatore di oggetti non è riuscito a inizializzarsi. Vedi i log di errore per i dettagli"
             )
-            Log.e("Test", "TFLite failed to load model with error: " + e.message)
+            Log.e("Test", "TFLite non è riuscito a caricare il modello con errore: " + e.message)
         }
     }
 
@@ -109,10 +108,10 @@ class ObjectDetectorHelper(
             imageWidth: Int
         )
     }
-    /*
+
     companion object {
         const val DELEGATE_CPU = 0
         const val DELEGATE_GPU = 1
         const val DELEGATE_NNAPI = 2
-    }*/
+    }
 }

@@ -52,7 +52,7 @@ dependencies {
     implementation libs.androidx.activity.ktx
     implementation libs.tensorflow.lite.metadata
     implementation libs.tensorflow.lite.task.vision.v042
-    implementation libs.play.services.tflite.gpu
+    implementation libs.tensorflow.lite.gpu.v290
     implementation libs.androidx.camera.core
     implementation libs.androidx.camera.camera2
     implementation libs.camera.lifecycle
