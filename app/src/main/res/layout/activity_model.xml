@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -73,10 +74,11 @@
     <!-- Aggiunta del bottone -->
     <ImageButton
         android:id="@+id/modal_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/black"
+        android:background="@color/black"
         android:contentDescription="@string/apri_modale"
-        android:src="@drawable/baseline_arrow_upward_24"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"/>
+        android:src="@drawable/baseline_arrow_drop_up_24"
+        android:layout_gravity="center"/>
 </LinearLayout>

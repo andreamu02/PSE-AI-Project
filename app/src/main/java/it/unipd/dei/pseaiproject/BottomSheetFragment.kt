@@ -9,6 +9,7 @@ import it.unipd.dei.pseaiproject.databinding.FragmentBottomSheetBinding
 
 class BottomSheetFragment: BottomSheetDialogFragment() {
 
+    //TODO CAPIRE SE SERVE IL NULL OPPURE NO
     // Classe generata automaticamente basata sul nome del file xml
     private var _binding: FragmentBottomSheetBinding? = null
 
