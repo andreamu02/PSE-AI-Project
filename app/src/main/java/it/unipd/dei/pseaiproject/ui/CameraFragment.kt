@@ -189,7 +189,7 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
                     imageWidth
                 )
                 if (lastTimeUpdateScreen == 0L || (System.currentTimeMillis() - lastTimeUpdateScreen >= 1000 || resultsAreDifferent())) {
-                    overlayView.invalidate()                    // Invalida la view per forzarne il ridisegno ogni 0.5 s
+                    overlayView.invalidate()
                     lastTimeUpdateScreen = System.currentTimeMillis()
                 }
                 previousResults = this.results
@@ -206,7 +206,7 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         if (this.results!!.size != this.previousResults!!.size){
             return true
         }
-        var foundResults: MutableList<Detection> = mutableListOf()
+        val foundResults: MutableList<Detection> = mutableListOf()
         for (result in this.results!!) {
             var found = false
             for(previousResult in this.previousResults!!) {
