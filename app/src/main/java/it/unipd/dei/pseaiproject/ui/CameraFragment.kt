@@ -21,8 +21,8 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.DetectionOverlayView
+import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList
@@ -173,7 +173,7 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         }
     }
 
-    // Metodo chiamato quando ci sono risultati dal rilevamento degli oggetti
+    // Metodo chiamato quando ci sono risultati dal rilevamento degli oggettii
     override fun onResults(
         results: MutableList<Detection>?,
         inferenceTime: Long,
