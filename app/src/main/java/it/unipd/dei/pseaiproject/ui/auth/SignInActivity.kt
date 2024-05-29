@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
+import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.style.StyleManager
 import it.unipd.dei.pseaiproject.ui.main.MainActivity
 import it.unipd.dei.pseaiproject.databinding.ActivitySigninBinding
@@ -26,7 +27,8 @@ class SignInActivity : AppCompatActivity() {
         val theme = styleManager.loadThemePreference(this)
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        styleManager.setEditTextAppearance(this, findViewById(R.id.email_input))
+        styleManager.setEditTextAppearance(this, findViewById(R.id.password_input))
         with(binding){
             // Listener per il pulsante di login
             loginButton.setOnClickListener {

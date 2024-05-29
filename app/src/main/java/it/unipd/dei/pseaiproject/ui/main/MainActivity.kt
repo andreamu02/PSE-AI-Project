@@ -3,7 +3,6 @@ package it.unipd.dei.pseaiproject.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -30,18 +29,16 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        //cambia il colore delle immagini
-        val image1: ImageView = findViewById(R.id.androidStudio)
-        styleManager.setImageViewDrawableColor(image1, R.drawable.android_studio, this)
-        val image2: ImageView = findViewById(R.id.android)
-        styleManager.setImageViewDrawableColor(image2, R.drawable.android, this)
-        val image3: ImageView = findViewById(R.id.ImageView)
-        styleManager.setImageViewDrawableColor(image3, R.drawable.object_recognition, this)
+        //cambia il colore delle immagini e delle icone
+        styleManager.setImageViewDrawableColor(findViewById(R.id.androidStudio), R.drawable.android_studio, this)
+        styleManager.setImageViewDrawableColor(findViewById(R.id.android), R.drawable.android, this)
+        styleManager.setImageViewDrawableColor(findViewById(R.id.ImageView), R.drawable.object_recognition, this)
 
         val spinner: Spinner = findViewById(R.id.spinner)
         val start : Button = findViewById(R.id.getStarted)
 
-        styleManager.setWidgetAppearance(this, toolbar, start)
+        //cambio il colore del bottone e della toolbar
+        styleManager.setWidgetAppearance(this, toolbar, start, findViewById(R.id.horizontal_view), findViewById(R.id.vertical_view))
         //bottone per iniziare ad usare il modello
         start.setOnClickListener {
             val myIntent = Intent(this, CameraActivity::class.java)

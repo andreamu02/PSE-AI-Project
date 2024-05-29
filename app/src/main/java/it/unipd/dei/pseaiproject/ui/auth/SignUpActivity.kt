@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
+import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.style.StyleManager
 import it.unipd.dei.pseaiproject.ui.main.MainActivity
 import it.unipd.dei.pseaiproject.databinding.ActivitySignupBinding
@@ -26,7 +27,9 @@ class SignUpActivity : AppCompatActivity() {
         val theme = styleManager.loadThemePreference(this)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        styleManager.setEditTextAppearance(this, findViewById(R.id.email_input_signup))
+        styleManager.setEditTextAppearance(this, findViewById(R.id.password_input_signup))
+        styleManager.setEditTextAppearance(this, findViewById(R.id.confirm_password_input_signup))
         with(binding) {
             // Imposta il listener per il pulsante di registrazione
             signupButton.setOnClickListener {

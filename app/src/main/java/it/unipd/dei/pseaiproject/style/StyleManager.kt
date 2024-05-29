@@ -2,7 +2,9 @@ package it.unipd.dei.pseaiproject.style
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -58,23 +60,45 @@ class StyleManager(private val activity: AppCompatActivity) {
         var color = R.color.black
         if (themeName == ThemeType.DARK.name) color = R.color.white
         if (drawable != null) {
-            drawable.setTint(context.resources.getColor(color))
+            drawable.setTint(ContextCompat.getColor(context, color))
             imageView.setImageDrawable(drawable)
         }
     }
 
-    fun setWidgetAppearance(context: Context, toolbar: Toolbar, button: Button)
+    //metodo che setta i colori di widget presenti nella UI a seconda del tema
+    fun setWidgetAppearance(context: Context, toolbar: Toolbar, button: Button?, view1: View, view2: View)
     {
         val prefs: SharedPreferences = activity.getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
         val themeName = prefs.getString("key_theme", ThemeType.DARK.name)
         var color = R.color.black
+        var viewColor = R.color.lightGrey
         if (themeName == ThemeType.DARK.name)
         {
             color = R.color.white
-            button.setTextAppearance(R.style.CustomButtonDark)
+            viewColor = R.color.colorPrimary
+            button?.setTextAppearance(R.style.CustomButtonDark)
         }
-        else button.setTextAppearance(R.style.CustomButtonLight)
+        else button?.setTextAppearance(R.style.CustomButtonLight)
         toolbar.setTitleTextAppearance(context, R.style.ToolbarTitleText)
-        toolbar.setTitleTextColor(context.resources.getColor(color))
+        toolbar.setTitleTextColor(ContextCompat.getColor(context, color))
+        view1.setBackgroundColor(ContextCompat.getColor(context, viewColor))
+        view2.setBackgroundColor(ContextCompat.getColor(context, viewColor))
+    }
+
+    //metodo che setta i colori di widget di tipo EditText a seconda del tema
+    fun setEditTextAppearance(context: Context, editText: EditText)
+    {
+        val prefs: SharedPreferences = activity.getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
+        val themeName = prefs.getString("key_theme", ThemeType.DARK.name)
+        var colorHint = R.color.darkGrey
+        var color = R.color.black
+        if (themeName == ThemeType.DARK.name)
+        {
+            color = R.color.white
+            colorHint = R.color.white
+        }
+        editText.setTextColor(ContextCompat.getColor(context, color))
+        editText.setHintTextColor(ContextCompat.getColor(context, colorHint))
+
     }
 }
