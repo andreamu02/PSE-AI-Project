@@ -27,6 +27,9 @@ import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList
 import java.util.concurrent.Executors
+import it.unipd.dei.pseaiproject.BottomSheetFragment
+import it.unipd.dei.pseaiproject.databinding.ActivityModelBinding
+
 
 class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
@@ -45,6 +48,10 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
     private var previousResults: MutableList<Detection>? = null
 
+    private lateinit var binding: ActivityModelBinding
+
+    private var bottomSheetFragment: BottomSheetFragment? = null
+
 
     // Variabili per il buffer di bitmap, l'analisi delle immagini e l'helper per il rilevamento degli oggetti
     private lateinit var bitmapBuffer: Bitmap
@@ -55,6 +62,7 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_camera, container, false)
     }
 
@@ -73,6 +81,14 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         objectDetectorHelper = ObjectDetectorHelper(
             context = requireContext(),
             objectDetectorListener = this)
+
+        bottomSheetFragment = BottomSheetFragment()
+        bottomSheetFragment?.setDetectorObject(objectDetectorHelper)
+        binding = ActivityModelBinding.inflate(layoutInflater)
+        binding.modalButton.setOnClickListener {
+            // Mostra il modale
+            bottomSheetFragment?.show(parentFragmentManager, "BottomSheetDialog")
+        }
     }
 
     // Metodo per gestire la richiesta dei permessi della fotocamera

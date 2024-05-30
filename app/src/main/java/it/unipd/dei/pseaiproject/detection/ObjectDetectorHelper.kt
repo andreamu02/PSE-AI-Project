@@ -14,9 +14,9 @@ import org.tensorflow.lite.task.core.BaseOptions
 
 class ObjectDetectorHelper(
     private var threshold: Float = 0.5f,
-    var numThreads: Int = 2,
+    private var numThreads: Int = 2,
     private var maxResults: Int = 3,
-    var currentDelegate: Int = DELEGATE_CPU,
+    private var currentDelegate: Int = DELEGATE_CPU,
     val context: Context,
     val objectDetectorListener: DetectorListener?) {
 
@@ -24,6 +24,10 @@ class ObjectDetectorHelper(
 
     init {
         setupObjectDetector()
+    }
+
+    fun clearObjectDetector() {
+        objectDetector = null
     }
 
     private fun setupObjectDetector() {
@@ -113,5 +117,15 @@ class ObjectDetectorHelper(
         const val DELEGATE_CPU = 0
         const val DELEGATE_GPU = 1
         const val DELEGATE_NNAPI = 2
+    }
+
+    fun setThreshold(threshold: Float){
+        this.threshold = threshold
+        setupObjectDetector()
+    }
+
+    fun setMaxResults(maxResults: Int){
+        this.maxResults = maxResults
+        setupObjectDetector()
     }
 }
