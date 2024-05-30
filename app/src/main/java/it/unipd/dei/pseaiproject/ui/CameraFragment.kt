@@ -1,4 +1,4 @@
-package it.unipd.dei.pseaiproject.ui
+package it.unipd.dei.pseaiproject
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -21,7 +21,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.detection.DetectionOverlayView
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
 import org.tensorflow.lite.task.vision.detector.Detection
@@ -189,4 +188,6 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
             }
         }
     }
+
+
 }

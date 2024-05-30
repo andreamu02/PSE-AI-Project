@@ -7,39 +7,63 @@
 
     <ImageView
         android:id="@+id/ImageView"
-        android:layout_width="231dp"
-        android:layout_height="310dp"
-        android:contentDescription="@string/apple"
+        android:layout_width="318dp"
+        android:layout_height="632dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/apple_image"
+        android:contentDescription="@string/apple"
+        android:src="@drawable/object_recognition"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.341" />
+        app:layout_constraintVertical_bias="0.173" />
+
+    <ImageView
+        android:id="@+id/androidStudio"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/androidStu"
+        android:src="@drawable/android_studio"
+        app:layout_constraintBottom_toTopOf="@id/horizontal_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/vertical_view"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/android"
+        android:layout_width="87dp"
+        android:layout_height="73dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/android"
+        android:src="@drawable/android"
+        app:layout_constraintBottom_toTopOf="@id/madeBy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/TextView"
-        android:layout_width="300dp"
-        android:layout_height="63dp"
-        android:text="@string/AppTitle"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:textSize="24sp"
+        android:layout_width="305dp"
+        android:layout_height="75dp"
+        android:background="@drawable/rounded_corner"
         android:fontFamily="sans-serif-medium"
-        android:textStyle="bold"
-        android:padding="16dp"
+        android:gravity="center"
         android:letterSpacing="0.05"
-        android:shadowColor="#33000000"
+        android:padding="16dp"
+        android:shadowColor="@color/black"
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="1.5"
+        android:text="@string/AppTitle"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.152" />
+        app:layout_constraintVertical_bias="0.119" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -60,6 +84,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
     <View
+        android:id="@+id/vertical_view"
         android:layout_width="1dp"
         android:layout_height="50dp"
         android:background="@color/lightGrey"
@@ -67,20 +92,23 @@
         app:layout_constraintBottom_toTopOf="@id/horizontal_view" />
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/getStarted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="287dp"
+        android:layout_height="56dp"
+        android:padding="12dp"
         android:text="@string/start"
-        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:cornerRadius="10dp"
+        app:iconGravity="textStart"
+        app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.705" />
+        app:layout_constraintVertical_bias="0.777" />
 
-        <Spinner
+    <Spinner
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -90,5 +118,22 @@
             app:layout_constraintEnd_toEndOf="@id/toolbar"
             app:layout_constraintTop_toTopOf="@id/toolbar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <TextView
+        android:id="@+id/madeBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:padding="10dp"
+        android:text="@string/MadeBy"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

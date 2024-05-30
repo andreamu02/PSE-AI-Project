@@ -84,6 +84,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:text="@string/signup_button"
+            android:textColor="@color/black"
             app:cornerRadius="10dp"
             app:iconGravity="textStart"
             android:textSize="20sp" />

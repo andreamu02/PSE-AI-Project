@@ -3,9 +3,12 @@
 
     <!-- Stringhe per la schermata home -->
     <string name="start">Get started!</string>
-    <string name="apple">Apple image</string>
+    <string name="apple">Object recognition icon</string>
     <string name="changeTheme">Change theme</string>
-    <string name="AppTitle">ImageClassifier</string>
+    <string name="AppTitle">ObjectDetection</string>
+    <string name="MadeBy">Andrea Mutti, Alessandro Girlanda e Umberto Bianchin</string>
+    <string name="androidStu">Android Studio icon</string>
+    <string name="android">Android icon</string>
     <string-array name="spinner_items">
         <item>Item 1</item>
         <item>Item 2</item>

@@ -30,6 +30,9 @@ class InfoActivity: AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        //setto i colori dei vari widget e anche delle immagini
+        styleManager.setWidgetAppearance(this, toolbar, null, findViewById(R.id.horizontal_view), findViewById(R.id.vertical_view))
+        styleManager.setImageViewDrawableColor(findViewById(R.id.androidStudio), R.drawable.android_studio, this)
         val spinner: Spinner = findViewById(R.id.spinner)
 
         // Creazione degli elementi dello spinner
