@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -17,8 +18,6 @@
             android:layout_height="wrap_content">
 
             <!-- Pulsante di back -->
-
-            <!-- Titolo della toolbar -->
             <ImageButton
                 android:id="@+id/back_button_toolbar"
                 android:layout_width="48dp"
@@ -33,6 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/black" />
 
+            <!-- Titolo della toolbar -->
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
@@ -69,4 +69,15 @@
         android:layout_weight="1"
         android:name="it.unipd.dei.pseaiproject.ui.CameraFragment"
         tools:layout="@layout/fragment_camera" />
+
+    <!-- Bottone per aprire il modale -->
+    <ImageButton
+        android:id="@+id/modal_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/black"
+        android:background="@color/black"
+        android:contentDescription="@string/apri_modale"
+        android:src="@drawable/baseline_arrow_drop_up_24"
+        android:layout_gravity="center"/>
 </LinearLayout>

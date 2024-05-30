@@ -1,31 +1,29 @@
 package it.unipd.dei.pseaiproject.ui.main
 
 import android.os.Bundle
-import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import it.unipd.dei.pseaiproject.BottomSheetFragment
-import it.unipd.dei.pseaiproject.R
+import it.unipd.dei.pseaiproject.databinding.ActivityModelBinding
 
 
 class ModelActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityModelBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_model)
+        binding = ActivityModelBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        val backButton: ImageButton = findViewById(R.id.back_button_toolbar)
-        val modalButton: ImageButton = findViewById(R.id.modal_button)
         val bottomSheetFragment = BottomSheetFragment()
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
-        backButton.setOnClickListener {
+        binding.backButtonToolbar.setOnClickListener {
             finish()
         }
 
-        modalButton.setOnClickListener {
+        binding.modalButton.setOnClickListener {
             // Mostra il modale
             bottomSheetFragment.show(supportFragmentManager, "BottomSheetDialog")
         }

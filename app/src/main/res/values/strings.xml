@@ -45,10 +45,16 @@
     <string name="treshold">Valore di soglia</string>
     <string name="start_treshold_value">0.5</string>
     <string name="start_rectangle_value">3</string>
+    <string name="delegato">Delegato</string>
+    <string-array name="delegati">
+        <item>CPU</item>
+        <item>GPU</item>
+        <item>NNAPI</item>
+    </string-array>
+
 
     <string name="spinner_item_icon">Spinner item icon</string>
     <string name="logo_descriptor">LOGO</string>
-
 
 
 </resources>

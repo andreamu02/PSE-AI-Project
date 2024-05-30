@@ -18,8 +18,6 @@
             android:layout_height="wrap_content">
 
             <!-- Pulsante di back -->
-
-            <!-- Titolo della toolbar -->
             <ImageButton
                 android:id="@+id/back_button_toolbar"
                 android:layout_width="48dp"
@@ -34,6 +32,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Titolo della toolbar -->
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
@@ -71,7 +70,7 @@
         android:name="it.unipd.dei.pseaiproject.ui.CameraFragment"
         tools:layout="@layout/fragment_camera" />
 
-    <!-- Aggiunta del bottone -->
+    <!-- Bottone per aprire il modale -->
     <ImageButton
         android:id="@+id/modal_button"
         android:layout_width="48dp"

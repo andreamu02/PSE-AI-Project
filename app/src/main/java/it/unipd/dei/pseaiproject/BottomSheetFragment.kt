@@ -9,19 +9,15 @@ import it.unipd.dei.pseaiproject.databinding.FragmentBottomSheetBinding
 
 class BottomSheetFragment: BottomSheetDialogFragment() {
 
-    //TODO CAPIRE SE SERVE IL NULL OPPURE NO
     // Classe generata automaticamente basata sul nome del file xml
-    private var _binding: FragmentBottomSheetBinding? = null
-
-    // Fornisce un accesso non nullable a _binding
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentBottomSheetBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
+        binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -33,9 +29,4 @@ class BottomSheetFragment: BottomSheetDialogFragment() {
         }
     }
 
-    // Resetto _binding per evitare memory leaks
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
