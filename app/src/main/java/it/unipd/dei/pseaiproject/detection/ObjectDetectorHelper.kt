@@ -26,7 +26,7 @@ class ObjectDetectorHelper(
         setupObjectDetector()
     }
 
-    fun clearObjectDetector() {
+    private fun clearObjectDetector() {
         objectDetector = null
     }
 
@@ -115,14 +115,36 @@ class ObjectDetectorHelper(
 
     fun setThreshold(threshold: Float){
         this.threshold = threshold
+        clearObjectDetector()
+        Log.d("BottomSheetFragmentUpdate", "Saved threshold: $this.threshold")
         setupObjectDetector()
     }
 
     fun setMaxResults(maxResults: Int){
         this.maxResults = maxResults
+        clearObjectDetector()
         setupObjectDetector()
     }
 
+    fun setDelegate(delegate: Int){
+        when (delegate) {
+            DELEGATE_CPU -> {
+                this.currentDelegate = DELEGATE_CPU
+                clearObjectDetector()
+                setupObjectDetector()
+            }
+            DELEGATE_GPU -> {
+                this.currentDelegate = DELEGATE_GPU
+                clearObjectDetector()
+                setupObjectDetector()
+            }
+            DELEGATE_NNAPI -> {
+                this.currentDelegate = DELEGATE_NNAPI
+                clearObjectDetector()
+                setupObjectDetector()
+            }
+        }
+    }
     companion object {
         const val DELEGATE_CPU = 0
         const val DELEGATE_GPU = 1

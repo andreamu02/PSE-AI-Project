@@ -64,7 +64,7 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCameraBinding.inflate(inflater, container, false)
-        return inflater.inflate(R.layout.fragment_camera, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

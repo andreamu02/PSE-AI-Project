@@ -26,19 +26,14 @@ class ModelActivity : AppCompatActivity() {
         }
 
         bottomSheetFragment = BottomSheetFragment()
-        cameraViewModel.objectDetectorHelper.value?.let{
-            helper -> bottomSheetFragment?.setDetectorObject(helper)
+        cameraViewModel.objectDetectorHelper.observe(this) { helper ->
+            helper?.let {
+                bottomSheetFragment?.setDetectorObject(it)
+            }
         }
 
-        binding.modalButton.setOnClickListener{
+        binding.modalButton.setOnClickListener {
             bottomSheetFragment?.show(supportFragmentManager, "BottomSheetDialog")
         }
-        /*
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Gestisci l'evento del pulsante back
-                finish()
-            }
-        })*/
     }
 }

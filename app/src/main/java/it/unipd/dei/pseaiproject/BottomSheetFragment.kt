@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import it.unipd.dei.pseaiproject.databinding.FragmentBottomSheetBinding
@@ -27,6 +28,32 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPreferences = requireContext().getSharedPreferences("appPreferences", 0)
+        val savedThreshold = sharedPreferences.getFloat("threshold", 0.5f) // Default value 0.5f
+        val savedMaxResults = sharedPreferences.getInt("maxResults", 3) // Default value 3
+        val savedDelegate = sharedPreferences.getString("selectedDelegate", "CPU")
+
+        binding.firstParamValue.text = savedThreshold.toString()
+        binding.secondParamValue.text = savedMaxResults.toString()
+        detector?.setThreshold(savedThreshold)
+        detector?.setMaxResults(savedMaxResults)
+        if (savedDelegate != null) {
+            updateValueDelegate(savedDelegate)
+        }
+
+        // Imposta il listener dello spinner
+        binding.thirdParamSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedValue = parent.getItemAtPosition(position).toString()
+                updateValueDelegate(selectedValue)
+                saveToPreferences(selectedValue)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Codice per gestire il caso in cui non viene selezionato nulla, se necessario
+            }
+        }
 
         // Listener per il pulsante di chiusura
         binding.closeButton.setOnClickListener {
@@ -54,26 +81,64 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     // Metodo per aggiornare i valori dei TextView
     private fun updateValueThreshold(textView: TextView, delta: Float) {
-        val currentValue = round(textView.text.toString().toFloat()*100)/100
-        val newValue = round((currentValue + delta)*100)/100
-        if(newValue < 0.1 || newValue > 0.9){
+        val currentValue = round(textView.text.toString().toFloat() * 100) / 100
+        val newValue = round((currentValue + delta) * 100) / 100
+        if (newValue < 0.1 || newValue > 0.9) {
             return
         }
         textView.text = newValue.toString()
         detector?.setThreshold(newValue)
+        saveToPreferences(newValue)
     }
 
-    private fun updateValueElements(textView: TextView, delta: Int){
+    private fun updateValueElements(textView: TextView, delta: Int) {
         val currentValue = textView.text.toString().toInt()
         val newValue = currentValue + delta
-        if(newValue < 1 || newValue > 9){
+        if (newValue < 1 || newValue > 9) {
             return
         }
         textView.text = newValue.toString()
         detector?.setMaxResults(newValue)
+        saveToPreferences(newValue)
     }
 
-    fun setDetectorObject(detector: ObjectDetectorHelper){
+    private fun updateValueDelegate(delegate: String){
+        if (delegate == "CPU"){
+            detector?.setDelegate(0)
+            return
+        }
+        if (delegate == "GPU"){
+            detector?.setDelegate(1)
+            return
+        }
+        if (delegate == "NNAPI"){
+            detector?.setDelegate(2)
+            return
+        }
+    }
+
+    fun setDetectorObject(detector: ObjectDetectorHelper) {
         this.detector = detector
+    }
+
+    private fun saveToPreferences(value: Float) {
+        val sharedPreferences = requireContext().getSharedPreferences("appPreferences", 0)
+        val editor = sharedPreferences.edit()
+        editor.putFloat("threshold", value)
+        editor.apply()
+    }
+
+    private fun saveToPreferences(value: Int) {
+        val sharedPreferences = requireContext().getSharedPreferences("appPreferences", 0)
+        val editor = sharedPreferences.edit()
+        editor.putInt("maxResults", value)
+        editor.apply()
+    }
+
+    private fun saveToPreferences(value: String) {
+        val sharedPreferences = requireContext().getSharedPreferences("appPreferences", 0)
+        val editor = sharedPreferences.edit()
+        editor.putString("selectedDelegate", value)
+        editor.apply()
     }
 }
