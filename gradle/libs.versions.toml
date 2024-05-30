@@ -8,6 +8,7 @@ cameraExtensions = "1.1.0"
 cameraLifecycle = "1.1.0"
 cameraView = "1.1.0"
 firebaseBom = "33.0.0"
+fragmentKtx = "1.7.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -40,6 +41,7 @@ androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-view
 camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "cameraExtensions" }
 camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraLifecycle" }
 camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraView" }
+fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

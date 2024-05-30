@@ -4,13 +4,13 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.SystemClock
 import android.util.Log
+import org.tensorflow.lite.gpu.CompatibilityList
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.Rot90Op
+import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
-import org.tensorflow.lite.gpu.CompatibilityList
-import org.tensorflow.lite.task.core.BaseOptions
 
 class ObjectDetectorHelper(
     private var threshold: Float = 0.5f,
@@ -113,12 +113,6 @@ class ObjectDetectorHelper(
         )
     }
 
-    companion object {
-        const val DELEGATE_CPU = 0
-        const val DELEGATE_GPU = 1
-        const val DELEGATE_NNAPI = 2
-    }
-
     fun setThreshold(threshold: Float){
         this.threshold = threshold
         setupObjectDetector()
@@ -127,5 +121,11 @@ class ObjectDetectorHelper(
     fun setMaxResults(maxResults: Int){
         this.maxResults = maxResults
         setupObjectDetector()
+    }
+
+    companion object {
+        const val DELEGATE_CPU = 0
+        const val DELEGATE_GPU = 1
+        const val DELEGATE_NNAPI = 2
     }
 }

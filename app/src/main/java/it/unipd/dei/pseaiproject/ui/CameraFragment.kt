@@ -21,14 +21,15 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import it.unipd.dei.pseaiproject.DetectionOverlayView
 import it.unipd.dei.pseaiproject.R
+import it.unipd.dei.pseaiproject.databinding.FragmentCameraBinding
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
+import it.unipd.dei.pseaiproject.viewmodels.CameraViewModel
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList
 import java.util.concurrent.Executors
-import it.unipd.dei.pseaiproject.BottomSheetFragment
-import it.unipd.dei.pseaiproject.databinding.ActivityModelBinding
 
 
 class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
@@ -48,9 +49,7 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
     private var previousResults: MutableList<Detection>? = null
 
-    private lateinit var binding: ActivityModelBinding
-
-    private var bottomSheetFragment: BottomSheetFragment? = null
+    private var binding: FragmentCameraBinding? = null
 
 
     // Variabili per il buffer di bitmap, l'analisi delle immagini e l'helper per il rilevamento degli oggetti
@@ -58,11 +57,13 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
     private var imageAnalyzer: ImageAnalysis? = null
     private lateinit var objectDetectorHelper: ObjectDetectorHelper
 
+    private val cameraViewModel: CameraViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        binding = FragmentCameraBinding.inflate(inflater, container, false)
         return inflater.inflate(R.layout.fragment_camera, container, false)
     }
 
@@ -80,15 +81,11 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
         objectDetectorHelper = ObjectDetectorHelper(
             context = requireContext(),
-            objectDetectorListener = this)
+            objectDetectorListener = this
+        )
 
-        bottomSheetFragment = BottomSheetFragment()
-        bottomSheetFragment?.setDetectorObject(objectDetectorHelper)
-        binding = ActivityModelBinding.inflate(layoutInflater)
-        binding.modalButton.setOnClickListener {
-            // Mostra il modale
-            bottomSheetFragment?.show(parentFragmentManager, "BottomSheetDialog")
-        }
+        // Set the ObjectDetectorHelper in the shared ViewModel
+        cameraViewModel.setObjectDetectorHelper(objectDetectorHelper)
     }
 
     // Metodo per gestire la richiesta dei permessi della fotocamera
