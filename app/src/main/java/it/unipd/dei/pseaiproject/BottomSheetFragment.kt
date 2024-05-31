@@ -39,14 +39,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         detector?.setThreshold(savedThreshold)
         detector?.setMaxResults(savedMaxResults)
         if (savedDelegate != null) {
-            updateValueDelegate(savedDelegate)
+            updateValue(null, savedDelegate)
         }
 
         // Imposta il listener dello spinner
         binding.thirdParamSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedValue = parent.getItemAtPosition(position).toString()
-                updateValueDelegate(selectedValue)
+                updateValue(null, selectedValue)
                 saveToPreferences(selectedValue)
             }
 
@@ -62,83 +62,72 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
         // Listener per il primo set di pulsanti
         binding.firstParamMinus.setOnClickListener {
-            updateValueThreshold(binding.firstParamValue, -0.1f)
+            updateValue(binding.firstParamValue, -0.1f)
         }
 
         binding.firstParamPlus.setOnClickListener {
-            updateValueThreshold(binding.firstParamValue, 0.1f)
+            updateValue(binding.firstParamValue, 0.1f)
         }
 
         // Listener per il secondo set di pulsanti
         binding.secondParamMinus.setOnClickListener {
-            updateValueElements(binding.secondParamValue, -1)
+            updateValue(binding.secondParamValue, -1)
         }
 
         binding.secondParamPlus.setOnClickListener {
-            updateValueElements(binding.secondParamValue, 1)
+            updateValue(binding.secondParamValue, 1)
         }
     }
 
     // Metodo per aggiornare i valori dei TextView
-    private fun updateValueThreshold(textView: TextView, delta: Float) {
-        val currentValue = round(textView.text.toString().toFloat() * 100) / 100
-        val newValue = round((currentValue + delta) * 100) / 100
-        if (newValue < 0.1 || newValue > 0.9) {
-            return
-        }
-        textView.text = newValue.toString()
-        detector?.setThreshold(newValue)
-        saveToPreferences(newValue)
-    }
-
-    private fun updateValueElements(textView: TextView, delta: Int) {
-        val currentValue = textView.text.toString().toInt()
-        val newValue = currentValue + delta
-        if (newValue < 1 || newValue > 9) {
-            return
-        }
-        textView.text = newValue.toString()
-        detector?.setMaxResults(newValue)
-        saveToPreferences(newValue)
-    }
-
-    private fun updateValueDelegate(delegate: String){
-        if (delegate == "CPU"){
-            detector?.setDelegate(0)
-            return
-        }
-        if (delegate == "GPU"){
-            detector?.setDelegate(1)
-            return
-        }
-        if (delegate == "NNAPI"){
-            detector?.setDelegate(2)
-            return
+    private fun updateValue(textView: TextView?, delta: Any) {
+        when (delta) {
+            is Float -> {
+                val currentValue = round(textView?.text.toString().toFloat() * 100) / 100
+                val newValue = round((currentValue + delta) * 100) / 100
+                if (newValue in 0.1..0.9) {
+                    textView?.text = newValue.toString()
+                    detector?.setThreshold(newValue)
+                    saveToPreferences(newValue)
+                }
+            }
+            is Int -> {
+                val currentValue = textView?.text.toString().toInt()
+                val newValue = currentValue + delta
+                if (newValue in 1..9) {
+                    textView?.text = newValue.toString()
+                    detector?.setMaxResults(newValue)
+                    saveToPreferences(newValue)
+                }
+            }
+            is String -> {
+                val delegateValue = when (delta) {
+                    "CPU" -> 0
+                    "GPU" -> 1
+                    "NNAPI" -> 2
+                    else -> return
+                }
+                detector?.setDelegate(delegateValue)
+                saveToPreferences(delta)
+            }
+            else -> throw IllegalArgumentException("Unsupported delta type")
         }
     }
-
     fun setDetectorObject(detector: ObjectDetectorHelper) {
         this.detector = detector
     }
 
-    private fun saveToPreferences(value: Float) {
+    private fun saveToPreferences(value: Any) {
         val sharedPreferences = requireContext().getSharedPreferences("appPreferences", 0)
         val editor = sharedPreferences.edit()
-        editor.putFloat("threshold", value)
+
+        when (value) {
+            is Float -> editor.putFloat("threshold", value)
+            is Int -> editor.putInt("maxResults", value)
+            is String -> editor.putString("selectedDelegate", value)
+            else -> throw IllegalArgumentException("Unsupported type")
+        }
         editor.apply()
     }
 
-    private fun saveToPreferences(value: Int) {
-        val sharedPreferences = requireContext().getSharedPreferences("appPreferences", 0)
-        val editor = sharedPreferences.edit()
-        editor.putInt("maxResults", value)
-        editor.apply()
-    }
-
-    private fun saveToPreferences(value: String) {
-        val sharedPreferences = requireContext().getSharedPreferences("appPreferences", 0)
-        val editor = sharedPreferences.edit()
-        editor.putString("selectedDelegate", value)
-        editor.apply()
-    }
 }

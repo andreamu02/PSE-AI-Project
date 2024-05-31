@@ -23,7 +23,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import it.unipd.dei.pseaiproject.DetectionOverlayView
-import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.databinding.FragmentCameraBinding
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
 import it.unipd.dei.pseaiproject.viewmodels.CameraViewModel
@@ -34,6 +33,8 @@ import java.util.concurrent.Executors
 
 class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
+    private var binding: FragmentCameraBinding? = null
+
     // View per mostrare il feed della fotocamera
     private lateinit var previewView: PreviewView
 
@@ -43,21 +44,19 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
     // Executor per eseguire operazioni della fotocamera in un thread separato
     private val cameraExecutor = Executors.newSingleThreadExecutor()
 
+    // Variabili per capire se e quando aggiornare i risultati
     private var lastTimeUpdateScreen = 0L
-
     private var results : MutableList<Detection>? = null
-
     private var previousResults: MutableList<Detection>? = null
 
-    private var binding: FragmentCameraBinding? = null
+    // CameraViewModel per la condivisione dell'objectDetectionHelper
+    private val cameraViewModel: CameraViewModel by activityViewModels()
 
 
     // Variabili per il buffer di bitmap, l'analisi delle immagini e l'helper per il rilevamento degli oggetti
     private lateinit var bitmapBuffer: Bitmap
     private var imageAnalyzer: ImageAnalysis? = null
     private lateinit var objectDetectorHelper: ObjectDetectorHelper
-
-    private val cameraViewModel: CameraViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,8 +68,9 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        previewView = view.findViewById(R.id.previewView)
-        overlayView = view.findViewById(R.id.overlayView)
+
+        previewView = binding!!.previewView
+        overlayView = binding!!.overlayView
 
         // Controlla se i permessi sono concessi, altrimenti richiedili
         if (allPermissionsGranted()) {
