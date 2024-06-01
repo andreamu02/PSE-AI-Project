@@ -11,8 +11,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/apple_icon"
-        android:roundIcon="@mipmap/apple_icon_round"
+        android:icon="@mipmap/objrec_icon"
+        android:roundIcon="@mipmap/objrec_icon_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.Dark.NoActionBar">

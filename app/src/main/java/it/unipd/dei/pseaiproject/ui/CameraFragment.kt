@@ -1,4 +1,4 @@
-package it.unipd.dei.pseaiproject.ui
+package it.unipd.dei.pseaiproject
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -235,4 +235,6 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         }
         return false
     }
+
+
 }
