@@ -27,9 +27,9 @@ class SignUpActivity : AppCompatActivity() {
         val theme = styleManager.loadThemePreference(this)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        styleManager.setEditTextAppearance(this, findViewById(R.id.email_input_signup))
-        styleManager.setEditTextAppearance(this, findViewById(R.id.password_input_signup))
-        styleManager.setEditTextAppearance(this, findViewById(R.id.confirm_password_input_signup))
+        styleManager.setEditTextAppearance(this, binding.emailInputSignup)
+        styleManager.setEditTextAppearance(this, binding.passwordInputSignup)
+        styleManager.setEditTextAppearance(this, binding.confirmPasswordInputSignup)
         with(binding) {
             // Imposta il listener per il pulsante di registrazione
             signupButton.setOnClickListener {

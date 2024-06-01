@@ -1,9 +1,12 @@
 package it.unipd.dei.pseaiproject.ui.main
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import it.unipd.dei.pseaiproject.BottomSheetFragment
+import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.databinding.ActivityModelBinding
 import it.unipd.dei.pseaiproject.viewmodels.CameraViewModel
 
@@ -24,6 +27,9 @@ class ModelActivity : AppCompatActivity() {
         binding.backButtonToolbar.setOnClickListener {
             finish()
         }
+
+        val logoImage = binding.logoImage
+        logoImage.setColorFilter(ContextCompat.getColor(this, R.color.black), PorterDuff.Mode.SRC_IN)
 
         bottomSheetFragment = BottomSheetFragment()
         cameraViewModel.objectDetectorHelper.observe(this) { helper ->
