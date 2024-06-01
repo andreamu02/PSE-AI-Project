@@ -1,32 +1,39 @@
 package it.unipd.dei.pseaiproject.ui.main
 
 import android.os.Bundle
-import android.widget.ImageButton
-import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import it.unipd.dei.pseaiproject.R
+import it.unipd.dei.pseaiproject.BottomSheetFragment
+import it.unipd.dei.pseaiproject.databinding.ActivityModelBinding
+import it.unipd.dei.pseaiproject.viewmodels.CameraViewModel
+
 
 class ModelActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityModelBinding
+    private var bottomSheetFragment: BottomSheetFragment? = null
+    private val cameraViewModel: CameraViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_model)
+        binding = ActivityModelBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
-        val backButton: ImageButton = findViewById(R.id.back_button_toolbar)
-
-        backButton.setOnClickListener {
+        binding.backButtonToolbar.setOnClickListener {
             finish()
         }
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Gestisci l'evento del pulsante "Indietro"
-                finish()
+        bottomSheetFragment = BottomSheetFragment()
+        cameraViewModel.objectDetectorHelper.observe(this) { helper ->
+            helper?.let {
+                bottomSheetFragment?.setDetectorObject(it)
             }
-        })
+        }
+
+        binding.modalButton.setOnClickListener {
+            bottomSheetFragment?.show(supportFragmentManager, "BottomSheetDialog")
+        }
     }
 }

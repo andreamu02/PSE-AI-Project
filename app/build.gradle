@@ -16,11 +16,15 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -52,7 +56,7 @@ dependencies {
     implementation libs.androidx.activity.ktx
     implementation libs.tensorflow.lite.metadata
     implementation libs.tensorflow.lite.task.vision.v042
-    implementation libs.play.services.tflite.gpu
+    implementation libs.tensorflow.lite.gpu.v290
     implementation libs.androidx.camera.core
     implementation libs.androidx.camera.camera2
     implementation libs.camera.lifecycle
@@ -60,6 +64,8 @@ dependencies {
     implementation libs.camera.extensions
     implementation libs.object.detection.common
     implementation libs.androidx.fragment
+    implementation libs.fragment.ktx
+    implementation libs.material
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

@@ -11,6 +11,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList
+import java.util.Locale
 import kotlin.math.max
 import kotlin.math.min
 
@@ -82,7 +83,7 @@ class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(contex
                 // Crea il testo da visualizzare accanto agli oggetti rilevati
                 val drawableText =
                     result.categories[0].label + " " +
-                            String.format("%.2f", result.categories[0].score)
+                            String.format(Locale.getDefault(), "%.2f", result.categories[0].score)
 
                 // Disegna un rettangolo dietro il testo di visualizzazione
                 textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)

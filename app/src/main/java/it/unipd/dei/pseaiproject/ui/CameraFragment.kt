@@ -21,12 +21,19 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import it.unipd.dei.pseaiproject.DetectionOverlayView
+import it.unipd.dei.pseaiproject.databinding.FragmentCameraBinding
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
+import it.unipd.dei.pseaiproject.viewmodels.CameraViewModel
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList
 import java.util.concurrent.Executors
 
+
 class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
+
+    private var binding: FragmentCameraBinding? = null
 
     // View per mostrare il feed della fotocamera
     private lateinit var previewView: PreviewView
@@ -37,7 +44,14 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
     // Executor per eseguire operazioni della fotocamera in un thread separato
     private val cameraExecutor = Executors.newSingleThreadExecutor()
 
+    // Variabili per capire se e quando aggiornare i risultati
     private var lastTimeUpdateScreen = 0L
+    private var results : MutableList<Detection>? = null
+    private var previousResults: MutableList<Detection>? = null
+
+    // CameraViewModel per la condivisione dell'objectDetectionHelper
+    private val cameraViewModel: CameraViewModel by activityViewModels()
+
 
     // Variabili per il buffer di bitmap, l'analisi delle immagini e l'helper per il rilevamento degli oggetti
     private lateinit var bitmapBuffer: Bitmap
@@ -48,13 +62,15 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_camera, container, false)
+        binding = FragmentCameraBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        previewView = view.findViewById(R.id.previewView)
-        overlayView = view.findViewById(R.id.overlayView)
+
+        previewView = binding!!.previewView
+        overlayView = binding!!.overlayView
 
         // Controlla se i permessi sono concessi, altrimenti richiedili
         if (allPermissionsGranted()) {
@@ -65,7 +81,11 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
         objectDetectorHelper = ObjectDetectorHelper(
             context = requireContext(),
-            objectDetectorListener = this)
+            objectDetectorListener = this
+        )
+
+        // Set the ObjectDetectorHelper in the shared ViewModel
+        cameraViewModel.setObjectDetectorHelper(objectDetectorHelper)
     }
 
     // Metodo per gestire la richiesta dei permessi della fotocamera
@@ -166,7 +186,7 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         }
     }
 
-    // Metodo chiamato quando ci sono risultati dal rilevamento degli oggetti
+    // Metodo chiamato quando ci sono risultati dal rilevamento degli oggettii
     override fun onResults(
         results: MutableList<Detection>?,
         inferenceTime: Long,
@@ -175,17 +195,45 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
     ) {
         activity?.runOnUiThread {
             if (isAdded) {
+                this.results = results
                 overlayView.setResults(
                     results ?: LinkedList(),
                     imageHeight,
                     imageWidth
                 )
-                if (lastTimeUpdateScreen == 0L || (System.currentTimeMillis() - lastTimeUpdateScreen >= 250)) {
-                    overlayView.invalidate()                    // Invalida la view per forzarne il ridisegno ogni 0.5 s
+                if (lastTimeUpdateScreen == 0L || (System.currentTimeMillis() - lastTimeUpdateScreen >= 1000 || resultsAreDifferent())) {
+                    overlayView.invalidate()
                     lastTimeUpdateScreen = System.currentTimeMillis()
                 }
+                previousResults = this.results
             }
         }
+    }
+
+    private fun resultsAreDifferent() : Boolean {
+        if (this.results == null && this.previousResults == null) {
+            return false
+        }else if((this.results == null && this.previousResults != null) || (this.results != null && this.previousResults == null) ) {
+            return true
+        }
+        if (this.results!!.size != this.previousResults!!.size){
+            return true
+        }
+        val foundResults: MutableList<Detection> = mutableListOf()
+        for (result in this.results!!) {
+            var found = false
+            for(previousResult in this.previousResults!!) {
+                if(result !in foundResults && result.categories[0].label == previousResult.categories[0].label) {
+                    found = true
+                    foundResults.add(result)
+                    break
+                }
+            }
+            if(!found) {
+                return true
+            }
+        }
+        return false
     }
 
 
