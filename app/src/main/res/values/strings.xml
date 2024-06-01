@@ -37,4 +37,13 @@
     <string name="reset_password">Reset Password</string>
     <string name="spinner_item_icon">Spinner item icon</string>
     <string name="logo_descriptor">LOGO</string>
+
+    <!-- Stringhe per la schermata info -->
+    <string name="version">Version 1.0</string>
+    <string name="infoText">ObjectDetection è un app che permette l\'individuazione e la classificazione di oggetti attraverso la camera frontale.
+        Questa funzionalità è implementata tramite il <a href="https://www.tensorflow.org/lite/examples/object_detection/overview">modello</a> TensorFlow Lite dedicato all\'ObjectDetection che consiste in una rete neurale convoluzionale che, data un\'immagine di input, compie le seguenti operazioni:\n\n
+        &#8226; Estrazione delle caratteristiche rilevanti per l\'individuazione di oggetti nell\'immagine (Feature Extraction);\n\n
+        &#8226; Generazione di possibili regioni dell\'immagine che potrebbero contenere oggetti (Regional Proposal);\n\n
+        &#8226; Predizione delle coordinate dei rettangoli che delimitano gli oggetti (Bounding Box Regression);\n\n
+        &#8226; Assegnamento di una classe a ciascun oggetto rilevato fornendo un punteggio di confidenza per ogni previsione (Classification).\n\nTramite queste operazioni la rete fornisce in output le bounding boxes, le classi degli oggetti e i punteggi di confidenza.</string>
 </resources>
