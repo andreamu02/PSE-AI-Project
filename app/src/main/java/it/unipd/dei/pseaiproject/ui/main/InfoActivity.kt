@@ -1,14 +1,16 @@
 package it.unipd.dei.pseaiproject.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import it.unipd.dei.pseaiproject.spinner.CustomSpinnerAdapter
 import it.unipd.dei.pseaiproject.R
+import it.unipd.dei.pseaiproject.spinner.CustomSpinnerAdapter
 import it.unipd.dei.pseaiproject.spinner.SpinnerItem
 import it.unipd.dei.pseaiproject.spinner.SpinnerItemSelectedListener
 import it.unipd.dei.pseaiproject.style.StyleManager
@@ -58,5 +60,16 @@ class InfoActivity: AppCompatActivity() {
 
         // Gestire gli eventi di selezione
         spinner.onItemSelectedListener = SpinnerItemSelectedListener(this, firebaseAuth, theme, styleManager, spinner)
+
+        //Callback per gestire la presisone del tasto indeitro del telefono
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@InfoActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 }
