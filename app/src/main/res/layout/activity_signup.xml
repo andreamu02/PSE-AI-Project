@@ -1,103 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".ui.auth.SignUpActivity">
+    tools:context=".ui.auth.ForgotPasswordActivity">
 
-    <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:src="@drawable/baseline_account_circle_24"
-        android:contentDescription="@string/account_circle"
-        />
-    <!-- TextView per mostrare delle info -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/signup"
         android:gravity="center"
-        android:textSize="30sp"
-        android:paddingTop="10dp"
-        android:text="@string/signup"
-        android:textAllCaps="true"/>
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".ui.auth.SignUpActivity">
 
-    <!-- EditText per l'inserimento dell'email -->
-    <EditText
-        android:id="@+id/email_input_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:autofillHints=""
-        android:hint="@string/email_text"
-        android:textSize="20sp"
-        android:background="@drawable/rounded_corner"
-        android:padding="18dp"
-        android:inputType="textEmailAddress" />
-
-    <!-- EditText per l'inserimento della password -->
-    <EditText
-        android:id="@+id/password_input_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:autofillHints=""
-        android:hint="@string/password_text"
-        android:textSize="20sp"
-        android:background="@drawable/rounded_corner"
-        android:padding="18dp"
-        android:inputType="textPassword" />
-
-    <!-- EditText per l'inserimento della password di conferma -->
-    <EditText
-        android:id="@+id/confirm_password_input_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:autofillHints=""
-        android:hint="@string/confirm_password_text"
-        android:textSize="20sp"
-        android:background="@drawable/rounded_corner"
-        android:padding="18dp"
-        android:inputType="textPassword" />
-
-    <!-- FrameLayout per avere una progressbar nascosta sotto il bottone da attivare in seguito -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp">
-
-        <ProgressBar
-            android:id="@+id/signUpProgressbar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:visibility="invisible" />
-        <!-- MaterialButton per la registrazione -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/signup_button"
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/baseline_account_circle_24"
+            android:contentDescription="@string/account_circle"
+            />
+        <!-- TextView per mostrare delle info -->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/signup_button"
-            android:textColor="@color/black"
-            app:cornerRadius="10dp"
-            app:iconGravity="textStart"
-            android:textSize="20sp" />
-    </FrameLayout>
+            android:id="@+id/signup"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:paddingTop="10dp"
+            android:text="@string/signup"
+            android:textAllCaps="true"/>
 
-    <!-- Link alla pagina di SignIn -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/already_signup"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:paddingTop="10dp"
-        android:text="@string/yes_account"/>
+        <!-- EditText per l'inserimento dell'email -->
+        <EditText
+            android:id="@+id/email_input_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:autofillHints=""
+            android:hint="@string/email_text"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="18dp"
+            android:inputType="textEmailAddress" />
 
-</LinearLayout>
+        <!-- EditText per l'inserimento della password -->
+        <EditText
+            android:id="@+id/password_input_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:hint="@string/password_text"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="18dp"
+            android:inputType="textPassword" />
+
+        <!-- EditText per l'inserimento della password di conferma -->
+        <EditText
+            android:id="@+id/confirm_password_input_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:hint="@string/confirm_password_text"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="18dp"
+            android:inputType="textPassword" />
+
+        <!-- FrameLayout per avere una progressbar nascosta sotto il bottone da attivare in seguito -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp">
+
+            <ProgressBar
+                android:id="@+id/signUpProgressbar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="invisible" />
+            <!-- MaterialButton per la registrazione -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signup_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="@string/signup_button"
+                android:textColor="@color/black"
+                app:cornerRadius="10dp"
+                app:iconGravity="textStart"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+        <!-- Link alla pagina di SignIn -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/already_signup"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:paddingTop="10dp"
+            android:text="@string/yes_account"/>
+
+    </LinearLayout>
+</ScrollView>
