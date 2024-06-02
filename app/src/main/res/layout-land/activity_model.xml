@@ -49,12 +49,12 @@
             <!-- Immagine del logo -->
             <ImageView
                 android:id="@+id/logo_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/logo_descriptor"
                 android:scaleType="centerInside"
-                android:src="@drawable/apple_image"
+                android:src="@drawable/object_recognition"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/toolbar_title"
