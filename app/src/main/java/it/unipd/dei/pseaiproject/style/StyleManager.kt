@@ -14,10 +14,6 @@ import it.unipd.dei.pseaiproject.R
 //classe che, data un'attività, ne cambia lo stile grafico salvando la scelta in memoria
 class StyleManager(private val activity: AppCompatActivity) {
 
-    //stringhe che fungono da chiavi per lo stato dell'attività
-    private val PREFS_NAME = "theme_prefs"
-    private val KEY_THEME = "key_theme"
-
     //Metodo che, dato un tema, lo applica all'attività
     fun applyTheme(themeType: ThemeType) {
         // Salva il tema scelto nelle SharedPreferences
@@ -100,5 +96,11 @@ class StyleManager(private val activity: AppCompatActivity) {
         editText.setTextColor(ContextCompat.getColor(context, color))
         editText.setHintTextColor(ContextCompat.getColor(context, colorHint))
 
+    }
+
+    companion object {
+        //stringhe che fungono da chiavi per lo stato dell'attività
+        const val PREFS_NAME = "theme_prefs"
+        const val KEY_THEME = "key_theme"
     }
 }

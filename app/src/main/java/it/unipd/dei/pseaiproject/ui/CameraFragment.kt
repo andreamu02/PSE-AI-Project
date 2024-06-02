@@ -1,4 +1,4 @@
-package it.unipd.dei.pseaiproject
+package it.unipd.dei.pseaiproject.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
