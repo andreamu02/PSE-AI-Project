@@ -155,10 +155,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
+    <!-- Container destro (occupa metà dello schermo a destra della guideline) -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="20dp"
+        android:layout_margin="15dp"
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/horizontal_view"
         app:layout_constraintEnd_toEndOf="parent"
@@ -166,8 +167,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/TextView"
