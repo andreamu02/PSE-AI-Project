@@ -11,21 +11,33 @@ import androidx.core.content.ContextCompat
 import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.style.ThemeType
 
-//Classe che personalizza l'aspetto degli elementi di uno spinner
-//In ingresso riceve il contesto, la lista degli elementi dello spinner e il tema con cui decidere i colori dello spinner
+/**
+ * Adattatore personalizzato per personalizzare l'aspetto degli elementi di uno spinner.
+ * Riceve il contesto, la lista degli elementi dello spinner e il tema per decidere i colori dello spinner.
+ *
+ * @param context Il contesto in cui viene utilizzato lo spinner.
+ * @param data La lista degli elementi da visualizzare nello spinner.
+ * @param theme Il tipo di tema usato per determinare i colori dello spinner.
+ */
 class CustomSpinnerAdapter(context: Context, data: List<SpinnerItem>, private val theme: ThemeType) :
     ArrayAdapter<SpinnerItem>(context, 0, data) {
 
-        //metodo che crea e ritorna una vista per l'elemento dello spinner selezionato
-        //usato per settare il colore del testo e dello sfondo di un generico elemento dello spinner
-        //e per bindare un'icona ad un certo testo
+    /**
+     * Crea e ritorna una vista per l'elemento dello spinner selezionato.
+     * Imposta il colore del testo e dello sfondo di un elemento generico dello spinner
+     * e associa un'icona a un determinato testo.
+     *
+     * @param position La posizione dell'elemento all'interno del set di dati dell'adattatore.
+     * @param convertView La vecchia vista da riutilizzare, se possibile.
+     * @param parent Il genitore a cui questa vista verrà eventualmente allegata.
+     * @return Una vista corrispondente ai dati nella posizione specificata.
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var view = convertView
         val holder: ViewHolder
         var textColor = R.color.white
         var backgroundColor = R.color.black
-        if (theme.name == ThemeType.LIGHT.name)
-        {
+        if (theme.name == ThemeType.LIGHT.name) {
             textColor = R.color.black
             backgroundColor = R.color.lightBrown
         }
@@ -50,14 +62,23 @@ class CustomSpinnerAdapter(context: Context, data: List<SpinnerItem>, private va
         return view!!
     }
 
-    //metodo che gestisce la visualizzazione degli elementi nel menu a tendina dello spinner
-    //crea e ritorna una vista per ogni elemento dello spinner
+    /**
+     * Gestisce la visualizzazione degli elementi nel menu a tendina dello spinner.
+     * Crea e ritorna una vista per ogni elemento dello spinner.
+     *
+     * @param position La posizione dell'elemento all'interno del set di dati dell'adattatore.
+     * @param convertView La vecchia vista da riutilizzare, se possibile.
+     * @param parent Il genitore a cui questa vista verrà eventualmente allegata.
+     * @return Una vista corrispondente ai dati nella posizione specificata.
+     */
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         return getView(position, convertView, parent)
     }
 
-    //classe interna statica per ottimizzare le prestazioni dell'adattatore
-    //Tramite questa classe: posso evitare chiamate ripetute a findViewById (costose)
+    /**
+     * Classe interna statica per ottimizzare le prestazioni dell'adattatore.
+     * Usando questa classe si evitano chiamate ripetute a findViewById (che sono costose).
+     */
     private class ViewHolder {
         var icon: ImageView? = null
         var text: TextView? = null
