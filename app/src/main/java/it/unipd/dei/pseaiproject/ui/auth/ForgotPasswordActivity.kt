@@ -23,6 +23,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val styleManager = StyleManager(this)
+        styleManager.loadThemePreference(this)
         binding = ActivityForgotpasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
         styleManager.setEditTextAppearance(this, findViewById(R.id.forgot_email))

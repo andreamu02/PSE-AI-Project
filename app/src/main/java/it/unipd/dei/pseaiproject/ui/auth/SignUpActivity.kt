@@ -23,6 +23,7 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val styleManager = StyleManager(this)
+        styleManager.loadThemePreference(this)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
         styleManager.setEditTextAppearance(this, binding.emailInputSignup)
