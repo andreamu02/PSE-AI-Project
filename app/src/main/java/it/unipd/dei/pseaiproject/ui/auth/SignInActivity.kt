@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import it.unipd.dei.pseaiproject.R
+import it.unipd.dei.pseaiproject.databinding.ActivitySigninBinding
 import it.unipd.dei.pseaiproject.style.StyleManager
 import it.unipd.dei.pseaiproject.ui.main.MainActivity
-import it.unipd.dei.pseaiproject.databinding.ActivitySigninBinding
 import it.unipd.dei.pseaiproject.viewmodels.AuthViewModel
 import kotlinx.coroutines.launch
 
@@ -24,7 +24,6 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val styleManager = StyleManager(this)
-        val theme = styleManager.loadThemePreference(this)
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
         styleManager.setEditTextAppearance(this, findViewById(R.id.email_input))
