@@ -36,7 +36,7 @@
         android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/android"
-        android:src="@mipmap/objrec_icon_round"
+        android:src="@mipmap/object_icon_round"
         app:layout_constraintRight_toLeftOf="@id/AppVersion"
         app:layout_constraintTop_toBottomOf="@+id/horizontal_view" />
 

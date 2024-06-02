@@ -22,6 +22,8 @@ class ObjectDetectorHelper(
 
     private var objectDetector: ObjectDetector? = null
 
+    private var isError: Boolean = false
+
     init {
         setupObjectDetector()
     }
@@ -61,11 +63,15 @@ class ObjectDetectorHelper(
         try {
             objectDetector =
                 ObjectDetector.createFromFileAndOptions(context, "mobilenetv1.tflite", optionsBuilder.build())
+            isError = false
         } catch (e: IllegalStateException) {
-            objectDetectorListener?.onError(
-                "Il rilevatore di oggetti non è riuscito a inizializzarsi. Vedi i log di errore per i dettagli"
-            )
-            Log.e("Test", "TFLite non è riuscito a caricare il modello con errore: " + e.message)
+            if(!isError){
+                objectDetectorListener?.onError(
+                    "Il rilevatore di oggetti non è riuscito a inizializzarsi. Vedi i log di errore per i dettagli"
+                )
+                Log.e("Test", "TFLite non è riuscito a caricare il modello con errore: " + e.message)
+            }
+            isError = true
         }
     }
 
