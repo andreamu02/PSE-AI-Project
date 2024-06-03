@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -12,7 +13,6 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import kotlin.Exception
 
 class AuthViewModel : ViewModel() {
 
@@ -113,6 +113,12 @@ class AuthViewModel : ViewModel() {
             is FirebaseAuthUserCollisionException -> "Esiste già un account con questa mail."
             is FirebaseAuthInvalidUserException -> "L'email inserita non è valida. Riprova."
             is FirebaseAuthInvalidCredentialsException -> "Password errata. Riprova."
+            is FirebaseAuthException-> {
+                when (exception.errorCode) {
+                    "ERROR_NETWORK_REQUEST_FAILED" -> "Errore di rete. Controlla la tua connessione e riprova."
+                    else -> "Errore di Firebase: ${exception.message}"
+                }
+            }
             else -> "Errore di Firebase: ${exception?.message}"
         }
     }

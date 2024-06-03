@@ -28,9 +28,16 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        //cambia il colore delle immagini e delle icone
+        styleManager.setImageViewDrawableColor(findViewById(R.id.androidStudio), R.drawable.android_studio, this)
+        styleManager.setImageViewDrawableColor(findViewById(R.id.android), R.drawable.android, this)
+        styleManager.setImageViewDrawableColor(findViewById(R.id.ImageView), R.drawable.object_recognition, this)
+
         val spinner: Spinner = findViewById(R.id.spinner)
         val start : Button = findViewById(R.id.getStarted)
 
+        //cambio il colore del bottone e della toolbar
+        styleManager.setWidgetAppearance(this, toolbar, start, findViewById(R.id.horizontal_view), findViewById(R.id.vertical_view))
         //bottone per iniziare ad usare il modello
         start.setOnClickListener {
             val myIntent = Intent(this, ModelActivity::class.java)
@@ -49,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = CustomSpinnerAdapter(this, spinnerItems, theme)
         spinner.adapter = adapter
 
-        // Gestire gli eventi di selezione
+        // Gestione degli eventi di selezione
         spinner.onItemSelectedListener = SpinnerItemSelectedListener(this, firebaseAuth, theme, styleManager, spinner)
     }
 }

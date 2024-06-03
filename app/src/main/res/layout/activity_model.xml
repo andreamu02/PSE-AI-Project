@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:name="it.unipd.dei.pseaiproject.ui.CameraFragment"
+        android:name="it.unipd.dei.pseaiproject.CameraFragment"
         tools:layout="@layout/fragment_camera" />
 
     <!-- Bottone per aprire il modale -->

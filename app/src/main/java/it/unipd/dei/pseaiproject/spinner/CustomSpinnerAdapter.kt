@@ -23,7 +23,7 @@ class CustomSpinnerAdapter(context: Context, data: List<SpinnerItem>, private va
         var view = convertView
         val holder: ViewHolder
         var textColor = R.color.white
-        var backgroundColor = R.color.ametista
+        var backgroundColor = R.color.black
         if (theme.name == ThemeType.LIGHT.name)
         {
             textColor = R.color.black

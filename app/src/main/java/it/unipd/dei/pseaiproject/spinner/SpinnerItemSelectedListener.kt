@@ -50,6 +50,7 @@ class SpinnerItemSelectedListener(private val activity: AppCompatActivity, priva
                 val intent = Intent(activity, InfoActivity::class.java)
                 activity.startActivity(intent)
                 spinner.setSelection(0)
+                activity.finish()
             }
         }
         //azione di home:
