@@ -1,6 +1,7 @@
 package it.unipd.dei.pseaiproject.detection
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.SystemClock
 import android.util.Log
@@ -13,16 +14,22 @@ import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
 
 class ObjectDetectorHelper(
-    private var threshold: Float = 0.5f,
-    private var numThreads: Int = 2,
-    private var maxResults: Int = 3,
-    private var currentDelegate: Int = DELEGATE_CPU,
     val context: Context,
     val objectDetectorListener: DetectorListener?) {
+
+    private var threshold: Float
+    private var numThreads: Int
+    private var maxResults: Int
+    private var currentDelegate: Int
+    private var sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     private var objectDetector: ObjectDetector? = null
 
     init {
+        threshold = sharedPreferences.getFloat(KEY_THRESHOLD, 0.5f)
+        numThreads = sharedPreferences.getInt(KEY_NUM_THREADS, 2)
+        maxResults = sharedPreferences.getInt(KEY_MAX_RESULTS, 3)
+        currentDelegate = sharedPreferences.getInt(KEY_DELEGATE, DELEGATE_CPU)
         setupObjectDetector()
     }
 
@@ -115,6 +122,7 @@ class ObjectDetectorHelper(
 
     fun setThreshold(threshold: Float){
         this.threshold = threshold
+        sharedPreferences.edit().putFloat(KEY_THRESHOLD, threshold).apply()
         clearObjectDetector()
         Log.d("BottomSheetFragmentUpdate", "Saved threshold: $this.threshold")
         setupObjectDetector()
@@ -122,30 +130,25 @@ class ObjectDetectorHelper(
 
     fun setMaxResults(maxResults: Int){
         this.maxResults = maxResults
+        sharedPreferences.edit().putInt(KEY_MAX_RESULTS, maxResults).apply()
         clearObjectDetector()
         setupObjectDetector()
     }
 
     fun setDelegate(delegate: Int){
-        when (delegate) {
-            DELEGATE_CPU -> {
-                this.currentDelegate = DELEGATE_CPU
-                clearObjectDetector()
-                setupObjectDetector()
-            }
-            DELEGATE_GPU -> {
-                this.currentDelegate = DELEGATE_GPU
-                clearObjectDetector()
-                setupObjectDetector()
-            }
-            DELEGATE_NNAPI -> {
-                this.currentDelegate = DELEGATE_NNAPI
-                clearObjectDetector()
-                setupObjectDetector()
-            }
-        }
+        this.currentDelegate = delegate
+        sharedPreferences.edit().putInt(KEY_DELEGATE, delegate).apply()
+        clearObjectDetector()
+        setupObjectDetector()
     }
+
     companion object {
+        const val PREFS_NAME = "ObjectDetectorPrefs"
+        const val KEY_THRESHOLD = "threshold"
+        const val KEY_NUM_THREADS = "numThreads"
+        const val KEY_MAX_RESULTS = "maxResults"
+        const val KEY_DELEGATE = "delegate"
+
         const val DELEGATE_CPU = 0
         const val DELEGATE_GPU = 1
         const val DELEGATE_NNAPI = 2
