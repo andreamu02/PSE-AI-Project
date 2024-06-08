@@ -1,4 +1,4 @@
-package it.unipd.dei.pseaiproject
+package it.unipd.dei.pseaiproject.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

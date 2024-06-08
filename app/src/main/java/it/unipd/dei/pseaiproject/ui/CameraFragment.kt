@@ -22,8 +22,8 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import it.unipd.dei.pseaiproject.DetectionOverlayView
 import it.unipd.dei.pseaiproject.databinding.FragmentCameraBinding
+import it.unipd.dei.pseaiproject.detection.DetectionOverlayView
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
 import it.unipd.dei.pseaiproject.viewmodels.CameraViewModel
 import org.tensorflow.lite.task.vision.detector.Detection
@@ -71,6 +71,7 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
         previewView = binding!!.previewView
         overlayView = binding!!.overlayView
+        binding!!.overlayView
 
         // Controlla se i permessi sono concessi, altrimenti richiedili
         if (allPermissionsGranted()) {

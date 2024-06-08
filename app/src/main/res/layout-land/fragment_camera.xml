@@ -12,7 +12,7 @@
         app:scaleType="fillStart"
         android:paddingBottom="5dp"/>
 
-    <it.unipd.dei.pseaiproject.DetectionOverlayView
+    <it.unipd.dei.pseaiproject.detection.DetectionOverlayView
         android:id="@+id/overlayView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
