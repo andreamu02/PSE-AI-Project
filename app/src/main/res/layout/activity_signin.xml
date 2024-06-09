@@ -42,7 +42,8 @@
             android:textSize="20sp"
             android:background="@drawable/rounded_corner"
             android:padding="18dp"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <!-- EditText per l'inserimento della password -->
         <EditText
@@ -55,7 +56,8 @@
             android:textSize="20sp"
             android:background="@drawable/rounded_corner"
             android:padding="18dp"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <!-- FrameLayout per avere una progressbar nascosta sotto il bottone da attivare in seguito -->
         <FrameLayout
@@ -80,7 +82,8 @@
                 app:cornerRadius="10dp"
                 app:iconGravity="textStart"
                 android:textSize="20sp"
-                app:iconTint="@color/black" />
+                app:iconTint="@color/black"
+                tools:ignore="VisualLintButtonSize" />
 
         </FrameLayout>
 

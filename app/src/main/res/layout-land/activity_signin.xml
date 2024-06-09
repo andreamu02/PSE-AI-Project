@@ -18,31 +18,20 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <!-- Container sinistro (occupa metà dello schermo a sinistra della guideline) -->
-    <LinearLayout
+    <TextView
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
         android:gravity="center"
-        android:layout_marginStart="20dp"
+        android:text="@string/login"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:paddingTop="10dp"
+        app:drawableTopCompat="@drawable/baseline_account_circle_24"
         app:layout_constraintEnd_toStartOf="@id/guideline"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:src="@drawable/baseline_account_circle_24"
-            android:contentDescription="@string/account_circle"/>
-        <!-- TextView per mostrare delle info -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/signin"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:paddingTop="10dp"
-            android:text="@string/login"
-            android:textAllCaps="true"/>
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <!-- Container destro (occupa metà dello schermo a destra della guideline) -->
     <ScrollView
@@ -70,7 +59,8 @@
                 android:textSize="20sp"
                 android:background="@drawable/rounded_corner"
                 android:padding="18dp"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                tools:ignore="VisualLintTextFieldSize" />
 
             <!-- EditText per l'inserimento della password -->
             <EditText
@@ -83,7 +73,8 @@
                 android:textSize="20sp"
                 android:background="@drawable/rounded_corner"
                 android:padding="18dp"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                tools:ignore="VisualLintTextFieldSize" />
 
             <!-- FrameLayout per avere una progressbar nascosta sotto il bottone da attivare in seguito -->
             <FrameLayout
@@ -107,7 +98,8 @@
                     android:textColor="@color/black"
                     app:cornerRadius="10dp"
                     app:iconGravity="textStart"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    tools:ignore="VisualLintButtonSize" />
             </FrameLayout>
 
             <!-- Link alla pagina di SingUp -->

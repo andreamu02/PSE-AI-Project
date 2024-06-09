@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import it.unipd.dei.pseaiproject.R
-import it.unipd.dei.pseaiproject.style.StyleManager
 import it.unipd.dei.pseaiproject.databinding.ActivityForgotpasswordBinding
+import it.unipd.dei.pseaiproject.style.StyleManager
 import it.unipd.dei.pseaiproject.viewmodels.AuthViewModel
 import kotlinx.coroutines.launch
 
@@ -27,6 +27,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         binding = ActivityForgotpasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
         styleManager.setEditTextAppearance(this, findViewById(R.id.forgot_email))
+
         with(binding){
             // Listener per il pulsante back
             backButton.setOnClickListener { finish() }
