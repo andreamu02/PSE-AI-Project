@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.databinding.ActivityModelBinding
+import it.unipd.dei.pseaiproject.style.StyleManager
 import it.unipd.dei.pseaiproject.ui.BottomSheetFragment
 import it.unipd.dei.pseaiproject.viewmodels.CameraViewModel
 
@@ -19,6 +20,8 @@ class ModelActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val styleManager = StyleManager(this)
+        styleManager.loadThemePreference(this)
         binding = ActivityModelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

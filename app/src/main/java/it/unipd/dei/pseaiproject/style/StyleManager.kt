@@ -62,7 +62,7 @@ class StyleManager(private val activity: AppCompatActivity) {
     }
 
     //metodo che setta i colori di widget presenti nella UI a seconda del tema
-    fun setWidgetAppearance(context: Context, toolbar: Toolbar, button: Button?, view1: View, view2: View)
+    fun setWidgetAppearance(context: Context, toolbar: Toolbar, button: Button?, view1: View?, view2: View?)
     {
         val prefs: SharedPreferences = activity.getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
         val themeName = prefs.getString("key_theme", ThemeType.DARK.name)
@@ -77,8 +77,8 @@ class StyleManager(private val activity: AppCompatActivity) {
         else button?.setTextAppearance(R.style.CustomButtonLight)
         toolbar.setTitleTextAppearance(context, R.style.ToolbarTitleText)
         toolbar.setTitleTextColor(ContextCompat.getColor(context, color))
-        view1.setBackgroundColor(ContextCompat.getColor(context, viewColor))
-        view2.setBackgroundColor(ContextCompat.getColor(context, viewColor))
+        view1?.setBackgroundColor(ContextCompat.getColor(context, viewColor))
+        view2?.setBackgroundColor(ContextCompat.getColor(context, viewColor))
     }
 
     //metodo che setta i colori di widget di tipo EditText a seconda del tema

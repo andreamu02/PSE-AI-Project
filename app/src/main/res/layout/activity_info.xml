@@ -26,7 +26,8 @@
         app:layout_constraintBottom_toTopOf="@id/horizontal_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toLeftOf="@id/vertical_view"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ImageContrastCheck" />
 
     <View
         android:id="@+id/horizontal_view"
@@ -72,14 +73,16 @@
                 android:id="@+id/AppIcon"
                 android:layout_width="87dp"
                 android:layout_height="73dp"
+                android:layout_marginStart="60dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/android"
                 android:src="@mipmap/object_icon_round"
                 app:layout_constraintBottom_toTopOf="@+id/TextView"
-                app:layout_constraintRight_toLeftOf="@id/AppTitle"
                 app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/AppTitle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.538" />
 
             <TextView
                 android:id="@+id/AppTitle"
