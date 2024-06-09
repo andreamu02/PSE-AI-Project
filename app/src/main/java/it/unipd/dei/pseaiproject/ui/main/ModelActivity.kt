@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import it.unipd.dei.pseaiproject.ui.BottomSheetFragment
 import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.databinding.ActivityModelBinding
+import it.unipd.dei.pseaiproject.ui.BottomSheetFragment
 import it.unipd.dei.pseaiproject.viewmodels.CameraViewModel
 
 

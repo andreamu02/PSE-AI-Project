@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.TextView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import it.unipd.dei.pseaiproject.databinding.FragmentBottomSheetBinding
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
@@ -33,6 +34,13 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         val savedThreshold = sharedPreferences.getFloat("threshold", 0.5f) // Default value 0.5f
         val savedMaxResults = sharedPreferences.getInt("maxResults", 3) // Default value 3
         val savedDelegate = sharedPreferences.getString("selectedDelegate", "CPU")
+
+        val bottomSheet = view.parent as? View
+        if (bottomSheet != null) {
+            val behavior = BottomSheetBehavior.from(bottomSheet)
+            // Imposto lo stato del BottomSheet in modo che si espanda completamente quando aperto
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
 
         binding.firstParamValue.text = savedThreshold.toString()
         binding.secondParamValue.text = savedMaxResults.toString()
