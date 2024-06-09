@@ -167,6 +167,7 @@ class ObjectDetectorHelper(
         this.maxResults = maxResults
         sharedPreferences.edit().putInt(KEY_MAX_RESULTS, maxResults).apply()
         clearObjectDetector()
+        Log.d("BottomSheetFragmentUpdate", "Saved maxResult: $this.maxResults")
         setupObjectDetector()
     }
 
