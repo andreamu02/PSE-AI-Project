@@ -38,12 +38,13 @@
         android:layout_marginEnd="350dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/androidStu"
-        android:src="@drawable/android_studio"
         android:elevation="4dp"
+        android:src="@drawable/android_studio"
         app:layout_constraintBottom_toTopOf="@id/horizontal_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toLeftOf="@id/vertical_view"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ImageContrastCheck" />
 
     <View
         android:id="@+id/horizontal_view"
@@ -102,14 +103,14 @@
                 android:id="@+id/android"
                 android:layout_width="87dp"
                 android:layout_height="73dp"
-                android:layout_marginBottom="16dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/android"
                 android:src="@drawable/android"
 
-                app:layout_constraintTop_toBottomOf="@id/ImageView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/ImageView"
+                tools:ignore="ImageContrastCheck" />
 
             <TextView
                 android:id="@+id/madeBy"
