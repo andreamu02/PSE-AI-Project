@@ -12,7 +12,9 @@ import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.spinner.SpinnerItem
 import it.unipd.dei.pseaiproject.spinner.SpinnerItemSelectedListener
 import it.unipd.dei.pseaiproject.style.StyleManager
-
+/**
+   Classe per la visualizzazione della schermata principale
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        //cambia il colore delle immagini e delle icone
+        // Cambia il colore delle immagini e delle icone
         styleManager.setImageViewDrawableColor(findViewById(R.id.androidStudio), R.drawable.android_studio, this)
         styleManager.setImageViewDrawableColor(findViewById(R.id.android), R.drawable.android, this)
         styleManager.setImageViewDrawableColor(findViewById(R.id.ImageView), R.drawable.object_recognition, this)
@@ -36,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         val spinner: Spinner = findViewById(R.id.spinner)
         val start : Button = findViewById(R.id.getStarted)
 
-        //cambio il colore del bottone e della toolbar
+        // Cambio il colore del bottone e della toolbar
         styleManager.setWidgetAppearance(this, toolbar, start, findViewById(R.id.horizontal_view), findViewById(R.id.vertical_view))
-        //bottone per iniziare ad usare il modello
+        // Bottone per iniziare ad usare il modello
         start.setOnClickListener {
             val myIntent = Intent(this, ModelActivity::class.java)
             startActivity(myIntent)

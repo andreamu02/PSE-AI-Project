@@ -16,7 +16,9 @@ import java.util.Locale
 import kotlin.math.max
 import kotlin.math.min
 
-// Classe che estende View, serve per visualizzare le rilevazioni di oggetti su un'area di disegno
+/**
+ * Classe che estende View, serve per visualizzare le rilevazioni di oggetti su un'area di disegno.
+ */
 class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
     // Lista dei risultati delle rilevazioni
@@ -38,7 +40,9 @@ class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(contex
         initPaints()
     }
 
-    // Metodo per inizializzare i Paint utilizzati nel disegno
+    /**
+     * Metodo per inizializzare i Paint utilizzati nel disegno.
+     */
     private fun initPaints() {
         textBackgroundPaint.color = Color.BLACK // Colore di sfondo del testo
         textBackgroundPaint.style = Paint.Style.FILL // Stile di riempimento
@@ -53,7 +57,9 @@ class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(contex
         boxPaint.style = Paint.Style.STROKE // Stile del bordo
     }
 
-    // Metodo per disegnare sulla Canvas
+    /**
+     * Metodo per disegnare sulla Canvas.
+     */
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
 
@@ -104,7 +110,12 @@ class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(contex
         }
     }
 
-    // Metodo per impostare i risultati delle rilevazioni e l'immagine
+    /**
+     * Metodo per impostare i risultati delle rilevazioni e l'immagine.
+     * @param detectionResults I risultati delle rilevazioni.
+     * @param imageHeight L'altezza dell'immagine.
+     * @param imageWidth La larghezza dell'immagine.
+     */
     fun setResults(
         detectionResults: MutableList<Detection>,
         imageHeight: Int,

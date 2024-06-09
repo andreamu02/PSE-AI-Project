@@ -14,6 +14,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
+/**
+ * ViewModel per la gestione delle operazioni di autenticazione.
+ */
 class AuthViewModel : ViewModel() {
 
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -22,7 +25,7 @@ class AuthViewModel : ViewModel() {
     private val _authException = MutableLiveData<String>()
     val authException: LiveData<String> = _authException
 
-    // LiveData per gestire la visibilità della progress bar durante reset della password
+    // LiveData per gestire la visibilità della progress bar durante il reset della password
     private val _resetPasswordState = MutableLiveData<Boolean>()
     val resetPasswordState: LiveData<Boolean> = _resetPasswordState
 
@@ -34,86 +37,78 @@ class AuthViewModel : ViewModel() {
     private val _signUpState = MutableLiveData<Boolean>()
     val signUpState: LiveData<Boolean> = _signUpState
 
-    // Suspend fun per signIn, così si aspetta che venga eseguita la funzione in Firebase
+    /**
+     * Effettua il login con l'email e la password fornite.
+     */
     suspend fun signIn(email: String, password: String): Boolean {
-        // Segnala l'inizio del processo di signIn
         _signInState.value = true
-
-        // Avvia una coroutine nel contesto principale
         return try {
             withContext(Dispatchers.IO) {
-                // Effettua il tentativo di accesso con Firebase Authentication
                 firebaseAuth.signInWithEmailAndPassword(email, password).await()
             }
             true
         } catch (e: Exception) {
-            // Se l'accesso fallisce, gestisci l'errore
             handleAuthException(e)
             false
         } finally {
-            // Fine del processo di signIn
             _signInState.value = false
         }
     }
 
-    // Suspend fun per signUp, così si aspetta che venga eseguita la funzione in Firebase
+    /**
+     * Registra un nuovo utente con l'email e la password fornite.
+     */
     suspend fun signUp(email: String, password: String): Boolean {
-        // Segnala l'inizio del processo di signUp
         _signUpState.value = true
         return try {
-            // Avvia una coroutine nel contesto principale
             withContext(Dispatchers.IO) {
-                // Effettua il tentativo di registrazione con Firebase Authentication
                 firebaseAuth.createUserWithEmailAndPassword(email, password).await()
             }
             true
         } catch (e: Exception) {
-            // Se la registrazione fallisce, gestisci l'errore
             handleAuthException(e)
             false
         } finally {
-            // Segnala la fine del processo di signUp
             _signUpState.value = false
         }
     }
 
-    // Suspend fun per il reset della password, così si aspetta che venga eseguita la funzione in Firebase
+    /**
+     * Invia un'email per il reset della password all'indirizzo fornito.
+     */
     suspend fun resetPassword(email: String): Boolean {
-        // Segnala l'inizio del processo di reset della password
         _resetPasswordState.value = true
-
         return try {
-            // Avvia una coroutine nel contesto principale
             withContext(Dispatchers.IO) {
-                // Invia l'email per il reset della password tramite Firebase Authentication
                 firebaseAuth.sendPasswordResetEmail(email).await()
             }
-            // Se l'operazione è completata con successo, mostra un messaggio all'utente
             _authException.value = "Il link per il reset della password è stato inviato alla tua email"
             true
         } catch (e: Exception) {
-            // Se il reset della password fallisce, gestisci l'errore
             handleAuthException(e)
             false
-        }finally {
-            // Segnala la fine del processo di reset della password
+        } finally {
             _resetPasswordState.value = false
         }
     }
 
-    // Funzione per ottenere l'utente attuale
+    /**
+     * Restituisce l'utente attualmente autenticato.
+     */
     fun getCurrentUser(): FirebaseUser? {
         return firebaseAuth.currentUser
     }
 
-    // Metodo per gestire gli errori di accesso
+    /**
+     * Gestisce le eccezioni di autenticazione e aggiorna il LiveData [_authException] con il messaggio appropriato.
+     */
     private fun handleAuthException(exception: Exception?) {
         _authException.value = when (exception) {
             is FirebaseAuthWeakPasswordException -> "La password è troppo debole. Inserisci una password più sicura."
             is FirebaseAuthUserCollisionException -> "Esiste già un account con questa mail."
             is FirebaseAuthInvalidUserException -> "L'email inserita non è valida. Riprova."
             is FirebaseAuthInvalidCredentialsException -> "Password errata. Riprova."
-            is FirebaseAuthException-> {
+            is FirebaseAuthException -> {
                 when (exception.errorCode) {
                     "ERROR_NETWORK_REQUEST_FAILED" -> "Errore di rete. Controlla la tua connessione e riprova."
                     else -> "Errore di Firebase: ${exception.message}"

@@ -12,10 +12,15 @@ import it.unipd.dei.pseaiproject.databinding.FragmentBottomSheetBinding
 import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
 import kotlin.math.round
 
+/**
+ * Un fragment per regolare i parametri del modello.
+ */
 class BottomSheetFragment : BottomSheetDialogFragment() {
 
-    // Classe generata automaticamente basata sul nome del file xml
+    // Binding per il layout del frammento
     private lateinit var binding: FragmentBottomSheetBinding
+
+    // Oggetto detector per la rilevazione degli oggetti
     private var detector: ObjectDetectorHelper? = null
 
     override fun onCreateView(
@@ -30,18 +35,20 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Recupera i valori dei parametri salvati dalle preferenze condivise
         val sharedPreferences = requireContext().getSharedPreferences("appPreferences", 0)
-        val savedThreshold = sharedPreferences.getFloat("threshold", 0.5f) // Default value 0.5f
-        val savedMaxResults = sharedPreferences.getInt("maxResults", 3) // Default value 3
+        val savedThreshold = sharedPreferences.getFloat("threshold", 0.5f) // Valore predefinito 0.5f
+        val savedMaxResults = sharedPreferences.getInt("maxResults", 3) // Valore predefinito 3
         val savedDelegate = sharedPreferences.getString("selectedDelegate", "CPU")
 
+        // Espandi completamente il foglio inferiore quando viene aperto
         val bottomSheet = view.parent as? View
         if (bottomSheet != null) {
             val behavior = BottomSheetBehavior.from(bottomSheet)
-            // Imposto lo stato del BottomSheet in modo che si espanda completamente quando aperto
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
+        // Inizializza i valori dei parametri e il detector
         binding.firstParamValue.text = savedThreshold.toString()
         binding.secondParamValue.text = savedMaxResults.toString()
         detector?.setThreshold(savedThreshold)
@@ -50,7 +57,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             updateValue(null, savedDelegate)
         }
 
-        // Imposta il listener dello spinner
+        // Imposta il listener per lo spinner
         binding.thirdParamSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedValue = parent.getItemAtPosition(position).toString()
@@ -59,7 +66,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Codice per gestire il caso in cui non viene selezionato nulla, se necessario
+                // Gestire il caso in cui non viene selezionato nulla, se necessario
             }
         }
 
@@ -121,10 +128,15 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             else -> throw IllegalArgumentException("Unsupported delta type")
         }
     }
+
+    /**
+     * Imposta l'oggetto ObjectDetectorHelper.
+     */
     fun setDetectorObject(detector: ObjectDetectorHelper) {
         this.detector = detector
     }
 
+    // Metodo per salvare i valori dei parametri nelle preferenze condivise
     private fun saveToPreferences(value: Any) {
         val sharedPreferences = requireContext().getSharedPreferences("appPreferences", 0)
         val editor = sharedPreferences.edit()
@@ -137,5 +149,4 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         }
         editor.apply()
     }
-
 }

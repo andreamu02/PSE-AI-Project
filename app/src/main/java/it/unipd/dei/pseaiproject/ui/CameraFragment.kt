@@ -30,30 +30,19 @@ import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.LinkedList
 import java.util.concurrent.Executors
 
-
+/**
+ * Un fragment che gestisce l'acquisizione video dalla fotocamera e il rilevamento degli oggetti.
+ */
 class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
     private var binding: FragmentCameraBinding? = null
-
-    // View per mostrare il feed della fotocamera
     private lateinit var previewView: PreviewView
-
-    // View per mostrare le rilevazioni degli oggetti
     private lateinit var overlayView: DetectionOverlayView
-
-    // Executor per eseguire operazioni della fotocamera in un thread separato
     private val cameraExecutor = Executors.newSingleThreadExecutor()
-
-    // Variabili per capire se e quando aggiornare i risultati
     private var lastTimeUpdateScreen = 0L
-    private var results : MutableList<Detection>? = null
+    private var results: MutableList<Detection>? = null
     private var previousResults: MutableList<Detection>? = null
-
-    // CameraViewModel per la condivisione dell'objectDetectionHelper
     private val cameraViewModel: CameraViewModel by activityViewModels()
-
-
-    // Variabili per il buffer di bitmap, l'analisi delle immagini e l'helper per il rilevamento degli oggetti
     private lateinit var bitmapBuffer: Bitmap
     private var imageAnalyzer: ImageAnalysis? = null
     private lateinit var objectDetectorHelper: ObjectDetectorHelper
@@ -85,42 +74,46 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
             objectDetectorListener = this
         )
 
-        // Set the ObjectDetectorHelper in the shared ViewModel
         cameraViewModel.setObjectDetectorHelper(objectDetectorHelper)
     }
 
-    // Metodo per gestire la richiesta dei permessi della fotocamera
-    private val requestPermissions = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-        if (permissions.all { it.value }) {
-            startCamera()
-        } else {
-            Toast.makeText(requireContext(), "Permessi non concessi dall'utente.", Toast.LENGTH_SHORT).show()
-            requireActivity().finish()
+    /**
+     * Metodo chiamato per richiedere i permessi di accesso alla fotocamera.
+     */
+    private val requestPermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            if (permissions.all { it.value }) {
+                startCamera()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Permessi non concessi dall'utente.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                requireActivity().finish()
+            }
         }
-    }
 
-    // Metodo per verificare se tutti i permessi necessari sono stati concessi
+    /**
+     * Verifica se tutti i permessi necessari sono stati concessi.
+     */
     private fun allPermissionsGranted() = arrayOf(Manifest.permission.CAMERA).all {
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
-    // Metodo per avviare la fotocamera
+    /**
+     * Avvia la fotocamera.
+     */
     private fun startCamera() {
-        // Ottiene il provider della fotocamera
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener({
 
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-
-            // Seleziona la fotocamera posteriore come default
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-            // Imposta la strategia per la selezione della risoluzione
             val resolutionSelector = ResolutionSelector.Builder()
                 .setAspectRatioStrategy(AspectRatioStrategy.RATIO_4_3_FALLBACK_AUTO_STRATEGY)
                 .build()
 
-            // Configura la preview della fotocamera
             val preview = Preview.Builder()
                 .setResolutionSelector(resolutionSelector)
                 .build()
@@ -128,7 +121,6 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
                     it.setSurfaceProvider(previewView.surfaceProvider)
                 }
 
-            // Configura l'analisi delle immagini
             imageAnalyzer = ImageAnalysis.Builder()
                 .setResolutionSelector(resolutionSelector)
                 .setTargetRotation(previewView.display.rotation)
@@ -137,7 +129,6 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
                 .build()
                 .also {
                     it.setAnalyzer(cameraExecutor) { image ->
-                        // Inizializza il buffer di bitmap solo una volta che l'analizzatore è in esecuzione
                         if (!::bitmapBuffer.isInitialized) {
                             bitmapBuffer = Bitmap.createBitmap(
                                 image.width,
@@ -149,12 +140,12 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
                     }
                 }
 
-            // Scollega tutti i casi d'uso precedenti e collega quelli nuovi
             cameraProvider.unbindAll()
 
             try {
                 cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageAnalyzer)
+                    this, cameraSelector, preview, imageAnalyzer
+                )
 
                 preview.setSurfaceProvider(previewView.surfaceProvider)
             } catch (exc: Exception) {
@@ -164,9 +155,10 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
-    // Metodo per l'analisi delle immagini e il rilevamento degli oggetti
+    /**
+     * Analizza le immagini e rileva gli oggetti.
+     */
     private fun detectObjects(image: ImageProxy) {
-        // Copia i bit RGB nel buffer bitmap condiviso
         image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
 
         val imageRotation = image.imageInfo.rotationDegrees
@@ -211,26 +203,29 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         }
     }
 
-    private fun resultsAreDifferent() : Boolean {
+    /**
+     * Verifica se i risultati ottenuti dal rilevamento degli oggetti sono diversi dai risultati precedenti.
+     */
+    private fun resultsAreDifferent(): Boolean {
         if (this.results == null && this.previousResults == null) {
             return false
-        }else if((this.results == null && this.previousResults != null) || (this.results != null && this.previousResults == null) ) {
+        } else if ((this.results == null && this.previousResults != null) || (this.results != null && this.previousResults == null)) {
             return true
         }
-        if (this.results!!.size != this.previousResults!!.size){
+        if (this.results!!.size != this.previousResults!!.size) {
             return true
         }
         val foundResults: MutableList<Detection> = mutableListOf()
         for (result in this.results!!) {
             var found = false
-            for(previousResult in this.previousResults!!) {
-                if(result !in foundResults && result.categories[0].label == previousResult.categories[0].label) {
+            for (previousResult in this.previousResults!!) {
+                if (result !in foundResults && result.categories[0].label == previousResult.categories[0].label) {
                     found = true
                     foundResults.add(result)
                     break
                 }
             }
-            if(!found) {
+            if (!found) {
                 return true
             }
         }

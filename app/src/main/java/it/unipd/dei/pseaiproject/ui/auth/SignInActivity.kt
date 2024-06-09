@@ -15,10 +15,13 @@ import it.unipd.dei.pseaiproject.ui.main.MainActivity
 import it.unipd.dei.pseaiproject.viewmodels.AuthViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * Activity per l'accesso dell'utente.
+ */
 class SignInActivity : AppCompatActivity() {
 
-    // Utilizza il delegato by viewModels() per creare e ottenere un'istanza di AuthViewModel
-    private val authViewModel : AuthViewModel by viewModels()
+    // ViewModel per l'autenticazione
+    private val authViewModel: AuthViewModel by viewModels()
     private lateinit var binding: ActivitySigninBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +33,7 @@ class SignInActivity : AppCompatActivity() {
         styleManager.setEditTextAppearance(this, findViewById(R.id.email_input))
         styleManager.setEditTextAppearance(this, findViewById(R.id.password_input))
         with(binding){
-            // Listener per il pulsante di login
+            // Listener per il pulsante di accesso
             loginButton.setOnClickListener {
                 val email = emailInput.text.toString()
                 val password = passwordInput.text.toString()
@@ -59,7 +62,7 @@ class SignInActivity : AppCompatActivity() {
             Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
         }
 
-        // Osserva lo stato del processo di reset della password
+        // Osserva lo stato del processo di accesso
         authViewModel.signInState.observe(this) { isSigningIn ->
             binding.signInProgressbar.visibility = if (isSigningIn) View.VISIBLE else View.INVISIBLE
             binding.loginButton.visibility = if (isSigningIn) View.INVISIBLE else View.VISIBLE
@@ -78,7 +81,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    // Funzione privata per il signIn
+    // Funzione privata per l'accesso
     private fun signIn(email: String, password: String){
         // Avvia una coroutine per chiamare signIn
         lifecycleScope.launch {

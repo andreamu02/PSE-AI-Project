@@ -13,6 +13,12 @@ import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
 
+/**
+ * Classe helper per il rilevamento degli oggetti utilizzando TensorFlow Lite.
+ *
+ * @param context Il contesto dell'applicazione.
+ * @param objectDetectorListener Il listener per gestire i risultati e gli errori del rilevamento degli oggetti.
+ */
 class ObjectDetectorHelper(
     val context: Context,
     val objectDetectorListener: DetectorListener?) {
@@ -35,10 +41,16 @@ class ObjectDetectorHelper(
         setupObjectDetector()
     }
 
+    /**
+     * Cancella l'istanza dell'oggetto rilevatore.
+     */
     private fun clearObjectDetector() {
         objectDetector = null
     }
 
+    /**
+     * Configura il rilevatore di oggetti con le opzioni specificate.
+     */
     private fun setupObjectDetector() {
         val optionsBuilder =
             ObjectDetector.ObjectDetectorOptions.builder()
@@ -82,7 +94,12 @@ class ObjectDetectorHelper(
         }
     }
 
-    // Metodo per eseguire la rilevazione degli oggetti sull'immagine
+    /**
+     * Esegue la rilevazione degli oggetti su un'immagine.
+     *
+     * @param image L'immagine su cui eseguire il rilevamento.
+     * @param imageRotation La rotazione dell'immagine in gradi.
+     */
     fun detect(image: Bitmap, imageRotation: Int) {
         // Se l'oggetto ObjectDetector è nullo, prova a configurarlo
         if (objectDetector == null) {
@@ -115,7 +132,9 @@ class ObjectDetectorHelper(
         )
     }
 
-    // Interfaccia per il listener degli eventi del rilevatore di oggetti
+    /**
+     * Interfaccia per il listener degli eventi del rilevatore di oggetti.
+     */
     interface DetectorListener {
         fun onError(error: String)
         fun onResults(
@@ -126,6 +145,11 @@ class ObjectDetectorHelper(
         )
     }
 
+    /**
+     * Imposta la soglia di punteggio per il rilevamento degli oggetti.
+     *
+     * @param threshold La soglia di punteggio.
+     */
     fun setThreshold(threshold: Float){
         this.threshold = threshold
         sharedPreferences.edit().putFloat(KEY_THRESHOLD, threshold).apply()
@@ -134,6 +158,11 @@ class ObjectDetectorHelper(
         setupObjectDetector()
     }
 
+    /**
+     * Imposta il numero massimo di risultati per il rilevamento degli oggetti.
+     *
+     * @param maxResults Il numero massimo di risultati.
+     */
     fun setMaxResults(maxResults: Int){
         this.maxResults = maxResults
         sharedPreferences.edit().putInt(KEY_MAX_RESULTS, maxResults).apply()
@@ -141,6 +170,11 @@ class ObjectDetectorHelper(
         setupObjectDetector()
     }
 
+    /**
+     * Imposta il delegato da utilizzare per l'esecuzione del modello (CPU, GPU, NNAPI).
+     *
+     * @param delegate Il delegato da utilizzare.
+     */
     fun setDelegate(delegate: Int){
         this.currentDelegate = delegate
         sharedPreferences.edit().putInt(KEY_DELEGATE, delegate).apply()

@@ -14,10 +14,13 @@ import it.unipd.dei.pseaiproject.ui.main.MainActivity
 import it.unipd.dei.pseaiproject.viewmodels.AuthViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * Activity per la registrazione dell'utente.
+ */
 class SignUpActivity : AppCompatActivity() {
 
-    // Utilizza il delegato by viewModels() per creare e ottenere un'istanza di AuthViewModel
-    private val authViewModel : AuthViewModel by viewModels()
+    // ViewModel per l'autenticazione
+    private val authViewModel: AuthViewModel by viewModels()
     private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

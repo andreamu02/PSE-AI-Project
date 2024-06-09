@@ -14,9 +14,12 @@ import it.unipd.dei.pseaiproject.style.StyleManager
 import it.unipd.dei.pseaiproject.viewmodels.AuthViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * Activity per il ripristino della password.
+ */
 class ForgotPasswordActivity : AppCompatActivity() {
 
-    // Utilizza il delegato by viewModels() per creare e ottenere un'istanza di AuthViewModel
+    // ViewModel per l'autenticazione
     private val authViewModel: AuthViewModel by viewModels()
     private lateinit var binding: ActivityForgotpasswordBinding
 

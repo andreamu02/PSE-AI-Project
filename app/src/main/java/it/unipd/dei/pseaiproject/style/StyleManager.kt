@@ -11,10 +11,18 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import it.unipd.dei.pseaiproject.R
 
-//classe che, data un'attività, ne cambia lo stile grafico salvando la scelta in memoria
+/**
+ * Classe che gestisce lo stile grafico dell'applicazione.
+ *
+ * @property activity L'attività corrente.
+ */
 class StyleManager(private val activity: AppCompatActivity) {
 
-    //Metodo che, dato un tema, lo applica all'attività
+    /**
+     * Metodo che applica il tema specificato all'attività e lo salva nelle SharedPreferences.
+     *
+     * @param themeType Il tipo di tema da applicare.
+     */
     fun applyTheme(themeType: ThemeType) {
         // Salva il tema scelto nelle SharedPreferences
         saveThemePreference(activity, themeType)
@@ -23,7 +31,12 @@ class StyleManager(private val activity: AppCompatActivity) {
         activity.setTheme(themeType.themeResId)
     }
 
-    //metodo che salva l'ultimo tema usato in memoria
+    /**
+     * Metodo privato che salva il tema scelto nelle SharedPreferences.
+     *
+     * @param context Il contesto corrente.
+     * @param themeType Il tipo di tema da salvare.
+     */
     private fun saveThemePreference(context: Context, themeType: ThemeType) {
         val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val editor = prefs.edit()
@@ -31,8 +44,12 @@ class StyleManager(private val activity: AppCompatActivity) {
         editor.apply()
     }
 
-    //metodo che, data un'attività, prende l'ultimo tema usato prima della sua chiusura e lo applica all'attività
-    //I temi disponibili sono: dark e light
+    /**
+     * Metodo che carica il tema preferito dall'utente e lo applica all'attività.
+     *
+     * @param activity L'attività su cui applicare il tema.
+     * @return Il tipo di tema caricato.
+     */
     fun loadThemePreference(activity: AppCompatActivity): ThemeType {
         val prefs: SharedPreferences = activity.getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
         val themeName = prefs.getString("key_theme", ThemeType.DARK.name)
@@ -48,7 +65,13 @@ class StyleManager(private val activity: AppCompatActivity) {
         return ThemeType.valueOf(themeName!!)
     }
 
-    //metodo per cambiare il colore di un'immagine data come parametro
+    /**
+     * Metodo che imposta il colore di un'immagine in base al tema corrente.
+     *
+     * @param imageView L'ImageView da modificare.
+     * @param drawableResId La risorsa drawable dell'immagine.
+     * @param context Il contesto corrente.
+     */
     fun setImageViewDrawableColor(imageView: ImageView, drawableResId: Int, context: Context) {
         val drawable = ContextCompat.getDrawable(context, drawableResId)
         val prefs: SharedPreferences = activity.getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
@@ -61,7 +84,15 @@ class StyleManager(private val activity: AppCompatActivity) {
         }
     }
 
-    //metodo che setta i colori di widget presenti nella UI a seconda del tema
+    /**
+     * Metodo che imposta l'aspetto dei widget presenti nella UI a seconda del tema corrente.
+     *
+     * @param context Il contesto corrente.
+     * @param toolbar La toolbar da modificare.
+     * @param button Il pulsante da modificare.
+     * @param view1 La prima vista da modificare.
+     * @param view2 La seconda vista da modificare.
+     */
     fun setWidgetAppearance(context: Context, toolbar: Toolbar, button: Button?, view1: View?, view2: View?)
     {
         val prefs: SharedPreferences = activity.getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
@@ -81,9 +112,13 @@ class StyleManager(private val activity: AppCompatActivity) {
         view2?.setBackgroundColor(ContextCompat.getColor(context, viewColor))
     }
 
-    //metodo che setta i colori di widget di tipo EditText a seconda del tema
-    fun setEditTextAppearance(context: Context, editText: EditText)
-    {
+    /**
+     * Metodo che imposta l'aspetto di un widget EditText a seconda del tema corrente.
+     *
+     * @param context Il contesto corrente.
+     * @param editText L'EditText da modificare.
+     */
+    fun setEditTextAppearance(context: Context, editText: EditText) {
         val prefs: SharedPreferences = activity.getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
         val themeName = prefs.getString("key_theme", ThemeType.DARK.name)
         var colorHint = R.color.darkGrey
@@ -99,7 +134,7 @@ class StyleManager(private val activity: AppCompatActivity) {
     }
 
     companion object {
-        //stringhe che fungono da chiavi per lo stato dell'attività
+        // Costanti per le SharedPreferences
         const val PREFS_NAME = "theme_prefs"
         const val KEY_THEME = "key_theme"
     }

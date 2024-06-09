@@ -15,14 +15,16 @@ import it.unipd.dei.pseaiproject.spinner.SpinnerItem
 import it.unipd.dei.pseaiproject.spinner.SpinnerItemSelectedListener
 import it.unipd.dei.pseaiproject.style.StyleManager
 
-
-//classe per gestire l'activity info
-class InfoActivity: AppCompatActivity() {
+/**
+ * Activity per gestire le informazioni dell'applicazione.
+ */
+class InfoActivity : AppCompatActivity() {
+    // Oggetto per l'autenticazione Firebase
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Carica il tema stilistico usato prima di chiudere l'app
+        // Carica il tema stilistico utilizzato prima della chiusura dell'app
         val styleManager = StyleManager(this)
         val theme = styleManager.loadThemePreference(this)
 
@@ -30,16 +32,16 @@ class InfoActivity: AppCompatActivity() {
 
         setContentView(R.layout.activity_info)
 
-        // Setta la toolbar come actionbar per la window
+        // Imposta la toolbar come action bar per la finestra
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        //setto i colori dei vari widget e anche delle immagini
+        // Imposta i colori dei vari widget e delle immagini
         styleManager.setWidgetAppearance(this, toolbar, null, findViewById(R.id.horizontal_view), findViewById(R.id.vertical_view))
         styleManager.setImageViewDrawableColor(findViewById(R.id.androidStudio), R.drawable.android_studio, this)
         styleManager.setImageViewDrawableColor(findViewById(R.id.android), R.drawable.android, this)
 
-        // attivo i link ipertestuali della contenuti nella TextView di informazioni
+        // Abilita i link ipertestuali contenuti nella TextView delle informazioni
         val textView = findViewById<TextView>(R.id.TextView)
         textView.movementMethod = LinkMovementMethod.getInstance()
 
@@ -53,15 +55,15 @@ class InfoActivity: AppCompatActivity() {
             SpinnerItem(R.drawable.logout, "Logout")
         )
 
-        // Creazione e inizializzazione dello spinner tramite gli elementi precedentemente definiti
+        // Creazione e inizializzazione dello spinner con gli elementi definiti precedentemente
         val adapter = CustomSpinnerAdapter(this, spinnerItems, theme)
         spinner.adapter = adapter
         spinner.setSelection(1)
 
-        // Gestire gli eventi di selezione
+        // Gestisce gli eventi di selezione dello spinner
         spinner.onItemSelectedListener = SpinnerItemSelectedListener(this, firebaseAuth, theme, styleManager, spinner)
 
-        //Callback per gestire la presisone del tasto indeitro del telefono
+        // Callback per gestire la pressione del tasto indietro del telefono
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val intent = Intent(this@InfoActivity, MainActivity::class.java)
