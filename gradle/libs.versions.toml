@@ -1,33 +1,26 @@
 [versions]
 activityKtx = "1.9.0"
-agp = "8.4.1"
-appcompatVersion = "1.4.1"
-cameraCamera2 = "1.1.0"
+agp = "8.4.2"
+appcompatVersion = "1.7.0"
+cameraCamera2 = "1.3.3"
 cameraCore = "1.3.3"
-cameraExtensions = "1.1.0"
-cameraLifecycle = "1.1.0"
-cameraView = "1.1.0"
-firebaseBom = "33.0.0"
+cameraExtensions = "1.3.3"
+cameraLifecycle = "1.3.3"
+cameraView = "1.3.3"
 fragmentKtx = "1.7.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
-appcompat = "1.6.1"
-lifecycleViewmodelKtx = "2.8.0"
+appcompat = "1.7.0"
+lifecycleViewmodelKtx = "2.8.1"
 material = "1.12.0"
-googleGmsGoogleServices = "4.4.1"
+googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.0.0"
-playServicesTfliteGpu = "16.2.0"
-tensorflowLite = "2.4.0"
-tensorflowLiteGpuVersion = "2.9.0"
-tensorflowLiteSupport = "0.1.0"
-tensorflowLiteMetadata = "0.1.0"
-tensorflowLiteGpu = "2.3.0"
-tensorflowLiteTaskCore = "0.3.1"
-tensorflowLiteTaskVision = "0.4.0"
-tensorflowLiteTaskVisionVersion = "0.4.2"
+tensorflowLiteGpuVersion = "2.16.1"
+tensorflowLiteMetadata = "0.4.4"
+tensorflowLiteTaskVisionVersion = "0.4.4"
 objectDetectionCommon = "18.0.0"
 fragment = "1.7.1"
 
@@ -48,14 +41,8 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
-play-services-tflite-gpu = { module = "com.google.android.gms:play-services-tflite-gpu", version.ref = "playServicesTfliteGpu" }
-tensorflow-lite = { module = "org.tensorflow:tensorflow-lite", version.ref = "tensorflowLite" }
 tensorflow-lite-gpu-v290 = { module = "org.tensorflow:tensorflow-lite-gpu", version.ref = "tensorflowLiteGpuVersion" }
-tensorflow-lite-support = { group = "org.tensorflow", name = "tensorflow-lite-support", version.ref = "tensorflowLiteSupport" }
 tensorflow-lite-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata", version.ref = "tensorflowLiteMetadata" }
-tensorflow-lite-gpu = { group = "org.tensorflow", name = "tensorflow-lite-gpu", version.ref = "tensorflowLiteGpu" }
-tensorflow-lite-task-core = { module = "org.tensorflow:tensorflow-lite-task-core", version.ref = "tensorflowLiteTaskCore" }
-tensorflow-lite-task-vision = { module = "org.tensorflow:tensorflow-lite-task-vision", version.ref = "tensorflowLiteTaskVision" }
 tensorflow-lite-task-vision-v042 = { module = "org.tensorflow:tensorflow-lite-task-vision", version.ref = "tensorflowLiteTaskVisionVersion" }
 object-detection-common = { group = "com.google.mlkit", name = "object-detection-common", version.ref = "objectDetectionCommon" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
