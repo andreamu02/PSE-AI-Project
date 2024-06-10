@@ -3,6 +3,8 @@ package it.unipd.dei.pseaiproject.detection
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.os.Handler
+import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
 import org.tensorflow.lite.gpu.CompatibilityList
@@ -85,12 +87,18 @@ class ObjectDetectorHelper(
             isError = false
         } catch (e: IllegalStateException) {
             if(!isError){
+                val delegate = if (currentDelegate == DELEGATE_CPU) "CPU" else (if (currentDelegate == DELEGATE_GPU) "GPU" else "NNAPI")
                 objectDetectorListener?.onError(
-                    "Il rilevatore di oggetti non è riuscito a inizializzarsi. Vedi i log di errore per i dettagli"
+                    "Il rilevatore di oggetti non è riuscito a inizializzarsi con il delegato $delegate. Verrà utilizzato il delegato CPU."
                 )
                 Log.e("Test", "TFLite non è riuscito a caricare il modello con errore: " + e.message)
             }
             isError = true
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({
+                currentDelegate = DELEGATE_CPU
+                setupObjectDetector()
+            }, 1000)
         }
     }
 
@@ -181,6 +189,10 @@ class ObjectDetectorHelper(
         sharedPreferences.edit().putInt(KEY_DELEGATE, delegate).apply()
         clearObjectDetector()
         setupObjectDetector()
+    }
+
+    fun getDelegate(): Int {
+        return this.currentDelegate
     }
 
     companion object {

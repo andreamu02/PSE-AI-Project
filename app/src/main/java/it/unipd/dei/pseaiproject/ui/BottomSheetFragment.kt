@@ -1,6 +1,8 @@
 package it.unipd.dei.pseaiproject.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -123,6 +125,27 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     else -> return
                 }
                 detector?.setDelegate(delegateValue)
+                val handler = Handler(Looper.getMainLooper())
+                handler.postDelayed({
+                    val usedDelegate = detector?.getDelegate()
+                    if (usedDelegate != delegateValue){
+                        if (usedDelegate != null) {
+                            val delegateString = when (usedDelegate) {
+                                0 -> "CPU"
+                                1 -> "GPU"
+                                2 -> "NNAPI"
+                                else -> {null}
+                            }
+                            if (delegateString != null) {
+                                saveToPreferences(delegateString)
+                                binding.thirdParamSpinner.setSelection(usedDelegate)
+                            }else{
+                                saveToPreferences("CPU")
+                                binding.thirdParamSpinner.setSelection(0)
+                            }
+                        }
+                    }
+                }, 2000)
                 saveToPreferences(delta)
             }
             else -> throw IllegalArgumentException("Unsupported delta type")
