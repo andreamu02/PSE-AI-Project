@@ -1,1 +1,6 @@
-/build
+/build/generated
+/build/gmpAppId
+/build/intermediates
+/build/kotlin
+/build/outputs
+/build/tmp

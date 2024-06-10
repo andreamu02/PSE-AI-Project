@@ -1,0 +1,111 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:it.unipd.dei.pseaiproject.detection////PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/index.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/DetectionOverlayView///PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-detection-overlay-view/index.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/DetectionOverlayView/DetectionOverlayView/#android.content.Context#android.util.AttributeSet?/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-detection-overlay-view/-detection-overlay-view.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/DetectionOverlayView/draw/#android.graphics.Canvas/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-detection-overlay-view/draw.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/DetectionOverlayView/onInit/#kotlin.Int/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-detection-overlay-view/on-init.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/DetectionOverlayView/setResults/#kotlin.collections.MutableList[org.tensorflow.lite.task.vision.detector.Detection]#kotlin.Int#kotlin.Int#kotlin.Boolean/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-detection-overlay-view/set-results.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.Companion///PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-companion/index.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.Companion/DELEGATE_CPU/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-companion/-d-e-l-e-g-a-t-e_-c-p-u.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.Companion/DELEGATE_GPU/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-companion/-d-e-l-e-g-a-t-e_-g-p-u.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.Companion/DELEGATE_NNAPI/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-companion/-d-e-l-e-g-a-t-e_-n-n-a-p-i.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.Companion/KEY_DELEGATE/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-companion/-k-e-y_-d-e-l-e-g-a-t-e.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.Companion/KEY_MAX_RESULTS/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-companion/-k-e-y_-m-a-x_-r-e-s-u-l-t-s.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.Companion/KEY_NUM_THREADS/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-companion/-k-e-y_-n-u-m_-t-h-r-e-a-d-s.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.Companion/KEY_THRESHOLD/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-companion/-k-e-y_-t-h-r-e-s-h-o-l-d.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.Companion/PREFS_NAME/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-companion/-p-r-e-f-s_-n-a-m-e.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.DetectorListener///PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-detector-listener/index.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.DetectorListener/onError/#kotlin.String/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-detector-listener/on-error.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper.DetectorListener/onResults/#kotlin.collections.MutableList[org.tensorflow.lite.task.vision.detector.Detection]?#kotlin.Long#kotlin.Int#kotlin.Int#kotlin.Boolean/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-detector-listener/on-results.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper///PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/index.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper/ObjectDetectorHelper/#android.content.Context#it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper.DetectorListener?/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/-object-detector-helper.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper/context/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/context.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper/detect/#android.graphics.Bitmap#kotlin.Int/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/detect.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper/getDelegate/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/get-delegate.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper/objectDetectorListener/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/object-detector-listener.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper/setDelegate/#kotlin.Int/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/set-delegate.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper/setMaxResults/#kotlin.Int/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/set-max-results.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper/setThreshold/#kotlin.Float/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/set-threshold.html
+$dokka.location:it.unipd.dei.pseaiproject.detection/ObjectDetectorHelper/setVolumeOn/#kotlin.Boolean/PointingToDeclaration/app/it.unipd.dei.pseaiproject.detection/-object-detector-helper/set-volume-on.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner////PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/index.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/CustomSpinnerAdapter///PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-custom-spinner-adapter/index.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/CustomSpinnerAdapter/CustomSpinnerAdapter/#android.content.Context#kotlin.collections.List[it.unipd.dei.pseaiproject.spinner.SpinnerItem]#it.unipd.dei.pseaiproject.style.ThemeType/PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-custom-spinner-adapter/-custom-spinner-adapter.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/CustomSpinnerAdapter/getDropDownView/#kotlin.Int#android.view.View?#android.view.ViewGroup/PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-custom-spinner-adapter/get-drop-down-view.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/CustomSpinnerAdapter/getView/#kotlin.Int#android.view.View?#android.view.ViewGroup/PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-custom-spinner-adapter/get-view.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/SpinnerItem///PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-spinner-item/index.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/SpinnerItem/SpinnerItem/#kotlin.Int#kotlin.String/PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-spinner-item/-spinner-item.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/SpinnerItem/icon/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-spinner-item/icon.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/SpinnerItem/text/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-spinner-item/text.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/SpinnerItemSelectedListener///PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-spinner-item-selected-listener/index.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/SpinnerItemSelectedListener/SpinnerItemSelectedListener/#androidx.appcompat.app.AppCompatActivity#com.google.firebase.auth.FirebaseAuth#it.unipd.dei.pseaiproject.style.ThemeType#it.unipd.dei.pseaiproject.style.StyleManager#android.widget.Spinner/PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-spinner-item-selected-listener/-spinner-item-selected-listener.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/SpinnerItemSelectedListener/onItemSelected/#android.widget.AdapterView[*]#android.view.View?#kotlin.Int#kotlin.Long/PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-spinner-item-selected-listener/on-item-selected.html
+$dokka.location:it.unipd.dei.pseaiproject.spinner/SpinnerItemSelectedListener/onNothingSelected/#android.widget.AdapterView[*]/PointingToDeclaration/app/it.unipd.dei.pseaiproject.spinner/-spinner-item-selected-listener/on-nothing-selected.html
+$dokka.location:it.unipd.dei.pseaiproject.style////PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/index.html
+$dokka.location:it.unipd.dei.pseaiproject.style/StyleManager.Companion///PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-style-manager/-companion/index.html
+$dokka.location:it.unipd.dei.pseaiproject.style/StyleManager.Companion/KEY_THEME/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-style-manager/-companion/-k-e-y_-t-h-e-m-e.html
+$dokka.location:it.unipd.dei.pseaiproject.style/StyleManager.Companion/PREFS_NAME/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-style-manager/-companion/-p-r-e-f-s_-n-a-m-e.html
+$dokka.location:it.unipd.dei.pseaiproject.style/StyleManager///PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-style-manager/index.html
+$dokka.location:it.unipd.dei.pseaiproject.style/StyleManager/StyleManager/#androidx.appcompat.app.AppCompatActivity/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-style-manager/-style-manager.html
+$dokka.location:it.unipd.dei.pseaiproject.style/StyleManager/applyTheme/#it.unipd.dei.pseaiproject.style.ThemeType/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-style-manager/apply-theme.html
+$dokka.location:it.unipd.dei.pseaiproject.style/StyleManager/loadThemePreference/#androidx.appcompat.app.AppCompatActivity/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-style-manager/load-theme-preference.html
+$dokka.location:it.unipd.dei.pseaiproject.style/StyleManager/setEditTextAppearance/#android.content.Context#android.widget.EditText/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-style-manager/set-edit-text-appearance.html
+$dokka.location:it.unipd.dei.pseaiproject.style/StyleManager/setImageViewDrawableColor/#android.widget.ImageView#kotlin.Int#android.content.Context/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-style-manager/set-image-view-drawable-color.html
+$dokka.location:it.unipd.dei.pseaiproject.style/StyleManager/setWidgetAppearance/#android.content.Context#androidx.appcompat.widget.Toolbar#android.widget.Button?#android.view.View?#android.view.View?/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-style-manager/set-widget-appearance.html
+$dokka.location:it.unipd.dei.pseaiproject.style/ThemeType.DARK///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/it.unipd.dei.pseaiproject.style/-theme-type/-d-a-r-k/index.html
+$dokka.location:it.unipd.dei.pseaiproject.style/ThemeType.LIGHT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/it.unipd.dei.pseaiproject.style/-theme-type/-l-i-g-h-t/index.html
+$dokka.location:it.unipd.dei.pseaiproject.style/ThemeType///PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-theme-type/index.html
+$dokka.location:it.unipd.dei.pseaiproject.style/ThemeType/entries/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-theme-type/entries.html
+$dokka.location:it.unipd.dei.pseaiproject.style/ThemeType/themeResId/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-theme-type/theme-res-id.html
+$dokka.location:it.unipd.dei.pseaiproject.style/ThemeType/valueOf/#kotlin.String/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-theme-type/value-of.html
+$dokka.location:it.unipd.dei.pseaiproject.style/ThemeType/values/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.style/-theme-type/values.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.auth////PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.auth/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.auth/ForgotPasswordActivity///PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.auth/-forgot-password-activity/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.auth/ForgotPasswordActivity/ForgotPasswordActivity/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.auth/-forgot-password-activity/-forgot-password-activity.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.auth/SignInActivity///PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.auth/-sign-in-activity/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.auth/SignInActivity/SignInActivity/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.auth/-sign-in-activity/-sign-in-activity.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.auth/SignUpActivity///PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.auth/-sign-up-activity/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.auth/SignUpActivity/SignUpActivity/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.auth/-sign-up-activity/-sign-up-activity.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.main////PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.main/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.main/InfoActivity///PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.main/-info-activity/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.main/InfoActivity/InfoActivity/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.main/-info-activity/-info-activity.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.main/MainActivity///PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.main/-main-activity/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.main/MainActivity/MainActivity/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.main/-main-activity/-main-activity.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.main/ModelActivity///PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.main/-model-activity/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui.main/ModelActivity/ModelActivity/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui.main/-model-activity/-model-activity.html
+$dokka.location:it.unipd.dei.pseaiproject.ui////PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/BottomSheetFragment///PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-bottom-sheet-fragment/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/BottomSheetFragment/BottomSheetFragment/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-bottom-sheet-fragment/-bottom-sheet-fragment.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/BottomSheetFragment/onCreateView/#android.view.LayoutInflater#android.view.ViewGroup?#android.os.Bundle?/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-bottom-sheet-fragment/on-create-view.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/BottomSheetFragment/onViewCreated/#android.view.View#android.os.Bundle?/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-bottom-sheet-fragment/on-view-created.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/BottomSheetFragment/setDetectorObject/#it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-bottom-sheet-fragment/set-detector-object.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/CameraFragment///PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-camera-fragment/index.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/CameraFragment/CameraFragment/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-camera-fragment/-camera-fragment.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/CameraFragment/onConfigurationChanged/#android.content.res.Configuration/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-camera-fragment/on-configuration-changed.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/CameraFragment/onCreateView/#android.view.LayoutInflater#android.view.ViewGroup?#android.os.Bundle?/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-camera-fragment/on-create-view.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/CameraFragment/onError/#kotlin.String/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-camera-fragment/on-error.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/CameraFragment/onResults/#kotlin.collections.MutableList[org.tensorflow.lite.task.vision.detector.Detection]?#kotlin.Long#kotlin.Int#kotlin.Int#kotlin.Boolean/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-camera-fragment/on-results.html
+$dokka.location:it.unipd.dei.pseaiproject.ui/CameraFragment/onViewCreated/#android.view.View#android.os.Bundle?/PointingToDeclaration/app/it.unipd.dei.pseaiproject.ui/-camera-fragment/on-view-created.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels////PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/index.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/AuthViewModel///PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-auth-view-model/index.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/AuthViewModel/AuthViewModel/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-auth-view-model/-auth-view-model.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/AuthViewModel/authException/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-auth-view-model/auth-exception.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/AuthViewModel/getCurrentUser/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-auth-view-model/get-current-user.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/AuthViewModel/resetPassword/#kotlin.String/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-auth-view-model/reset-password.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/AuthViewModel/resetPasswordState/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-auth-view-model/reset-password-state.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/AuthViewModel/signIn/#kotlin.String#kotlin.String/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-auth-view-model/sign-in.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/AuthViewModel/signInState/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-auth-view-model/sign-in-state.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/AuthViewModel/signUp/#kotlin.String#kotlin.String/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-auth-view-model/sign-up.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/AuthViewModel/signUpState/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-auth-view-model/sign-up-state.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/CameraViewModel///PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-camera-view-model/index.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/CameraViewModel/CameraViewModel/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-camera-view-model/-camera-view-model.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/CameraViewModel/objectDetectorHelper/#/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-camera-view-model/object-detector-helper.html
+$dokka.location:it.unipd.dei.pseaiproject.viewmodels/CameraViewModel/setObjectDetectorHelper/#it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper/PointingToDeclaration/app/it.unipd.dei.pseaiproject.viewmodels/-camera-view-model/set-object-detector-helper.html
+it.unipd.dei.pseaiproject.detection
+it.unipd.dei.pseaiproject.spinner
+it.unipd.dei.pseaiproject.style
+it.unipd.dei.pseaiproject.ui
+it.unipd.dei.pseaiproject.ui.auth
+it.unipd.dei.pseaiproject.ui.main
+it.unipd.dei.pseaiproject.viewmodels
+

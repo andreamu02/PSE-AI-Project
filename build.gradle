@@ -1,7 +1,28 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
+
 plugins {
 alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     alias(libs.plugins.google.gms.google.services) apply false
+    id 'org.jetbrains.dokka' version '1.9.20' apply false
+}
 
+
+subprojects {
+    apply plugin: 'org.jetbrains.dokka'
+
+    // configure only the HTML task
+    dokkaHtmlPartial {
+        outputDirectory.set(file("build/docs/partial"))
+    }
+
+    // configure all format tasks at once
+    tasks.withType(DokkaTaskPartial.class).tap {
+        configureEach {
+            dokkaSourceSets.configureEach {
+                includes.from("README.md")
+            }
+        }
+    }
 }
