@@ -196,13 +196,12 @@ class ObjectDetectorHelper(
         setupObjectDetector()
     }
 
-<<<<<<< audio
-    fun setVolumeOn(isVolumeOn: Boolean){
+    fun setVolumeOn(isVolumeOn: Boolean) {
         this.isVolumeOn = isVolumeOn
-=======
+    }
+
     fun getDelegate(): Int {
         return this.currentDelegate
->>>>>>> main
     }
 
     companion object {
