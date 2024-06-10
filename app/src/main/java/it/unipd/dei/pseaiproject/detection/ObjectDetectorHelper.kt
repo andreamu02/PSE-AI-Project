@@ -73,7 +73,12 @@ class ObjectDetectorHelper(
                 if (CompatibilityList().isDelegateSupportedOnThisDevice) {
                     baseOptionsBuilder.useGpu()
                 } else {
-                    objectDetectorListener?.onError("GPU non è supportata su questo dispositivo")
+                    objectDetectorListener?.onError("GPU non è supportata su questo dispositivo. Verrà utilizzato il delegato CPU.")
+                    val handler = Handler(Looper.getMainLooper())
+                    handler.postDelayed({
+                        currentDelegate = DELEGATE_CPU
+                        setupObjectDetector()
+                    }, 1000)
                 }
             }
             DELEGATE_NNAPI -> {
