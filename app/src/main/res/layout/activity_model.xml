@@ -18,9 +18,6 @@
             android:layout_height="wrap_content">
 
             <!-- Pulsante di back -->
-
-            <!-- Titolo della toolbar -->
-
             <ImageButton
                 android:id="@+id/back_button_toolbar"
                 android:layout_width="48dp"
@@ -44,11 +41,11 @@
                 android:src="@drawable/baseline_volume_off_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/toolbar_title"
-                app:layout_constraintHorizontal_bias="0.777"
-                app:layout_constraintStart_toStartOf="@id/back_button_toolbar"
+                app:layout_constraintStart_toEndOf="@id/back_button_toolbar"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/black" />
 
+            <!-- Titolo della toolbar -->
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"

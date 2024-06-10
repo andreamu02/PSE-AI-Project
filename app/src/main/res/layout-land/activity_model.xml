@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,6 +32,19 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/black" />
 
+            <ImageButton
+                android:id="@+id/volume_button_toolbar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@color/white"
+                android:contentDescription="@string/volume_button"
+                android:src="@drawable/baseline_volume_off_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/toolbar_title"
+                app:layout_constraintStart_toEndOf="@id/back_button_toolbar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
             <!-- Titolo della toolbar -->
             <TextView
                 android:id="@+id/toolbar_title"
@@ -49,8 +62,8 @@
             <!-- Immagine del logo -->
             <ImageView
                 android:id="@+id/logo_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/logo_descriptor"
                 android:scaleType="centerInside"
