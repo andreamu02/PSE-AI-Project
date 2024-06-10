@@ -168,6 +168,8 @@ class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(contex
             if(!isNextResult) {
                 textToSpeech?.speak(text, TextToSpeech.QUEUE_ADD, null, null)
                 Log.e("TTS", text)
+            }else{
+                textToSpeech?.stop()
             }
         }, 250)
 
