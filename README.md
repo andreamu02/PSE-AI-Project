@@ -16,6 +16,10 @@ Si tratta di un'applicazione di rilvamento oggetti che implementa un modello di 
 - Piattaforma: Android
 - Modello di IA: TensorFlow Lite
 
+## Note
+- L'app è stata sviluppata e testata utilizzando un dispositivo con Android 10.0, api 29.
+- Per gestire l'autenticazione è stato sfruttando il servizio con annesse librerie di Firebase (Google)
+
 # Release v1.0 #
 Nella sezione `app\release` è presente il file apk dell'applicazione, `app-release.apk`.
 
