@@ -48,11 +48,11 @@ class ModelActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.volumeButtonToolbar?.setOnClickListener {
+        binding.volumeButtonToolbar.setOnClickListener {
             if (isVolumeOn) {
-                binding.volumeButtonToolbar!!.setImageResource(R.drawable.baseline_volume_off_24)
+                binding.volumeButtonToolbar.setImageResource(R.drawable.baseline_volume_off_24)
             } else {
-                binding.volumeButtonToolbar!!.setImageResource(R.drawable.baseline_volume_up_24)
+                binding.volumeButtonToolbar.setImageResource(R.drawable.baseline_volume_up_24)
             }
             isVolumeOn = !isVolumeOn
             detectorObject?.setVolumeOn(isVolumeOn)
