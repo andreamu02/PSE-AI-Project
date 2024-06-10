@@ -20,7 +20,8 @@ Si tratta di un'applicazione di rilvamento oggetti che implementa un modello di 
 # Release v1.0 #
 Nella sezione `app\release` è presente il file apk dell'applicazione, `app-release.apk`.
 
-Testato con Android 10.0, api 29.
+## Documentazione
+Nella cartella `app\build\dokka\html` è presente la documentazione del progetto in formato KDoc.
 
 ## Autori
 
