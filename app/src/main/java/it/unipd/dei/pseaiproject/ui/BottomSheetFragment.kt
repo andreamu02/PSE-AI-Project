@@ -145,7 +145,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                             }
                         }
                     }
-                }, 2000)
+                }, 1100)
                 saveToPreferences(delta)
             }
             else -> throw IllegalArgumentException("Unsupported delta type")
