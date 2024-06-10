@@ -33,6 +33,8 @@ class ObjectDetectorHelper(
 
     private var isError: Boolean = false
 
+    private var isVolumeOn: Boolean = false
+
     init {
         threshold = sharedPreferences.getFloat(KEY_THRESHOLD, 0.5f)
         numThreads = sharedPreferences.getInt(KEY_NUM_THREADS, 2)
@@ -120,6 +122,7 @@ class ObjectDetectorHelper(
         // Esegue la rilevazione degli oggetti
         val results = objectDetector?.detect(tensorImage)
 
+
         // Calcola il tempo di inferenza
         inferenceTime = SystemClock.uptimeMillis() - inferenceTime
 
@@ -128,7 +131,8 @@ class ObjectDetectorHelper(
             results,
             inferenceTime,
             tensorImage.height,
-            tensorImage.width
+            tensorImage.width,
+            this.isVolumeOn
         )
     }
 
@@ -141,7 +145,8 @@ class ObjectDetectorHelper(
             results: MutableList<Detection>?,
             inferenceTime: Long,
             imageHeight: Int,
-            imageWidth: Int
+            imageWidth: Int,
+            isVolumeOn: Boolean
         )
     }
 
@@ -181,6 +186,10 @@ class ObjectDetectorHelper(
         sharedPreferences.edit().putInt(KEY_DELEGATE, delegate).apply()
         clearObjectDetector()
         setupObjectDetector()
+    }
+
+    fun setVolumeOn(isVolumeOn: Boolean){
+        this.isVolumeOn = isVolumeOn
     }
 
     companion object {

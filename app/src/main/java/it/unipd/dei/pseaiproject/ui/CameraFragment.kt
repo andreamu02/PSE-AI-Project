@@ -184,7 +184,8 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         results: MutableList<Detection>?,
         inferenceTime: Long,
         imageHeight: Int,
-        imageWidth: Int
+        imageWidth: Int,
+        isVolumeOn: Boolean
     ) {
         activity?.runOnUiThread {
             if (isAdded) {
@@ -192,9 +193,10 @@ class CameraFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
                 overlayView.setResults(
                     results ?: LinkedList(),
                     imageHeight,
-                    imageWidth
+                    imageWidth,
+                    isVolumeOn
                 )
-                if (lastTimeUpdateScreen == 0L || (System.currentTimeMillis() - lastTimeUpdateScreen >= 1000 || resultsAreDifferent())) {
+                if (lastTimeUpdateScreen == 0L || (System.currentTimeMillis() - lastTimeUpdateScreen >= 5000 || resultsAreDifferent())) {
                     overlayView.invalidate()
                     lastTimeUpdateScreen = System.currentTimeMillis()
                 }

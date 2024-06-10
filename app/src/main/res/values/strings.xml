@@ -35,6 +35,7 @@
     <string name="password_dimenticata_subtitle">Inserisci la tua mail per il recupero della password</string>
     <string name="back_button">Indietro</string>
     <string name="reset_password">Reset Password</string>
+    <string name="volume_button">Volume</string>
 
     <!-- Stringhe utilizzate per il modale -->
     <string name="impostazioni_modello">Impostazioni modello</string>

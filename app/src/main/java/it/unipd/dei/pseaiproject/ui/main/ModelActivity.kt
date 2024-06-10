@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import it.unipd.dei.pseaiproject.R
 import it.unipd.dei.pseaiproject.databinding.ActivityModelBinding
+import it.unipd.dei.pseaiproject.detection.ObjectDetectorHelper
 import it.unipd.dei.pseaiproject.style.StyleManager
 import it.unipd.dei.pseaiproject.ui.BottomSheetFragment
 import it.unipd.dei.pseaiproject.viewmodels.CameraViewModel
@@ -24,6 +25,10 @@ class ModelActivity : AppCompatActivity() {
 
     // ViewModel per la fotocamera
     private val cameraViewModel: CameraViewModel by viewModels()
+
+    private var isVolumeOn = false
+
+    private var detectorObject: ObjectDetectorHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +48,16 @@ class ModelActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.volumeButtonToolbar?.setOnClickListener {
+            if (isVolumeOn) {
+                binding.volumeButtonToolbar!!.setImageResource(R.drawable.baseline_volume_off_24)
+            } else {
+                binding.volumeButtonToolbar!!.setImageResource(R.drawable.baseline_volume_up_24)
+            }
+            isVolumeOn = !isVolumeOn
+            detectorObject?.setVolumeOn(isVolumeOn)
+        }
+
         // Impostazione del colore del logo
         val logoImage = binding.logoImage
         logoImage.setColorFilter(ContextCompat.getColor(this, R.color.black), PorterDuff.Mode.SRC_IN)
@@ -54,6 +69,8 @@ class ModelActivity : AppCompatActivity() {
         cameraViewModel.objectDetectorHelper.observe(this) { helper ->
             helper?.let {
                 bottomSheetFragment?.setDetectorObject(it)
+                it.setVolumeOn(isVolumeOn)
+                detectorObject = it
             }
         }
 

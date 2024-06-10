@@ -6,7 +6,11 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
+import android.os.Handler
+import android.os.Looper
+import android.speech.tts.TextToSpeech
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import it.unipd.dei.pseaiproject.R
@@ -16,10 +20,11 @@ import java.util.Locale
 import kotlin.math.max
 import kotlin.math.min
 
+
 /**
  * Classe che estende View, serve per visualizzare le rilevazioni di oggetti su un'area di disegno.
  */
-class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(context, attrs), TextToSpeech.OnInitListener {
 
     // Lista dei risultati delle rilevazioni
     private var results: List<Detection> = LinkedList<Detection>()
@@ -36,8 +41,26 @@ class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(contex
     // Rect utilizzato per calcolare le dimensioni del testo
     private var bounds = Rect()
 
+    private var isVolumeOn: Boolean = false
+
+    private var textToSpeech: TextToSpeech? = null
+
+    private var isNextResult: Boolean = false
+
     init {
         initPaints()
+        textToSpeech = TextToSpeech(context, this)
+    }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            val result = textToSpeech?.setLanguage(Locale.US)
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "Language not supported")
+            }
+        } else {
+            Log.e("TTS", "Initialization failed")
+        }
     }
 
     /**
@@ -61,11 +84,13 @@ class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(contex
      * Metodo per disegnare sulla Canvas.
      */
     override fun draw(canvas: Canvas) {
+        this.textToSpeech?.stop()
         super.draw(canvas)
 
         val viewWidth = width.toFloat()
         val viewHeight = height.toFloat()
 
+        this.isNextResult = true
         for (result in results) {
             val boundingBox = result.boundingBox // Bounding box della rilevazione
 
@@ -106,6 +131,7 @@ class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(contex
 
                 // Disegna il testo per l'oggetto rilevato
                 canvas.drawText(drawableText, left, top + bounds.height(), textPaint)
+                speak(drawableText)
             }
         }
     }
@@ -120,12 +146,30 @@ class DetectionOverlayView(context: Context, attrs: AttributeSet?) : View(contex
         detectionResults: MutableList<Detection>,
         imageHeight: Int,
         imageWidth: Int,
+        isVolumeOn: Boolean
     ) {
         results = detectionResults // Aggiorna la lista dei risultati
-
+        this.isVolumeOn = isVolumeOn
+        if(!isVolumeOn){
+            textToSpeech?.stop()
+        }
         // PreviewView è in modalità FILL_START. Quindi dobbiamo scalare la bounding box per
         // adattarla alla dimensione in cui le immagini catturate saranno visualizzate.
         scaleFactor = max(width * 1f / imageWidth, height * 1f / imageHeight) // Calcola il fattore di scala
     }
 
+    private fun speak(text: String) {
+        isNextResult = false
+        if (!isVolumeOn) {
+            return
+        }
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            if(!isNextResult) {
+                textToSpeech?.speak(text, TextToSpeech.QUEUE_ADD, null, null)
+                Log.e("TTS", text)
+            }
+        }, 250)
+
+    }
 }
