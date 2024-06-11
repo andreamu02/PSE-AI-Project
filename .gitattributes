@@ -1,0 +1,2 @@
+# Escludi la cartella "app/build" dalla classificazione dei linguaggi
+app/build/* linguist-vendored
