@@ -155,7 +155,6 @@
             <Spinner
                 android:id="@+id/third_param_spinner"
                 android:layout_width="wrap_content"
-                android:popupBackground="@color/black"
                 android:layout_height="48dp"
                 android:spinnerMode="dropdown"
                 android:entries="@array/delegati"

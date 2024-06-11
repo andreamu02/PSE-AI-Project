@@ -155,7 +155,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:spinnerMode="dropdown"
-                    android:popupBackground="@color/black"
                     android:entries="@array/delegati"
                     android:gravity="center"
                     app:layout_constraintTop_toTopOf="parent"
