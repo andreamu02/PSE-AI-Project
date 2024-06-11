@@ -133,6 +133,18 @@ class StyleManager(private val activity: AppCompatActivity) {
 
     }
 
+    /**
+     * Metodo che imposta l'aspetto della statusBarv a seconda del tema corrente.
+     *
+     * @param activity l'attività di cui bisogna cambiare il colore della statusBar
+     */
+    fun changeStatusBarColor(activity: AppCompatActivity) {
+        val prefs: SharedPreferences = activity.getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
+        val themeName = prefs.getString("key_theme", ThemeType.DARK.name)
+        if (themeName == ThemeType.DARK.name) activity.window.statusBarColor = ContextCompat.getColor(activity, R.color.colorPrimary)
+        else activity.window.statusBarColor = ContextCompat.getColor(activity, R.color.brownWhite)
+    }
+
     companion object {
         // Costanti per le SharedPreferences
         const val PREFS_NAME = "theme_prefs"

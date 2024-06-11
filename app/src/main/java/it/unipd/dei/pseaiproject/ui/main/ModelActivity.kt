@@ -35,7 +35,7 @@ class ModelActivity : AppCompatActivity() {
 
         // Inizializzazione del manager dello stile
         val styleManager = StyleManager(this)
-        styleManager.loadThemePreference(this)
+        styleManager.changeStatusBarColor(this)
 
         // Inflating del layout usando view binding
         binding = ActivityModelBinding.inflate(layoutInflater)
