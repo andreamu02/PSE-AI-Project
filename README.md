@@ -13,7 +13,7 @@ Si tratta di un'applicazione di rilvamento oggetti che implementa un modello di 
 ## Note
 - L'app è stata sviluppata e testata utilizzando vari dispositivi:
   - dispositivo 1 con Android 10.0, api 29;
-  - dispositivo 2 con Android
+  - dispositivo 2 con Android 14.0, api 34
   - emulatore con Android 14.0, api 34
 - Per gestire l'autenticazione è stato sfruttando il servizio con annesse librerie di Firebase (Google)
 
