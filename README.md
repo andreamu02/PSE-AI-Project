@@ -15,7 +15,7 @@ Si tratta di un'applicazione di rilvamento oggetti che implementa un modello di 
   - dispositivo 1 con Android 10.0, api 29;
   - dispositivo 2 con Android 14.0, api 34
   - emulatore con Android 14.0, api 34
-- Per gestire l'autenticazione è stato sfruttando il servizio con annesse librerie di Firebase (Google)
+- Per gestire l'autenticazione è stato sfruttando il servizio [Firebase Authentication](https://firebase.google.com/docs/auth?hl=it) (Google)
 
 # Release v1.0 #
 Nella sezione `app\release` è presente il file apk dell'applicazione, `app-release.apk`.
